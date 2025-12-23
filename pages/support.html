@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Support | Friend-u-me</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              teal: '#22C55E',
+              mint: '#16A34A',
+              coral: '#FB923C',
+              amber: '#F59E0B',
+              ink: '#0F172A',
+              gold: '#FACC15',
+              red: '#EF4444',
+            }
+          },
+          fontFamily: {
+            sans: ['"Space Grotesk"', 'Inter', 'system-ui', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+  <style>html{scroll-behavior:smooth;}</style>
+</head>
+<body class="bg-white text-brand-ink antialiased">
+  <header class="fixed w-full bg-white/90 backdrop-blur z-50 border-b border-slate-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center h-16">
+        <div class="flex items-center space-x-3">
+          <a href="../index.html" class="text-xl font-semibold tracking-tight">Friend-u-me</a>
+        </div>
+        <nav class="hidden md:flex items-center space-x-6">
+          <a href="gigasys-technologies-inc.html" class="text-sm font-medium text-slate-600 hover:text-brand-teal">About</a>
+          <a href="../index.html#how" class="text-sm font-medium text-slate-600 hover:text-brand-teal">How it works</a>
+          <a href="../index.html#trust" class="text-sm font-medium text-slate-600 hover:text-brand-teal">Trust levels</a>
+          <a href="../index.html#requests" class="text-sm font-medium text-slate-600 hover:text-brand-teal">Requests</a>
+          <a href="../index.html#offers" class="text-sm font-medium text-slate-600 hover:text-brand-teal">Circle offers</a>
+          <a href="../index.html#faq" class="text-sm font-medium text-slate-600 hover:text-brand-teal">FAQ</a>
+        </nav>
+        <div class="hidden md:flex items-center space-x-3 text-sm font-semibold text-brand-ink">
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-lg bg-slate-100">
+            <i class="fab fa-google-play text-brand-teal"></i><span>Play Store soon</span>
+          </div>
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-lg bg-slate-100">
+            <i class="fab fa-apple text-brand-teal"></i><span>App Store soon</span>
+          </div>
+        </div>
+        <button id="nav-toggle" class="md:hidden inline-flex items-center justify-center h-10 w-10 rounded-lg border border-slate-200 text-slate-600">
+          <i class="fas fa-bars text-xl"></i>
+        </button>
+      </div>
+      <div id="mobile-nav" class="md:hidden hidden flex-col space-y-2 pb-4">
+        <a href="gigasys-technologies-inc.html" class="block px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50">About</a>
+        <a href="../index.html#how" class="block px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50">How it works</a>
+        <a href="../index.html#trust" class="block px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50">Trust levels</a>
+        <a href="../index.html#requests" class="block px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50">Requests</a>
+        <a href="../index.html#offers" class="block px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50">Circle offers</a>
+        <a href="../index.html#faq" class="block px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50">FAQ</a>
+        <div class="flex flex-col gap-2 px-3 pt-1 text-slate-700 text-sm font-semibold">
+          <div class="inline-flex items-center gap-2">
+            <i class="fab fa-google-play text-brand-teal"></i><span>Play Store soon</span>
+          </div>
+          <div class="inline-flex items-center gap-2">
+            <i class="fab fa-apple text-brand-teal"></i><span>App Store soon</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="pt-20 pb-16">
+    <section class="relative overflow-hidden">
+      <div class="absolute inset-0 pointer-events-none">
+        <div class="absolute -top-24 -left-10 h-72 w-72 bg-brand-teal/20 blur-3xl rounded-full"></div>
+        <div class="absolute top-10 right-0 h-72 w-72 bg-brand-coral/15 blur-3xl rounded-full"></div>
+        <div class="absolute bottom-0 left-1/3 h-72 w-72 bg-brand-gold/14 blur-3xl rounded-full"></div>
+        <div class="absolute -bottom-16 right-1/4 h-64 w-64 bg-brand-red/12 blur-3xl rounded-full"></div>
+      </div>
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8 relative">
+        <div class="pt-2 space-y-3">
+          <p class="text-xs font-semibold text-brand-teal uppercase tracking-wide">Community · Support</p>
+          <h1 class="text-4xl sm:text-5xl font-semibold text-brand-ink leading-tight">Getting help from verified Gigasys teams</h1>
+          <p class="text-lg text-slate-700 max-w-3xl">Support for issues within your trusted circles — fast, accountable, and privacy-respecting.</p>
+          <div class="mt-2 flex flex-wrap items-center gap-3">
+            <a href="../index.html" class="inline-flex items-center px-4 py-2 rounded-lg bg-brand-teal text-white font-semibold shadow hover:shadow-lg transition">Back to home</a>
+            <a href="../index.html#faq" class="text-sm font-semibold text-brand-ink hover:text-brand-teal">FAQ</a>
+          </div>
+        </div>
+
+        <div class="grid lg:grid-cols-2 gap-6">
+          <div class="p-6 rounded-2xl border border-slate-200 bg-white shadow-sm space-y-3">
+            <h3 class="text-xl font-semibold text-brand-ink">How support works</h3>
+            <p class="text-sm text-slate-700">Support comes from verified Gigasys teams who see only what they need to resolve an issue in your Level 1 and Level 2 circles.</p>
+            <ul class="space-y-2 text-sm text-slate-700">
+              <li class="flex items-start gap-2"><i class="fas fa-lock text-brand-teal mt-0.5"></i><span>Privacy-respecting: no exposure beyond FRIEND OF A FRIEND boundaries.</span></li>
+              <li class="flex items-start gap-2"><i class="fas fa-bolt text-brand-teal mt-0.5"></i><span>Fast, accountable handling with clear status.</span></li>
+              <li class="flex items-start gap-2"><i class="fas fa-user-shield text-brand-teal mt-0.5"></i><span>Verified agents only; no outsourcing to strangers.</span></li>
+            </ul>
+          </div>
+          <div class="p-6 rounded-2xl border border-slate-200 bg-white shadow-sm space-y-3">
+            <h3 class="text-xl font-semibold text-brand-ink">When to contact support</h3>
+            <ul class="space-y-2 text-sm text-slate-700">
+              <li class="flex items-start gap-2"><i class="fas fa-circle-exclamation text-brand-teal mt-0.5"></i><span>Issues with requests or offers inside your Level 1/2 circles.</span></li>
+              <li class="flex items-start gap-2"><i class="fas fa-shield-heart text-brand-teal mt-0.5"></i><span>Safety concerns, spam, or boundary violations.</span></li>
+              <li class="flex items-start gap-2"><i class="fas fa-globe text-brand-teal mt-0.5"></i><span>Local compliance questions or data rights requests.</span></li>
+            </ul>
+            <p class="text-xs text-slate-500">Support never opens your circles to outsiders or expands reach beyond mutual links.</p>
+          </div>
+        </div>
+
+        <div class="grid lg:grid-cols-2 gap-6">
+          <div class="p-6 rounded-2xl border border-slate-200 bg-white shadow-sm space-y-3">
+            <h3 class="text-xl font-semibold text-brand-ink">How to reach us</h3>
+            <ul class="space-y-2 text-sm text-slate-700">
+              <li class="flex items-start gap-2"><i class="fas fa-mobile-screen text-brand-teal mt-0.5"></i><span>In-app support card: open a ticket tied to the relevant request/offer.</span></li>
+              <li class="flex items-start gap-2"><i class="fas fa-envelope text-brand-teal mt-0.5"></i><span>Regional support email: available per locale; responses stay within FRIEND OF A FRIEND context.</span></li>
+              <li class="flex items-start gap-2"><i class="fas fa-shield text-brand-teal mt-0.5"></i><span>Escalate to trust & safety for urgent risk or abuse.</span></li>
+            </ul>
+          </div>
+          <div class="p-6 rounded-2xl border border-slate-200 bg-white shadow-sm space-y-3">
+            <h3 class="text-xl font-semibold text-brand-ink">What to include</h3>
+            <ul class="space-y-2 text-sm text-slate-700">
+              <li class="flex items-start gap-2"><i class="fas fa-link text-brand-teal mt-0.5"></i><span>Link to the request/offer or involved profiles (Level 1/2 only).</span></li>
+              <li class="flex items-start gap-2"><i class="fas fa-note-sticky text-brand-teal mt-0.5"></i><span>Short description of the issue and expected outcome.</span></li>
+              <li class="flex items-start gap-2"><i class="fas fa-location-dot text-brand-teal mt-0.5"></i><span>Location only if relevant to the incident or policy.</span></li>
+            </ul>
+            <p class="text-xs text-slate-500">No screenshots of unrelated users; keep reports scoped to your circles.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="bg-brand-ink text-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-10">
+      <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6 border-b border-white/10 pb-6">
+        <div class="space-y-2">
+          <div class="text-2xl font-semibold">Friend-u-me</div>
+          <p class="text-white/70 text-sm">A Gigasys Technologies Inc. app. FRIEND OF A FRIEND-first, private by default.</p>
+        </div>
+        <div class="flex flex-wrap items-center gap-3 text-sm font-semibold">
+          <div class="inline-flex items-center gap-2 px-3 py-2 rounded-lg bg-white text-brand-ink shadow">
+            <span>Get started soon on</span>
+            <i class="fab fa-google-play text-brand-teal"></i>
+            <i class="fab fa-apple text-brand-teal"></i>
+          </div>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-8 text-sm">
+        <div class="space-y-3">
+          <h4 class="text-base font-semibold text-white">Company</h4>
+          <ul class="space-y-2 text-white/80">
+            <li><a href="gigasys-technologies-inc.html" class="hover:text-white">Gigasys Technologies Inc.</a></li>
+            <li><a href="careers.html" class="hover:text-white">Careers</a></li>
+            <li><a href="news.html" class="hover:text-white">News</a></li>
+          </ul>
+        </div>
+        <div class="space-y-3">
+          <h4 class="text-base font-semibold text-white">Community</h4>
+          <ul class="space-y-2 text-white/80">
+            <li><a href="support.html" class="hover:text-white">Support</a></li>
+            <li><a href="community-guidelines.html" class="hover:text-white">Community Guidelines</a></li>
+            <li><a href="safety-center.html" class="hover:text-white">Safety Center</a></li>
+          </ul>
+        </div>
+        <div class="space-y-3">
+          <h4 class="text-base font-semibold text-white">Circle business</h4>
+          <ul class="space-y-2 text-white/80">
+            <li><a href="circle-offers.html" class="hover:text-white">Circle Offers</a></li>
+            <li><a href="offer-policies.html" class="hover:text-white">Offer Policies</a></li>
+            <li><a href="brand-guidelines.html" class="hover:text-white">Brand Guidelines</a></li>
+            <li><a href="circle-promotions.html" class="hover:text-white">Circle Promotions</a></li>
+          </ul>
+        </div>
+        <div class="space-y-3">
+          <h4 class="text-base font-semibold text-white">Legal</h4>
+          <ul class="space-y-2 text-white/80">
+            <li><a href="privacy-center.html" class="hover:text-white">Privacy Center</a></li>
+            <li><a href="your-privacy-choices.html" class="hover:text-white">Your Privacy Choices</a></li>
+            <li><a href="cookie-policy.html" class="hover:text-white">Cookie Policy</a></li>
+            <li><a href="report-infringement.html" class="hover:text-white">Report Infringement</a></li>
+            <li><a href="creative-tools-terms.html" class="hover:text-white">Creative Tools Terms</a></li>
+            <li><a href="location-geofilter-terms.html" class="hover:text-white">Location & Geofilter Terms</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 text-xs text-white/60">
+        <span>&copy; 2025 Gigasys Technologies Inc. All rights reserved.</span>
+        <span>Friend-u-me by Gigasys Technologies Inc. FRIEND OF A FRIEND-only circles; nothing public or searchable.</span>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const toggleButton = document.getElementById('nav-toggle');
+    const mobileNav = document.getElementById('mobile-nav');
+
+    toggleButton?.addEventListener('click', () => {
+      mobileNav.classList.toggle('hidden');
+      toggleButton.setAttribute('aria-expanded', mobileNav.classList.contains('hidden') ? 'false' : 'true');
+    });
+  </script>
+</body>
+</html>

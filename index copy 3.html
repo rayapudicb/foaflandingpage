@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Friend-u-me</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              teal: '#22C55E',
+              mint: '#16A34A',
+              coral: '#FB923C',
+              amber: '#F59E0B',
+              ink: '#0F172A',
+              gold: '#FACC15',
+              red: '#EF4444',
+            }
+          },
+          fontFamily: {
+            sans: ['"Space Grotesk"', 'Inter', 'system-ui', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    html {
+      scroll-behavior: smooth;
+    }
+  </style>
+</head>
+<body class="bg-white text-brand-ink antialiased">
+  <header class="fixed w-full bg-white/90 backdrop-blur z-50 border-b border-slate-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center h-16">
+        <div class="flex items-center space-x-3">
+          <span class="text-xl font-semibold tracking-tight">Friend-u-me</span>
+        </div>
+        <nav class="hidden md:flex items-center space-x-6">
+          <a href="#how" class="text-sm font-medium text-slate-600 hover:text-brand-teal">How it works</a>
+          <a href="#trust" class="text-sm font-medium text-slate-600 hover:text-brand-teal">Trust levels</a>
+          <a href="#requests" class="text-sm font-medium text-slate-600 hover:text-brand-teal">Requests</a>
+          <a href="#offers" class="text-sm font-medium text-slate-600 hover:text-brand-teal">Circle offers</a>
+          <a href="#faq" class="text-sm font-medium text-slate-600 hover:text-brand-teal">FAQ</a>
+        </nav>
+        <div class="hidden md:flex items-center space-x-3 text-sm font-semibold text-brand-ink">
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-lg bg-slate-100">
+            <i class="fab fa-google-play text-brand-teal"></i><span>Play Store soon</span>
+          </div>
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-lg bg-slate-100">
+            <i class="fab fa-apple text-brand-teal"></i><span>App Store soon</span>
+          </div>
+        </div>
+        <button id="nav-toggle" class="md:hidden inline-flex items-center justify-center h-10 w-10 rounded-lg border border-slate-200 text-slate-600">
+          <i class="fas fa-bars text-xl"></i>
+        </button>
+      </div>
+      <div id="mobile-nav" class="md:hidden hidden flex-col space-y-2 pb-4">
+        <a href="#how" class="block px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50">How it works</a>
+        <a href="#trust" class="block px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50">Trust levels</a>
+        <a href="#requests" class="block px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50">Requests</a>
+        <a href="#offers" class="block px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50">Circle offers</a>
+        <a href="#faq" class="block px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50">FAQ</a>
+        <div class="flex flex-col gap-2 px-3 pt-1 text-slate-700 text-sm font-semibold">
+          <div class="inline-flex items-center gap-2">
+            <i class="fab fa-google-play text-brand-teal"></i><span>Play Store soon</span>
+          </div>
+          <div class="inline-flex items-center gap-2">
+            <i class="fab fa-apple text-brand-teal"></i><span>App Store soon</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="pt-20">
+    <section class="relative overflow-hidden">
+      <div class="absolute inset-0 pointer-events-none">
+        <div class="absolute -top-24 -left-10 h-72 w-72 bg-brand-teal/20 blur-3xl rounded-full"></div>
+        <div class="absolute top-10 right-0 h-72 w-72 bg-brand-coral/15 blur-3xl rounded-full"></div>
+        <div class="absolute bottom-0 left-1/3 h-72 w-72 bg-brand-gold/14 blur-3xl rounded-full"></div>
+        <div class="absolute -bottom-16 right-1/4 h-64 w-64 bg-brand-red/12 blur-3xl rounded-full"></div>
+      </div>
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
+        <div class="grid lg:grid-cols-2 gap-12 items-center">
+          <div class="space-y-6">
+            <div class="inline-flex items-center px-4 py-2 rounded-full bg-brand-teal/10 text-brand-teal font-semibold text-sm border border-brand-teal/20">
+              Verified circles • No strangers
+            </div>
+            <h1 class="text-4xl sm:text-5xl font-semibold leading-tight text-brand-ink">
+              Real requests from people you actually know.
+            </h1>
+            <p class="text-lg text-slate-700 max-w-2xl">
+              Verify once, let AI organize your contacts into a personal trust mesh. Level 1 is your trusted circle; Level 2 is friends-of-friends. Your feed only shows them—no spam, no randos.
+            </p>
+            <div class="flex flex-wrap items-center gap-3">
+              <a href="#cta" class="inline-flex items-center px-5 py-3 rounded-xl bg-brand-teal text-white font-semibold shadow-lg hover:shadow-xl transition">Start my trust mesh</a>
+              <span class="text-sm text-slate-600">No password. No public profile.</span>
+            </div>
+            <div class="flex flex-wrap gap-3 text-sm font-semibold text-brand-ink">
+              <span class="px-3 py-2 rounded-lg bg-slate-100">Identity check on sign-up</span>
+              <span class="px-3 py-2 rounded-lg bg-slate-100">AI contact clustering</span>
+              <span class="px-3 py-2 rounded-lg bg-slate-100">Smart request cards</span>
+              <span class="px-3 py-2 rounded-lg bg-slate-100">Businesses in separate tab</span>
+            </div>
+          </div>
+          <div class="relative">
+            <div class="rounded-2xl border border-slate-200 bg-white shadow-2xl overflow-hidden h-[360px] sm:h-[420px] lg:h-[520px]">
+              <img class="w-full h-full object-cover" src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=900&q=80" alt="Friends laughing together at a cafe" loading="eager">
+            </div>
+            <div class="absolute bottom-4 left-4 lg:bottom-6 lg:left-6 bg-white/80 backdrop-blur rounded-2xl shadow-2xl border border-slate-200 p-4 w-[220px] sm:w-[240px] lg:w-[260px] max-w-[20%] min-w-[200px] space-y-2 text-sm">
+              <div class="font-semibold text-brand-ink">Live feed · Your mesh</div>
+              <div class="p-3 rounded-xl bg-slate-50 border border-slate-200"><strong>Ride share · L1</strong><br>Anna can pick you up at 6:30pm.</div>
+              <div class="p-3 rounded-xl bg-slate-50 border border-slate-200"><strong>Kid swap · L2</strong><br>Maya needs a sitter; verified via Priya.</div>
+              <div class="p-3 rounded-xl bg-slate-50 border border-slate-200"><strong>Local offer</strong><br>Urban Bikes: 20% off tune-ups.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="gallery" class="bg-white py-10 scroll-mt-24">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-3">
+          <div>
+            <h2 class="text-3xl font-semibold text-brand-ink">Real people. Real circles.</h2>
+            <p class="text-slate-600 mt-2 max-w-2xl">Your mesh is made of faces you know: family runs, school pickups, neighborhood swaps, and trusted shops.</p>
+          </div>
+          <div class="flex items-center gap-2 text-sm text-slate-600">
+            <i class="fas fa-shield-heart text-brand-teal"></i>
+            Verified identities · No strangers
+          </div>
+        </div>
+        <div class="mt-8 grid gap-6 md:grid-cols-3">
+          <div class="relative group rounded-2xl overflow-hidden shadow-lg border border-slate-200">
+            <img src="https://images.unsplash.com/photo-1523580846011-d3a5bc25702b?auto=format&fit=crop&w=900&q=80" class="h-64 w-full object-cover transition duration-300 group-hover:scale-105" alt="Family walking together" loading="lazy">
+            <div class="absolute inset-0 bg-gradient-to-t from-black/50 via-black/10 to-transparent"></div>
+            <div class="absolute bottom-4 left-4 right-4 text-white">
+              <div class="flex items-center gap-2 text-xs uppercase tracking-wide">
+                <i class="fas fa-people-group"></i><span>Level 1 · Family</span>
+              </div>
+              <p class="text-lg font-semibold leading-tight mt-1">School pickup swap coordinated in minutes.</p>
+            </div>
+          </div>
+          <div class="relative group rounded-2xl overflow-hidden shadow-lg border border-slate-200">
+            <img src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=900&q=80" class="h-64 w-full object-cover transition duration-300 group-hover:scale-105" alt="Friends laughing at a cafe" loading="lazy">
+            <div class="absolute inset-0 bg-gradient-to-t from-black/50 via-black/10 to-transparent"></div>
+            <div class="absolute bottom-4 left-4 right-4 text-white">
+              <div class="flex items-center gap-2 text-xs uppercase tracking-wide">
+                <i class="fas fa-handshake-angle"></i><span>Level 2 · Friends-of-friends</span>
+              </div>
+              <p class="text-lg font-semibold leading-tight mt-1">Introductions happen with mutual connections visible.</p>
+            </div>
+          </div>
+          <div class="relative group rounded-2xl overflow-hidden shadow-lg border border-slate-200">
+            <img src="https://images.unsplash.com/photo-1556740749-887f6717d7e4?auto=format&fit=crop&w=900&q=80" class="h-64 w-full object-cover transition duration-300 group-hover:scale-105" alt="Small business owner smiling" loading="lazy">
+            <div class="absolute inset-0 bg-gradient-to-t from-black/55 via-black/10 to-transparent"></div>
+            <div class="absolute bottom-4 left-4 right-4 text-white">
+              <div class="flex items-center gap-2 text-xs uppercase tracking-wide">
+                <i class="fas fa-store"></i><span>Circle business</span>
+              </div>
+              <p class="text-lg font-semibold leading-tight mt-1">Offers from businesses you already trust—no feed spam.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="how" class="bg-slate-50 py-12 scroll-mt-24">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center">
+          <h2 class="text-3xl font-semibold text-brand-ink">How it works</h2>
+          <p class="mt-3 text-lg text-slate-600 max-w-2xl mx-auto">Verify identity once. AI organizes contacts. You tag who you truly know. Trust levels keep your feed clean.</p>
+        </div>
+        <div class="mt-10 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
+          <div class="bg-white p-5 rounded-xl shadow-sm border border-slate-200 text-center">
+            <div class="h-32 w-full overflow-hidden rounded-lg mb-4">
+              <img src="https://images.pexels.com/photos/6140934/pexels-photo-6140934.jpeg?auto=compress&cs=tinysrgb&w=1200&dpr=1" class="w-full h-full object-cover" alt="Person holding ID and phone for verification" loading="lazy">
+            </div>
+            <h3 class="font-semibold text-brand-ink">Verify & import safely</h3>
+            <p class="text-slate-600 mt-2 text-sm">Identity checked once. Contacts processed safely to prevent spammer dumps.</p>
+          </div>
+          <div class="bg-white p-5 rounded-xl shadow-sm border border-slate-200 text-center">
+            <div class="h-32 w-full overflow-hidden rounded-lg mb-4">
+              <img src="https://images.pexels.com/photos/8251157/pexels-photo-8251157.jpeg?auto=compress&cs=tinysrgb&w=1200&dpr=1" class="w-full h-full object-cover" alt="Team collaborating with tech" loading="lazy">
+            </div>
+            <h3 class="font-semibold text-brand-ink">AI organizes</h3>
+            <p class="text-slate-600 mt-2 text-sm">Automatic groups: family, friends, colleagues, businesses.</p>
+          </div>
+          <div class="bg-white p-5 rounded-xl shadow-sm border border-slate-200 text-center">
+            <div class="h-32 w-full overflow-hidden rounded-lg mb-4 bg-slate-100">
+              <img src="https://images.pexels.com/photos/461049/pexels-photo-461049.jpeg?auto=compress&cs=tinysrgb&w=1200&dpr=1" class="w-full h-full object-cover" alt="Group of friends linking arms in a circle" loading="lazy">
+            </div>
+            <h3 class="font-semibold text-brand-ink">You tag trust</h3>
+            <p class="text-slate-600 mt-2 text-sm">Level 1: trusted circle. Level 2: friends-of-friends. Everything else stays out.</p>
+          </div>
+          <div class="bg-white p-5 rounded-xl shadow-sm border border-slate-200 text-center">
+            <div class="h-32 w-full overflow-hidden rounded-lg mb-4">
+              <img src="https://images.pexels.com/photos/267394/pexels-photo-267394.jpeg?auto=compress&cs=tinysrgb&w=1200&dpr=1" class="w-full h-full object-cover" alt="Group collaborating around a laptop" loading="lazy">
+            </div>
+            <h3 class="font-semibold text-brand-ink">Smart request cards</h3>
+            <p class="text-slate-600 mt-2 text-sm">Help, rides, items, reviews, offers, emergencies—pre-built so intent is clear.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="trust" class="py-12 scroll-mt-24">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+          <h2 class="text-3xl font-semibold text-brand-ink">Your personal trust mesh</h2>
+          <div class="flex flex-wrap gap-3 text-sm">
+            <span class="px-3 py-2 rounded-full bg-brand-teal/10 text-brand-teal font-semibold">Level 1 · Trusted circle</span>
+            <span class="px-3 py-2 rounded-full bg-brand-mint/10 text-brand-ink font-semibold">Level 2 · Friends-of-friends</span>
+            <span class="px-3 py-2 rounded-full bg-amber-100 text-amber-700 font-semibold">Businesses in-circle</span>
+          </div>
+        </div>
+        <div class="mt-8 grid gap-6 lg:grid-cols-3">
+          <div class="p-6 rounded-2xl border border-slate-200 bg-white shadow-sm">
+            <div class="h-32 w-full overflow-hidden rounded-xl mb-4">
+              <img src="https://images.unsplash.com/photo-1523580846011-d3a5bc25702b?auto=format&fit=crop&w=900&q=80" class="w-full h-full object-cover" alt="Family walking together" loading="lazy">
+            </div>
+            <h3 class="text-xl font-semibold text-brand-ink">Level 1 · Trusted circle</h3>
+            <p class="text-slate-600 mt-2 text-sm">Family, neighbors, close colleagues, trusted local businesses. Emergency alerts go here first.</p>
+            <div class="mt-4 flex flex-wrap gap-2">
+              <span class="px-3 py-1 rounded-lg bg-slate-100 text-sm font-semibold">Family</span>
+              <span class="px-3 py-1 rounded-lg bg-slate-100 text-sm font-semibold">Neighbors</span>
+              <span class="px-3 py-1 rounded-lg bg-slate-100 text-sm font-semibold">Close colleagues</span>
+              <span class="px-3 py-1 rounded-lg bg-slate-100 text-sm font-semibold">Trusted shops</span>
+            </div>
+            <div class="mt-4">
+              <div class="h-2 rounded-full bg-slate-100">
+                <div class="h-2 rounded-full bg-gradient-to-r from-brand-teal to-brand-mint w-[90%]"></div>
+              </div>
+              <p class="text-xs text-slate-500 mt-2">Trust Score boost: +15 on completed interactions.</p>
+            </div>
+          </div>
+          <div class="p-6 rounded-2xl border border-slate-200 bg-white shadow-sm">
+            <div class="h-32 w-full overflow-hidden rounded-xl mb-4">
+              <img src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=900&q=80" class="w-full h-full object-cover" alt="Friends laughing at a cafe" loading="lazy">
+            </div>
+            <h3 class="text-xl font-semibold text-brand-ink">Level 2 · Friends-of-friends</h3>
+            <p class="text-slate-600 mt-2 text-sm">Introductions via people you trust. Mutual connections always shown.</p>
+            <div class="mt-4 flex flex-wrap gap-2">
+              <span class="px-3 py-1 rounded-lg bg-slate-100 text-sm font-semibold">Friends-of-friends</span>
+              <span class="px-3 py-1 rounded-lg bg-slate-100 text-sm font-semibold">School network</span>
+              <span class="px-3 py-1 rounded-lg bg-slate-100 text-sm font-semibold">Teammates of colleagues</span>
+            </div>
+            <div class="mt-4">
+              <div class="h-2 rounded-full bg-slate-100">
+                <div class="h-2 rounded-full bg-gradient-to-r from-brand-teal to-brand-mint w-[70%]"></div>
+              </div>
+              <p class="text-xs text-slate-500 mt-2">Trust Score boost: +8 on completed interactions.</p>
+            </div>
+          </div>
+          <div class="p-6 rounded-2xl border border-slate-200 bg-white shadow-sm">
+            <div class="h-32 w-full overflow-hidden rounded-xl mb-4">
+              <img src="https://images.unsplash.com/photo-1556740749-887f6717d7e4?auto=format&fit=crop&w=900&q=80" class="w-full h-full object-cover" alt="Small business owner smiling" loading="lazy">
+            </div>
+            <h3 class="text-xl font-semibold text-brand-ink">Businesses in your circle</h3>
+            <p class="text-slate-600 mt-2 text-sm">Offers from Level 1/2 businesses live in their own tab—never in the main feed.</p>
+            <div class="mt-4 space-y-3 text-sm">
+              <div class="p-3 rounded-xl bg-slate-50 border border-slate-200"><strong>Urban Bikes · L1</strong><br>20% off tune-ups for circle.</div>
+              <div class="p-3 rounded-xl bg-slate-50 border border-slate-200"><strong>Harvest Kitchen · L2</strong><br>Free delivery via Priya.</div>
+              <div class="p-3 rounded-xl bg-slate-50 border border-slate-200"><strong>FixRight Electric · L1</strong><br>Verified by two neighbors.</div>
+            </div>
+            <p class="text-xs text-slate-500 mt-2">No paid boosts. Only people already connected.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="requests" class="bg-slate-50 py-12 scroll-mt-24">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-3">
+          <h2 class="text-3xl font-semibold text-brand-ink">What you can post</h2>
+          <p class="text-slate-600 max-w-2xl">Home feed is Level 1 + Level 2 only. Pre-built cards keep intent clear; AI matches by relevance and proximity.</p>
+        </div>
+        <div class="mt-8 grid gap-6 md:grid-cols-3">
+          <div class="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm space-y-3">
+            <div class="h-32 w-full overflow-hidden rounded-xl mb-3 bg-slate-100">
+              <img src="https://images.pexels.com/photos/3699259/pexels-photo-3699259.jpeg?auto=compress&cs=tinysrgb&w=1200&dpr=1" class="w-full h-full object-cover" alt="Friends carpooling together" loading="lazy">
+            </div>
+            <div class="flex items-center space-x-3">
+              <div class="h-10 w-10 rounded-full bg-brand-teal/10 text-brand-teal flex items-center justify-center"><i class="fas fa-car-side"></i></div>
+              <h3 class="font-semibold text-brand-ink">Help & rides</h3>
+            </div>
+            <p class="text-slate-600 text-sm">Airport pickup, quick favors, school runs. Level 1 first, Level 2 optional.</p>
+            <div class="space-y-2 text-sm">
+              <div class="p-3 bg-slate-50 rounded-xl border border-slate-200"><strong>Ride share</strong> Need a ride to SFO at 6:30pm.</div>
+              <div class="p-3 bg-slate-50 rounded-xl border border-slate-200"><strong>Help</strong> Quick dog walk at 3pm.</div>
+            </div>
+          </div>
+          <div class="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm space-y-3">
+            <div class="h-32 w-full overflow-hidden rounded-xl mb-3">
+              <img src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&w=1200&q=80" class="w-full h-full object-cover" alt="Shared workspace items" loading="lazy">
+            </div>
+            <div class="flex items-center space-x-3">
+              <div class="h-10 w-10 rounded-full bg-brand-mint/10 text-brand-ink flex items-center justify-center"><i class="fas fa-hand-holding-heart"></i></div>
+              <h3 class="font-semibold text-brand-ink">Items & recommendations</h3>
+            </div>
+            <p class="text-slate-600 text-sm">Borrow/lend gear, share reviews, swap skills. Always tagged with trust level.</p>
+            <div class="space-y-2 text-sm">
+              <div class="p-3 bg-slate-50 rounded-xl border border-slate-200"><strong>Item loan</strong> Projector for Thursday?</div>
+              <div class="p-3 bg-slate-50 rounded-xl border border-slate-200"><strong>Review</strong> Trusted plumber near downtown?</div>
+            </div>
+          </div>
+          <div class="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm space-y-3">
+            <div class="h-32 w-full overflow-hidden rounded-xl mb-3">
+              <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=1200&q=80" class="w-full h-full object-cover" alt="Vibrant local market storefront" loading="lazy">
+            </div>
+            <div class="flex items-center space-x-3">
+              <div class="h-10 w-10 rounded-full bg-amber-100 text-amber-700 flex items-center justify-center"><i class="fas fa-bullhorn"></i></div>
+              <h3 class="font-semibold text-brand-ink">Offers & emergencies</h3>
+            </div>
+            <p class="text-slate-600 text-sm">Circle businesses post in a separate tab. Emergencies ping Level 1 with location.</p>
+            <div class="space-y-2 text-sm">
+              <div class="p-3 bg-slate-50 rounded-xl border border-slate-200"><strong>Local offer</strong> Urban Bikes: 20% off tune-ups.</div>
+              <div class="p-3 bg-slate-50 rounded-xl border border-slate-200"><strong>Emergency</strong> Nearest high-trust contacts alerted.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="offers" class="py-12 scroll-mt-24">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="bg-gradient-to-r from-brand-teal/15 via-brand-gold/15 to-brand-coral/15 rounded-3xl border border-slate-200 shadow-inner p-8">
+          <div class="grid lg:grid-cols-2 gap-8 items-center">
+            <div class="space-y-3">
+              <h2 class="text-3xl font-semibold text-brand-ink">Circle offers stay separate</h2>
+              <p class="text-slate-700">Businesses you already know can share perks in a dedicated tab—never boosting into your main feed.</p>
+              <ul class="space-y-2 text-slate-700 text-sm">
+                <li class="flex items-center gap-2"><i class="fas fa-toggle-on text-brand-teal"></i><span>Mute or follow any business with one tap.</span></li>
+                <li class="flex items-center gap-2"><i class="fas fa-location-dot text-brand-teal"></i><span>Location-aware offers—no irrelevant ads.</span></li>
+                <li class="flex items-center gap-2"><i class="fas fa-shield text-brand-teal"></i><span>Offers only from Level 1/2 verified circles.</span></li>
+              </ul>
+            </div>
+            <div class="grid sm:grid-cols-2 gap-4">
+              <div class="p-4 rounded-2xl bg-white shadow-sm border border-slate-200">
+                <div class="flex items-center gap-3 mb-2">
+                  <div class="h-10 w-10 rounded-full bg-brand-teal/10 text-brand-teal flex items-center justify-center"><i class="fas fa-store"></i></div>
+                  <div>
+                    <p class="font-semibold text-brand-ink">Harvest Kitchen · L2</p>
+                    <p class="text-xs text-slate-500">Verified by Priya</p>
+                  </div>
+                </div>
+                <p class="text-sm text-slate-700">Free delivery for your mesh this weekend only.</p>
+              </div>
+              <div class="p-4 rounded-2xl bg-white shadow-sm border border-slate-200">
+                <div class="flex items-center gap-3 mb-2">
+                  <div class="h-10 w-10 rounded-full bg-brand-coral/10 text-brand-coral flex items-center justify-center"><i class="fas fa-bicycle"></i></div>
+                  <div>
+                    <p class="font-semibold text-brand-ink">Urban Bikes · L1</p>
+                    <p class="text-xs text-slate-500">Verified by 2 neighbors</p>
+                  </div>
+                </div>
+                <p class="text-sm text-slate-700">20% off tune-ups and free safety check.</p>
+              </div>
+              <div class="p-4 rounded-2xl bg-white shadow-sm border border-slate-200">
+                <div class="flex items-center gap-3 mb-2">
+                  <div class="h-10 w-10 rounded-full bg-brand-amber/10 text-brand-amber flex items-center justify-center"><i class="fas fa-plug-circle-check"></i></div>
+                  <div>
+                    <p class="font-semibold text-brand-ink">FixRight Electric · L1</p>
+                    <p class="text-xs text-slate-500">Tagged high trust</p>
+                  </div>
+                </div>
+                <p class="text-sm text-slate-700">Same-day fixes with proof of insurance in-app.</p>
+              </div>
+              <div class="p-4 rounded-2xl bg-white shadow-sm border border-slate-200">
+                <div class="flex items-center gap-3 mb-2">
+                  <div class="h-10 w-10 rounded-full bg-brand-red/10 text-brand-red flex items-center justify-center"><i class="fas fa-screwdriver-wrench"></i></div>
+                  <div>
+                    <p class="font-semibold text-brand-ink">Maker Garage · L2</p>
+                    <p class="text-xs text-slate-500">Via Aria</p>
+                  </div>
+                </div>
+                <p class="text-sm text-slate-700">Tool library with weekend access for your circle.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="cta" class="py-12 scroll-mt-24">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="bg-gradient-to-r from-brand-teal via-brand-gold to-brand-coral text-white rounded-3xl p-10 shadow-xl grid md:grid-cols-3 gap-6 items-center">
+          <div class="md:col-span-2">
+            <h3 class="text-3xl font-semibold">Ready to keep your feed free of strangers?</h3>
+            <p class="text-white/90 mt-2">Launching soon. Keep your circles close—no public profiles.</p>
+            <div class="mt-4 inline-flex items-center gap-3 text-sm font-semibold text-white/90">
+              <i class="fab fa-google-play text-lg"></i><span>See us soon on Play Store</span>
+              <span class="text-white/60">·</span>
+              <i class="fab fa-apple text-lg"></i><span>See us soon on App Store</span>
+            </div>
+          </div>
+          <div class="flex md:justify-end">
+            <a href="#faq" class="inline-flex items-center justify-center px-6 py-3 rounded-xl bg-white text-brand-ink font-semibold shadow-lg hover:shadow-xl transition">Learn more</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="faq" class="bg-slate-50 py-12 scroll-mt-24">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center">
+          <h2 class="text-3xl font-semibold text-brand-ink">Quick answers</h2>
+          <p class="mt-3 text-lg text-slate-600 max-w-2xl mx-auto">Privacy-first, spam-free, people you actually know.</p>
+        </div>
+        <div class="mt-8 grid gap-4 md:grid-cols-2">
+          <div class="p-5 bg-white border border-slate-200 rounded-2xl shadow-sm">
+            <h4 class="font-semibold text-brand-ink">How do you read my contacts?</h4>
+            <p class="text-slate-600 mt-2 text-sm">With permission, once. Data is used to detect real relationships—never sold, never public.</p>
+          </div>
+          <div class="p-5 bg-white border border-slate-200 rounded-2xl shadow-sm">
+            <h4 class="font-semibold text-brand-ink">What stops spam?</h4>
+            <p class="text-slate-600 mt-2 text-sm">No one outside Level 1 or Level 2 can reach you. Businesses live in their own tab.</p>
+          </div>
+          <div class="p-5 bg-white border border-slate-200 rounded-2xl shadow-sm">
+            <h4 class="font-semibold text-brand-ink">Is anything public?</h4>
+            <p class="text-slate-600 mt-2 text-sm">No. Only Level 1 and Level 2 can see or post to you. Nothing is public or searchable.</p>
+          </div>
+          <div class="p-5 bg-white border border-slate-200 rounded-2xl shadow-sm">
+            <h4 class="font-semibold text-brand-ink">What about emergencies?</h4>
+            <p class="text-slate-600 mt-2 text-sm">One tap alerts Level 1 contacts nearest to you. Location is shared only with them.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="bg-brand-ink text-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-10">
+      <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6 border-b border-white/10 pb-6">
+        <div class="space-y-2">
+          <div class="text-2xl font-semibold">Friend-u-me</div>
+          <p class="text-white/70 text-sm">A Gigasys Technologies Inc. app. FRIEND OF A FRIEND-first, private by default.</p>
+        </div>
+        <div class="flex flex-wrap items-center gap-3 text-sm font-semibold">
+          <div class="inline-flex items-center gap-2 px-3 py-2 rounded-lg bg-white text-brand-ink shadow">
+            <span>Get started soon on</span>
+            <i class="fab fa-google-play text-brand-teal"></i>
+            <i class="fab fa-apple text-brand-teal"></i>
+          </div>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-8 text-sm">
+        <div class="space-y-3">
+          <h4 class="text-base font-semibold text-white">Company</h4>
+          <ul class="space-y-2 text-white/80">
+            <li><a href="pages/gigasys-technologies-inc.html" class="hover:text-white">Gigasys Technologies Inc.</a></li>
+            <li><a href="pages/careers.html" class="hover:text-white">Careers</a></li>
+            <li><a href="pages/news.html" class="hover:text-white">News</a></li>
+          </ul>
+        </div>
+        <div class="space-y-3">
+          <h4 class="text-base font-semibold text-white">Community</h4>
+          <ul class="space-y-2 text-white/80">
+            <li><a href="pages/support.html" class="hover:text-white">Support</a></li>
+            <li><a href="pages/community-guidelines.html" class="hover:text-white">Community Guidelines</a></li>
+            <li><a href="pages/safety-center.html" class="hover:text-white">Safety Center</a></li>
+          </ul>
+        </div>
+        <div class="space-y-3">
+          <h4 class="text-base font-semibold text-white">Advertising</h4>
+          <ul class="space-y-2 text-white/80">
+            <li><a href="pages/buy-ads.html" class="hover:text-white">Buy Ads</a></li>
+            <li><a href="pages/advertising-policies.html" class="hover:text-white">Advertising Policies</a></li>
+            <li><a href="pages/political-ads-library.html" class="hover:text-white">Political Ads Library</a></li>
+            <li><a href="pages/brand-guidelines.html" class="hover:text-white">Brand Guidelines</a></li>
+            <li><a href="pages/promotions-rules.html" class="hover:text-white">Promotions Rules</a></li>
+          </ul>
+        </div>
+        <div class="space-y-3">
+          <h4 class="text-base font-semibold text-white">Legal</h4>
+          <ul class="space-y-2 text-white/80">
+            <li><a href="pages/privacy-center.html" class="hover:text-white">Privacy Center</a></li>
+            <li><a href="pages/your-privacy-choices.html" class="hover:text-white">Your Privacy Choices</a></li>
+            <li><a href="pages/cookie-policy.html" class="hover:text-white">Cookie Policy</a></li>
+            <li><a href="pages/report-infringement.html" class="hover:text-white">Report Infringement</a></li>
+            <li><a href="pages/custom-creative-tools-terms.html" class="hover:text-white">Custom Creative Tools Terms</a></li>
+            <li><a href="pages/community-geofilter-terms.html" class="hover:text-white">Community Geofilter Terms</a></li>
+            <li><a href="pages/lens-studio-terms.html" class="hover:text-white">Lens Studio Terms</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 text-xs text-white/60">
+        <span>&copy; 2025 Gigasys Technologies Inc. All rights reserved.</span>
+        <span>Friend-u-me by Gigasys Technologies Inc. FRIEND OF A FRIEND-only circles; nothing public or searchable.</span>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const toggleButton = document.getElementById('nav-toggle');
+    const mobileNav = document.getElementById('mobile-nav');
+
+    toggleButton?.addEventListener('click', () => {
+      mobileNav.classList.toggle('hidden');
+      toggleButton.setAttribute('aria-expanded', mobileNav.classList.contains('hidden') ? 'false' : 'true');
+    });
+  </script>
+</body>
+</html>
