@@ -3,10 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>gonyr</title>
+  <title>Nyr</title>
+  <link rel="icon" type="image/png" href="assets/nyr-icon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet">
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <script>
@@ -15,13 +16,13 @@
         extend: {
           colors: {
             brand: {
-              teal: '#7C3AED',
-              mint: '#8B5CF6',
-              coral: '#A855F7',
-              amber: '#6D28D9',
-              ink: '#221B3A',
-              gold: '#E9D5FF',
-              red: '#581C87',
+              teal: '#5A6FF7',
+              mint: '#8EA1FF',
+              coral: '#FFD44D',
+              amber: '#F5BF34',
+              ink: '#26224C',
+              gold: '#FFF4BF',
+              red: '#FFE38A',
             }
           },
           fontFamily: {
@@ -32,435 +33,714 @@
     }
   </script>
   <style>
+    :root {
+      color-scheme: light;
+      --paper: #ffffff;
+      --paper-strong: #ffffff;
+      --ink: #26224C;
+      --glass: rgba(255, 255, 255, 0.96);
+      --glass-strong: rgba(255, 255, 255, 0.98);
+      --line: rgba(226, 232, 240, 0.95);
+      --shadow: 0 14px 40px rgba(34, 27, 58, 0.06);
+      --shadow-strong: 0 18px 48px rgba(34, 27, 58, 0.08);
+      --ease: cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
     html {
       scroll-behavior: smooth;
+      background: var(--paper);
+      scroll-padding-top: 7rem;
+      scroll-snap-type: y mandatory;
+    }
+
+    body {
+      min-height: 100vh;
+      background: #ffffff;
+      scroll-snap-type: y mandatory;
+    }
+
+    ::selection {
+      background: rgba(90, 111, 247, 0.18);
+    }
+
+    .nav-shell,
+    .soft-panel,
+    .story-card,
+    .offer-card,
+    .faq-card,
+    .hero-spotlight,
+    .feed-card {
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow);
+      background: #ffffff;
+    }
+
+    .nav-shell {
+      background: rgba(255, 255, 255, 0.96);
+      transition:
+        background 260ms var(--ease),
+        box-shadow 260ms var(--ease),
+        border-color 260ms var(--ease),
+        transform 260ms var(--ease);
+    }
+
+    #site-header.is-scrolled .nav-shell {
+      background: rgba(255, 255, 255, 0.98);
+      box-shadow: 0 10px 28px rgba(34, 27, 58, 0.08);
+      border-color: rgba(226, 232, 240, 0.95);
+      transform: translateY(0);
+    }
+
+    .hero-loop {
+      display: none;
+    }
+
+    .hero-loop__track {
+      display: none;
+    }
+
+    .hero-loop--compact .hero-loop__track {
+      display: none;
+    }
+
+    .soft-panel {
+      background: #ffffff;
+    }
+
+    .club-section {
+      scroll-snap-align: start;
+      scroll-snap-stop: always;
+    }
+
+    .hero-page {
+      min-height: calc(100svh - 6.5rem);
+      display: flex;
+      align-items: center;
+    }
+
+    .club-section > div,
+    .hero-page > div {
+      width: 100%;
+    }
+
+    .hero-spotlight {
+      background: #ffffff;
+      border-radius: 2rem;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .showcase-frame {
+      position: relative;
+      border-radius: 2rem;
+      overflow: hidden;
+      border: 1px solid rgba(226, 232, 240, 0.95);
+      box-shadow: var(--shadow-strong);
+      background: #ffffff;
+    }
+
+    .story-card,
+    .offer-card,
+    .faq-card,
+    .feed-card {
+      background: #ffffff;
+      border-radius: 1.5rem;
+      transition: transform 360ms var(--ease), box-shadow 360ms var(--ease);
+    }
+
+    .story-card:hover,
+    .offer-card:hover,
+    .faq-card:hover,
+    .feed-card:hover {
+      box-shadow: 0 18px 40px rgba(34, 27, 58, 0.08);
+    }
+
+    .dark-panel {
+      position: relative;
+      overflow: hidden;
+      border-radius: 2rem;
+      border: 1px solid var(--line);
+      background: #ffffff;
+      box-shadow: var(--shadow);
+    }
+
+    .dark-panel::before,
+    .dark-panel::after {
+      display: none;
+    }
+
+    .dark-panel::before {
+      width: 18rem;
+      height: 18rem;
+      top: -4rem;
+      right: -2rem;
+      background: rgba(124, 58, 237, 0.45);
+    }
+
+    .dark-panel::after {
+      width: 16rem;
+      height: 16rem;
+      bottom: -5rem;
+      left: -3rem;
+      background: rgba(168, 85, 247, 0.34);
+    }
+
+    .scroll-pill {
+      animation: none !important;
+    }
+
+    [data-reveal] {
+      --reveal-y: 24px;
+      --reveal-scale: 1;
+      opacity: 0;
+      transform: translate3d(0, var(--reveal-y), 0) scale(var(--reveal-scale));
+      transition:
+        opacity 700ms var(--ease),
+        transform 700ms var(--ease);
+      transition-delay: calc(var(--reveal-delay, 0) * 90ms);
+      will-change: opacity, transform;
+    }
+
+    [data-reveal].revealed {
+      --reveal-y: 0px;
+      --reveal-scale: 1;
+      opacity: 1;
+    }
+
+    .glass-grid {
+      background-image: none;
+    }
+
+    .fade-edge {
+      mask-image: linear-gradient(180deg, transparent, black 10%, black 90%, transparent);
+      -webkit-mask-image: linear-gradient(180deg, transparent, black 10%, black 90%, transparent);
+    }
+
+    .footer-panel {
+      background: linear-gradient(180deg, rgba(34, 27, 58, 1), rgba(27, 20, 45, 1));
+    }
+
+    @media (max-width: 767px) {
+      .floating-stack {
+        position: static;
+        margin-top: 1rem;
+        display: grid;
+        gap: 1rem;
+      }
+
+      .hero-page {
+        min-height: auto;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+
+      *,
+      *::before,
+      *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+
+      [data-reveal] {
+        opacity: 1;
+        transform: none;
+      }
     }
   </style>
 </head>
-<body class="bg-white text-brand-ink antialiased">
-  <header class="fixed w-full bg-white/90 backdrop-blur z-50 border-b border-slate-200">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="flex justify-between items-center h-16">
-        <div class="flex items-center space-x-3">
-          <span class="text-xl font-bold tracking-[-0.045em] lowercase text-brand-teal">gonyr</span>
+<body class="text-brand-ink antialiased selection:bg-brand-teal/20">
+  <header id="site-header" class="fixed inset-x-0 top-0 z-50 px-4 pt-4 sm:px-6 lg:px-8">
+    <div class="mx-auto max-w-7xl">
+      <div class="nav-shell rounded-full px-4 sm:px-5">
+        <div class="flex min-h-[4.25rem] items-center justify-between gap-4">
+          <a href="#top" class="flex items-center">
+            <img src="assets/nyr-icon.png" alt="Nyr" class="h-9 w-24 object-cover object-center sm:h-10 sm:w-28">
+          </a>
+          <nav class="hidden md:flex items-center space-x-6">
+            <a href="#how" class="text-sm font-medium text-slate-600 transition hover:text-brand-teal">How it works</a>
+            <a href="#trust" class="text-sm font-medium text-slate-600 transition hover:text-brand-teal">Trust levels</a>
+            <a href="#requests" class="text-sm font-medium text-slate-600 transition hover:text-brand-teal">Requests</a>
+            <a href="#offers" class="text-sm font-medium text-slate-600 transition hover:text-brand-teal">Circle offers</a>
+            <a href="#faq" class="text-sm font-medium text-slate-600 transition hover:text-brand-teal">FAQ</a>
+          </nav>
+          <div class="hidden md:flex items-center gap-3 text-sm font-semibold text-brand-ink">
+            <div class="inline-flex items-center gap-2 rounded-full bg-white/70 px-3 py-2">
+              <i class="fab fa-google-play text-brand-teal"></i><span>Play Store soon</span>
+            </div>
+            <div class="inline-flex items-center gap-2 rounded-full bg-white/70 px-3 py-2">
+              <i class="fab fa-apple text-brand-teal"></i><span>App Store soon</span>
+            </div>
+          </div>
+          <button id="nav-toggle" aria-controls="mobile-nav" aria-expanded="false" aria-label="Toggle navigation" class="md:hidden inline-flex h-11 w-11 items-center justify-center rounded-full bg-white/70 text-slate-700">
+            <i class="fas fa-bars text-lg"></i>
+          </button>
         </div>
-        <nav class="hidden md:flex items-center space-x-6">
-          <a href="pages/gigasys-technologies-inc.html" class="text-sm font-medium text-slate-600 hover:text-brand-teal">About</a>
-          <a href="#how" class="text-sm font-medium text-slate-600 hover:text-brand-teal">How it works</a>
-          <a href="#trust" class="text-sm font-medium text-slate-600 hover:text-brand-teal">Trust levels</a>
-          <a href="#requests" class="text-sm font-medium text-slate-600 hover:text-brand-teal">Requests</a>
-          <a href="#offers" class="text-sm font-medium text-slate-600 hover:text-brand-teal">Circle offers</a>
-          <a href="#faq" class="text-sm font-medium text-slate-600 hover:text-brand-teal">FAQ</a>
-        </nav>
-        <div class="hidden md:flex items-center space-x-3 text-sm font-semibold text-brand-ink">
-          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-lg bg-slate-100">
-            <i class="fab fa-google-play text-brand-teal"></i><span>Play Store soon</span>
+        <div id="mobile-nav" class="hidden border-t border-white/60 pb-4 pt-3 md:hidden">
+          <div class="flex flex-col space-y-2">
+            <a href="#how" class="rounded-2xl px-3 py-2 text-slate-700 transition hover:bg-white/70">How it works</a>
+            <a href="#trust" class="rounded-2xl px-3 py-2 text-slate-700 transition hover:bg-white/70">Trust levels</a>
+            <a href="#requests" class="rounded-2xl px-3 py-2 text-slate-700 transition hover:bg-white/70">Requests</a>
+            <a href="#offers" class="rounded-2xl px-3 py-2 text-slate-700 transition hover:bg-white/70">Circle offers</a>
+            <a href="#faq" class="rounded-2xl px-3 py-2 text-slate-700 transition hover:bg-white/70">FAQ</a>
           </div>
-          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-lg bg-slate-100">
-            <i class="fab fa-apple text-brand-teal"></i><span>App Store soon</span>
-          </div>
-        </div>
-        <button id="nav-toggle" class="md:hidden inline-flex items-center justify-center h-10 w-10 rounded-lg border border-slate-200 text-slate-600">
-          <i class="fas fa-bars text-xl"></i>
-        </button>
-      </div>
-      <div id="mobile-nav" class="md:hidden hidden flex-col space-y-2 pb-4">
-        <a href="pages/gigasys-technologies-inc.html" class="block px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50">About</a>
-        <a href="#how" class="block px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50">How it works</a>
-        <a href="#trust" class="block px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50">Trust levels</a>
-        <a href="#requests" class="block px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50">Requests</a>
-        <a href="#offers" class="block px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50">Circle offers</a>
-        <a href="#faq" class="block px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50">FAQ</a>
-        <div class="flex flex-col gap-2 px-3 pt-1 text-slate-700 text-sm font-semibold">
-          <div class="inline-flex items-center gap-2">
-            <i class="fab fa-google-play text-brand-teal"></i><span>Play Store soon</span>
-          </div>
-          <div class="inline-flex items-center gap-2">
-            <i class="fab fa-apple text-brand-teal"></i><span>App Store soon</span>
+          <div class="mt-3 flex flex-col gap-2 px-3 text-sm font-semibold text-slate-700">
+            <div class="inline-flex items-center gap-2">
+              <i class="fab fa-google-play text-brand-teal"></i><span>Play Store soon</span>
+            </div>
+            <div class="inline-flex items-center gap-2">
+              <i class="fab fa-apple text-brand-teal"></i><span>App Store soon</span>
+            </div>
           </div>
         </div>
       </div>
     </div>
   </header>
 
-  <main class="pt-20">
-    <section class="relative overflow-hidden">
-      <div class="absolute inset-0 pointer-events-none">
-        <div class="absolute -top-24 -left-10 h-72 w-72 bg-brand-teal/20 blur-3xl rounded-full"></div>
-        <div class="absolute top-10 right-0 h-72 w-72 bg-brand-coral/15 blur-3xl rounded-full"></div>
-        <div class="absolute bottom-0 left-1/3 h-72 w-72 bg-brand-gold/14 blur-3xl rounded-full"></div>
-        <div class="absolute -bottom-16 right-1/4 h-64 w-64 bg-brand-red/12 blur-3xl rounded-full"></div>
-      </div>
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
-        <div class="grid lg:grid-cols-2 gap-12 items-center">
-          <div class="space-y-6">
-            <div class="inline-flex items-center px-4 py-2 rounded-full bg-brand-teal/10 text-brand-teal font-semibold text-sm border border-brand-teal/20">
+  <main id="top" class="space-y-2 overflow-x-hidden pb-3 pt-24">
+    <section class="hero-page club-section relative overflow-hidden py-4 sm:py-6">
+      <div class="mx-auto flex max-w-7xl items-center px-4 py-8 sm:px-6 sm:py-10 lg:px-8 lg:py-12">
+        <div class="grid w-full items-center gap-10 lg:grid-cols-[0.94fr,1.06fr] lg:gap-14">
+          <div class="space-y-7">
+            <div data-reveal class="inline-flex items-center rounded-full border border-brand-teal/15 bg-white/70 px-4 py-2 text-sm font-semibold text-brand-teal">
               Verified circles • No strangers
             </div>
-            <h1 class="text-4xl sm:text-5xl font-semibold leading-tight text-brand-ink">
-              Real requests from people you actually know.
-            </h1>
-            <p class="text-lg text-slate-700 max-w-2xl">
-              Verify once, let AI organize your contacts into a personal trust mesh. Level 1 is your trusted circle; Level 2 is friends-of-friends. Your feed only shows them—no spam, no randos.
-            </p>
-            <div class="flex flex-wrap items-center gap-3">
-              <a href="#cta" class="inline-flex items-center px-5 py-3 rounded-xl bg-brand-teal text-white font-semibold shadow-lg hover:shadow-xl transition">Start my trust mesh</a>
-              <span class="text-sm text-slate-600">No password. No public profile.</span>
+            <div class="space-y-5">
+              <h1 data-reveal style="--reveal-delay: 1" class="max-w-2xl text-5xl font-semibold leading-[0.95] tracking-[-0.06em] text-brand-ink sm:text-6xl lg:text-7xl">
+                Real requests from people you actually know.
+              </h1>
+              <p data-reveal style="--reveal-delay: 2" class="max-w-xl text-lg leading-8 text-slate-700 sm:text-xl">
+                Verify once, let AI organize your contacts into a personal trust mesh. Level 1 is your trusted circle; Level 2 is friends-of-friends. Your feed only shows them—no spam, no randos.
+              </p>
             </div>
-            <div class="flex flex-wrap gap-3 text-sm font-semibold text-brand-ink">
-              <span class="px-3 py-2 rounded-lg bg-slate-100">Identity check on sign-up</span>
-              <span class="px-3 py-2 rounded-lg bg-slate-100">AI contact clustering</span>
-              <span class="px-3 py-2 rounded-lg bg-slate-100">Smart request cards</span>
-              <span class="px-3 py-2 rounded-lg bg-slate-100">Businesses in separate tab</span>
+            <div data-reveal style="--reveal-delay: 3" class="flex flex-wrap items-center gap-3">
+              <a href="#cta" class="inline-flex items-center justify-center rounded-full bg-brand-teal px-6 py-3.5 text-base font-semibold text-white shadow-lg shadow-brand-teal/25 transition hover:-translate-y-0.5 hover:shadow-xl hover:shadow-brand-teal/30">Start my trust mesh</a>
+              <span class="rounded-full bg-white/55 px-4 py-3 text-sm text-slate-600">No password. No public profile.</span>
             </div>
-          </div>
-          <div class="relative">
-            <div class="rounded-2xl border border-slate-200 bg-white shadow-2xl overflow-hidden h-[360px] sm:h-[420px] lg:h-[520px]">
-              <img class="w-full h-full object-cover" src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=900&q=80" alt="Friends laughing together at a cafe" loading="eager">
+            <div data-reveal style="--reveal-delay: 4" class="flex flex-wrap gap-3 text-sm font-semibold text-brand-ink">
+              <span class="rounded-full bg-white/70 px-4 py-2">Identity check on sign-up</span>
+              <span class="rounded-full bg-white/70 px-4 py-2">AI contact clustering</span>
+              <span class="rounded-full bg-white/70 px-4 py-2">Smart request cards</span>
+              <span class="rounded-full bg-white/70 px-4 py-2">Businesses in separate tab</span>
             </div>
-            <div class="absolute bottom-4 left-4 lg:bottom-6 lg:left-6 bg-white/80 backdrop-blur rounded-2xl shadow-2xl border border-slate-200 p-4 w-[220px] sm:w-[240px] lg:w-[260px] max-w-[20%] min-w-[200px] space-y-2 text-sm">
-              <div class="font-semibold text-brand-ink">Live feed · Your mesh</div>
-              <div class="p-3 rounded-xl bg-slate-50 border border-slate-200"><strong>Ride share · L1</strong><br>Anna can pick you up at 6:30pm.</div>
-              <div class="p-3 rounded-xl bg-slate-50 border border-slate-200"><strong>Kid swap · L2</strong><br>Maya needs a sitter; verified via Priya.</div>
-              <div class="p-3 rounded-xl bg-slate-50 border border-slate-200"><strong>Local offer</strong><br>Urban Bikes: 20% off tune-ups.</div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="how" class="bg-slate-50 py-12 scroll-mt-24">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="text-center">
-          <h2 class="text-3xl font-semibold text-brand-ink">How it works</h2>
-          <p class="mt-3 text-lg text-slate-600 max-w-2xl mx-auto">Verify identity once. AI organizes contacts. You tag who you truly know. Trust levels keep your feed clean.</p>
-        </div>
-        <div class="mt-10 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
-          <div class="bg-white p-5 rounded-xl shadow-sm border border-slate-200 text-center">
-            <div class="h-32 w-full overflow-hidden rounded-lg mb-4">
-              <img src="https://images.pexels.com/photos/6140934/pexels-photo-6140934.jpeg?auto=compress&cs=tinysrgb&w=1200&dpr=1" class="w-full h-full object-cover" alt="Person holding ID and phone for verification" loading="lazy">
-            </div>
-            <h3 class="font-semibold text-brand-ink">Verify & import safely</h3>
-            <p class="text-slate-600 mt-2 text-sm">Identity checked once. Contacts processed safely to prevent spammer dumps.</p>
-          </div>
-          <div class="bg-white p-5 rounded-xl shadow-sm border border-slate-200 text-center">
-            <div class="h-32 w-full overflow-hidden rounded-lg mb-4">
-              <img src="https://images.pexels.com/photos/8251157/pexels-photo-8251157.jpeg?auto=compress&cs=tinysrgb&w=1200&dpr=1" class="w-full h-full object-cover" alt="Team collaborating with tech" loading="lazy">
-            </div>
-            <h3 class="font-semibold text-brand-ink">AI organizes</h3>
-            <p class="text-slate-600 mt-2 text-sm">Automatic groups: family, friends, colleagues, businesses.</p>
-          </div>
-          <div class="bg-white p-5 rounded-xl shadow-sm border border-slate-200 text-center">
-            <div class="h-32 w-full overflow-hidden rounded-lg mb-4 bg-slate-100">
-              <img src="https://images.pexels.com/photos/461049/pexels-photo-461049.jpeg?auto=compress&cs=tinysrgb&w=1200&dpr=1" class="w-full h-full object-cover" alt="Group of friends linking arms in a circle" loading="lazy">
-            </div>
-            <h3 class="font-semibold text-brand-ink">You tag trust</h3>
-            <p class="text-slate-600 mt-2 text-sm">Level 1: trusted circle. Level 2: friends-of-friends. Everything else stays out.</p>
-          </div>
-          <div class="bg-white p-5 rounded-xl shadow-sm border border-slate-200 text-center">
-            <div class="h-32 w-full overflow-hidden rounded-lg mb-4">
-              <img src="https://images.pexels.com/photos/267394/pexels-photo-267394.jpeg?auto=compress&cs=tinysrgb&w=1200&dpr=1" class="w-full h-full object-cover" alt="Group collaborating around a laptop" loading="lazy">
-            </div>
-            <h3 class="font-semibold text-brand-ink">Smart request cards</h3>
-            <p class="text-slate-600 mt-2 text-sm">Help, rides, items, reviews, offers, emergencies—pre-built so intent is clear.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="trust" class="py-12 scroll-mt-24">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-3 mb-6">
-          <div>
-            <h2 class="text-3xl font-semibold text-brand-ink">Real people. Real circles.</h2>
-            <p class="text-slate-600 mt-2 max-w-2xl">Your mesh is made of faces you know: family runs, school pickups, neighborhood swaps, and trusted shops.</p>
-          </div>
-          <div class="flex items-center gap-2 text-sm text-slate-600">
-            <i class="fas fa-shield-heart text-brand-teal"></i>
-            Verified identities · No strangers
-          </div>
-        </div>
-        <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
-          <h2 class="text-3xl font-semibold text-brand-ink">Your personal trust mesh</h2>
-          <div class="flex flex-wrap gap-3 text-sm">
-            <span class="px-3 py-2 rounded-full bg-brand-teal/10 text-brand-teal font-semibold">Level 1 · Trusted circle</span>
-            <span class="px-3 py-2 rounded-full bg-brand-mint/10 text-brand-ink font-semibold">Level 2 · Friends-of-friends</span>
-            <span class="px-3 py-2 rounded-full bg-brand-mint/15 text-brand-mint font-semibold">Businesses in-circle</span>
-          </div>
-        </div>
-        <div class="mt-8 grid gap-6 lg:grid-cols-3">
-          <div class="p-6 rounded-2xl border border-slate-200 bg-white shadow-sm">
-            <div class="h-32 w-full overflow-hidden rounded-xl mb-4">
-              <img src="https://images.unsplash.com/photo-1523580846011-d3a5bc25702b?auto=format&fit=crop&w=900&q=80" class="w-full h-full object-cover" alt="Family walking together" loading="lazy">
-            </div>
-            <h3 class="text-xl font-semibold text-brand-ink">Level 1 · Trusted circle</h3>
-            <p class="text-slate-600 mt-2 text-sm">Family, neighbors, close colleagues, trusted local businesses. Emergency alerts go here first.</p>
-            <div class="mt-4 flex flex-wrap gap-2">
-              <span class="px-3 py-1 rounded-lg bg-slate-100 text-sm font-semibold">Family</span>
-              <span class="px-3 py-1 rounded-lg bg-slate-100 text-sm font-semibold">Neighbors</span>
-              <span class="px-3 py-1 rounded-lg bg-slate-100 text-sm font-semibold">Close colleagues</span>
-              <span class="px-3 py-1 rounded-lg bg-slate-100 text-sm font-semibold">Trusted shops</span>
-            </div>
-            <div class="mt-4">
-              <div class="h-2 rounded-full bg-slate-100">
-                <div class="h-2 rounded-full bg-gradient-to-r from-brand-teal to-brand-mint w-[90%]"></div>
+            <div data-reveal style="--reveal-delay: 5" class="flex items-center gap-5 pt-2">
+              <a href="#how" class="scroll-pill inline-flex h-14 w-14 items-center justify-center rounded-full border border-white/80 bg-white/70 text-brand-teal shadow-lg">
+                <i class="fas fa-arrow-down"></i>
+              </a>
+              <div>
+                <p class="text-sm font-semibold uppercase tracking-[0.22em] text-slate-500">How it works</p>
+                <p class="text-sm text-slate-600">Identity check on sign-up. AI contact clustering.</p>
               </div>
-              <p class="text-xs text-slate-500 mt-2">Trust Score boost: +15 on completed interactions.</p>
             </div>
           </div>
-          <div class="p-6 rounded-2xl border border-slate-200 bg-white shadow-sm">
-            <div class="h-32 w-full overflow-hidden rounded-xl mb-4">
-              <img src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=900&q=80" class="w-full h-full object-cover" alt="Friends laughing at a cafe" loading="lazy">
-            </div>
-            <h3 class="text-xl font-semibold text-brand-ink">Level 2 · Friends-of-friends</h3>
-            <p class="text-slate-600 mt-2 text-sm">Introductions via people you trust. Mutual connections always shown.</p>
-            <div class="mt-4 flex flex-wrap gap-2">
-              <span class="px-3 py-1 rounded-lg bg-slate-100 text-sm font-semibold">Friends-of-friends</span>
-              <span class="px-3 py-1 rounded-lg bg-slate-100 text-sm font-semibold">School network</span>
-              <span class="px-3 py-1 rounded-lg bg-slate-100 text-sm font-semibold">Teammates of colleagues</span>
-            </div>
-            <div class="mt-4">
-              <div class="h-2 rounded-full bg-slate-100">
-                <div class="h-2 rounded-full bg-gradient-to-r from-brand-teal to-brand-mint w-[70%]"></div>
+
+          <div data-reveal style="--reveal-delay: 2" class="relative mx-auto w-full max-w-2xl lg:max-w-none">
+            <div class="hero-spotlight px-4 pb-4 pt-4 sm:px-6 sm:pb-6 sm:pt-6">
+              <div class="showcase-frame h-[380px] sm:h-[460px] lg:h-[520px]">
+                <img class="h-full w-full object-cover" src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&amp;fit=crop&amp;w=900&amp;q=80" alt="Friends laughing together at a cafe" loading="eager">
+                <div class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-brand-ink/30 via-brand-ink/5 to-transparent p-6 sm:p-8">
+                  <div class="inline-flex items-center gap-2 rounded-full bg-white/80 px-4 py-2 text-sm font-semibold text-brand-ink">
+                    <i class="fas fa-shield-halved text-brand-teal"></i>
+                    <span>Verified circles • No strangers</span>
+                  </div>
+                </div>
               </div>
-              <p class="text-xs text-slate-500 mt-2">Trust Score boost: +8 on completed interactions.</p>
             </div>
-          </div>
-          <div class="p-6 rounded-2xl border border-slate-200 bg-white shadow-sm">
-            <div class="h-32 w-full overflow-hidden rounded-xl mb-4">
-              <img src="https://images.unsplash.com/photo-1556740749-887f6717d7e4?auto=format&fit=crop&w=900&q=80" class="w-full h-full object-cover" alt="Small business owner smiling" loading="lazy">
-            </div>
-            <h3 class="text-xl font-semibold text-brand-ink">Businesses in your circle</h3>
-            <p class="text-slate-600 mt-2 text-sm">Offers from Level 1/2 businesses live in their own tab—never in the main feed.</p>
-            <div class="mt-4 space-y-3 text-sm">
-              <div class="p-3 rounded-xl bg-slate-50 border border-slate-200"><strong>Urban Bikes · L1</strong><br>20% off tune-ups for circle.</div>
-              <div class="p-3 rounded-xl bg-slate-50 border border-slate-200"><strong>Harvest Kitchen · L2</strong><br>Free delivery via Priya.</div>
-              <div class="p-3 rounded-xl bg-slate-50 border border-slate-200"><strong>FixRight Electric · L1</strong><br>Verified by two neighbors.</div>
-            </div>
-            <p class="text-xs text-slate-500 mt-2">No paid boosts. Only people already connected.</p>
-          </div>
-        </div>
-      </div>
-    </section>
 
-    <section id="requests" class="bg-slate-50 py-12 scroll-mt-24">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-3">
-          <h2 class="text-3xl font-semibold text-brand-ink">What you can post</h2>
-          <p class="text-slate-600 max-w-2xl">Home feed is Level 1 + Level 2 only. Pre-built cards keep intent clear; AI matches by relevance and proximity.</p>
-        </div>
-        <div class="mt-8 grid gap-6 md:grid-cols-3">
-          <div class="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm space-y-3">
-            <div class="h-32 w-full overflow-hidden rounded-xl mb-3 bg-slate-100">
-              <img src="https://images.pexels.com/photos/3699259/pexels-photo-3699259.jpeg?auto=compress&cs=tinysrgb&w=1200&dpr=1" class="w-full h-full object-cover" alt="Friends carpooling together" loading="lazy">
-            </div>
-            <div class="flex items-center space-x-3">
-              <div class="h-10 w-10 rounded-full bg-brand-teal/10 text-brand-teal flex items-center justify-center"><i class="fas fa-car-side"></i></div>
-              <h3 class="font-semibold text-brand-ink">Help & rides</h3>
-            </div>
-            <p class="text-slate-600 text-sm">Airport pickup, quick favors, school runs. Level 1 first, Level 2 optional.</p>
-            <div class="space-y-2 text-sm">
-              <div class="p-3 bg-slate-50 rounded-xl border border-slate-200"><strong>Ride share</strong> Need a ride to SFO at 6:30pm.</div>
-              <div class="p-3 bg-slate-50 rounded-xl border border-slate-200"><strong>Help</strong> Quick dog walk at 3pm.</div>
-            </div>
-          </div>
-          <div class="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm space-y-3">
-            <div class="h-32 w-full overflow-hidden rounded-xl mb-3">
-              <img src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&w=1200&q=80" class="w-full h-full object-cover" alt="Shared workspace items" loading="lazy">
-            </div>
-            <div class="flex items-center space-x-3">
-              <div class="h-10 w-10 rounded-full bg-brand-mint/10 text-brand-ink flex items-center justify-center"><i class="fas fa-hand-holding-heart"></i></div>
-              <h3 class="font-semibold text-brand-ink">Items & recommendations</h3>
-            </div>
-            <p class="text-slate-600 text-sm">Borrow/lend gear, share reviews, swap skills. Always tagged with trust level.</p>
-            <div class="space-y-2 text-sm">
-              <div class="p-3 bg-slate-50 rounded-xl border border-slate-200"><strong>Item loan</strong> Projector for Thursday?</div>
-              <div class="p-3 bg-slate-50 rounded-xl border border-slate-200"><strong>Review</strong> Trusted plumber near downtown?</div>
-            </div>
-          </div>
-          <div class="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm space-y-3">
-            <div class="h-32 w-full overflow-hidden rounded-xl mb-3">
-              <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=1200&q=80" class="w-full h-full object-cover" alt="Vibrant local market storefront" loading="lazy">
-            </div>
-            <div class="flex items-center space-x-3">
-              <div class="h-10 w-10 rounded-full bg-brand-mint/15 text-brand-mint flex items-center justify-center"><i class="fas fa-bullhorn"></i></div>
-              <h3 class="font-semibold text-brand-ink">Offers & emergencies</h3>
-            </div>
-            <p class="text-slate-600 text-sm">Circle businesses post in a separate tab. Emergencies ping Level 1 with location.</p>
-            <div class="space-y-2 text-sm">
-              <div class="p-3 bg-slate-50 rounded-xl border border-slate-200"><strong>Local offer</strong> Urban Bikes: 20% off tune-ups.</div>
-              <div class="p-3 bg-slate-50 rounded-xl border border-slate-200"><strong>Emergency</strong> Nearest high-trust contacts alerted.</div>
+            <div class="floating-stack pointer-events-none absolute inset-0 hidden lg:block">
+              <div class="feed-card pointer-events-auto absolute -left-8 top-10 w-[280px] p-4">
+                <p class="text-sm font-semibold text-brand-ink">Live feed · Your mesh</p>
+                <div class="mt-3 space-y-2 text-sm">
+                  <div class="rounded-2xl border border-slate-200 bg-white/80 p-3"><strong>Ride share · L1</strong><br>Anna can pick you up at 6:30pm.</div>
+                  <div class="rounded-2xl border border-slate-200 bg-white/80 p-3"><strong>Kid swap · L2</strong><br>Maya needs a sitter; verified via Priya.</div>
+                </div>
+              </div>
+              <div class="feed-card pointer-events-auto absolute bottom-6 left-8 w-[320px] p-4">
+                <div class="flex flex-wrap gap-2 text-xs font-semibold text-brand-ink">
+                  <span class="rounded-full bg-brand-teal/10 px-3 py-1.5 text-brand-teal">Level 1 · Trusted circle</span>
+                  <span class="rounded-full bg-brand-mint/10 px-3 py-1.5 text-brand-ink">Level 2 · Friends-of-friends</span>
+                  <span class="rounded-full bg-brand-mint/15 px-3 py-1.5 text-brand-mint">Businesses in separate tab</span>
+                </div>
+                <p class="mt-3 text-sm leading-6 text-slate-700">Verify once, let AI organize your contacts into a personal trust mesh.</p>
+              </div>
+              <div class="feed-card pointer-events-auto absolute -right-8 top-20 w-[260px] p-4">
+                <p class="text-xs font-semibold uppercase tracking-[0.22em] text-slate-500">private by default</p>
+                <p class="mt-2 text-lg font-semibold leading-6 text-brand-ink">No password. No public profile.</p>
+                <div class="mt-3 rounded-2xl border border-slate-200 bg-slate-50 p-3 text-sm">
+                  <strong>Local offer</strong><br>Urban Bikes: 20% off tune-ups.
+                </div>
+                <div class="mt-3 h-2 rounded-full bg-slate-100">
+                  <div class="h-2 w-[84%] rounded-full bg-gradient-to-r from-brand-teal to-brand-coral"></div>
+                </div>
+                <p class="mt-2 text-xs text-slate-500">Trust Score boost: +15 on completed interactions.</p>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </section>
 
-    <section id="offers" class="py-12 scroll-mt-24">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="bg-gradient-to-r from-brand-teal/15 via-brand-mint/15 to-brand-coral/15 rounded-3xl border border-slate-200 shadow-inner p-8">
-          <div class="grid lg:grid-cols-2 gap-8 items-center">
-            <div class="space-y-3">
-              <h2 class="text-3xl font-semibold text-brand-ink">Circle offers stay separate</h2>
-              <p class="text-slate-700">Businesses you already know can share perks in a dedicated tab—never boosting into your main feed.</p>
-              <ul class="space-y-2 text-slate-700 text-sm">
-                <li class="flex items-center gap-2"><i class="fas fa-toggle-on text-brand-teal"></i><span>Mute or follow any business with one tap.</span></li>
-                <li class="flex items-center gap-2"><i class="fas fa-location-dot text-brand-teal"></i><span>Location-aware offers—no irrelevant ads.</span></li>
-                <li class="flex items-center gap-2"><i class="fas fa-shield text-brand-teal"></i><span>Offers only from Level 1/2 verified circles.</span></li>
+    <section id="how" class="club-section scroll-mt-28 py-3 sm:py-4">
+      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div class="soft-panel rounded-[2.4rem] p-6 sm:p-8 lg:p-10">
+          <div class="space-y-6">
+            <div class="max-w-3xl space-y-5">
+              <p data-reveal class="text-sm font-semibold uppercase tracking-[0.24em] text-brand-teal">How it works</p>
+              <h2 data-reveal style="--reveal-delay: 1" class="max-w-md text-4xl font-semibold leading-tight tracking-[-0.05em] text-brand-ink sm:text-5xl">
+                How it works
+              </h2>
+              <p data-reveal style="--reveal-delay: 2" class="max-w-md text-lg leading-8 text-slate-600">
+                Verify identity once. AI organizes contacts. You tag who you truly know. Trust levels keep your feed clean.
+              </p>
+              <div data-reveal style="--reveal-delay: 3" class="flex flex-wrap gap-3 text-sm font-semibold text-brand-ink">
+                <span class="rounded-full bg-slate-100 px-4 py-2">Identity check</span>
+                <span class="rounded-full bg-slate-100 px-4 py-2">Contact import</span>
+                <span class="rounded-full bg-slate-100 px-4 py-2">AI clustering</span>
+                <span class="rounded-full bg-slate-100 px-4 py-2">Trust tagging</span>
+              </div>
+            </div>
+
+            <div class="grid gap-4 lg:grid-cols-4">
+              <article data-reveal style="--reveal-delay: 1" class="story-card p-5 sm:p-6">
+                <div class="h-48 w-full overflow-hidden rounded-[1.35rem] bg-slate-100">
+                  <img src="https://images.pexels.com/photos/6140934/pexels-photo-6140934.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=1200&amp;dpr=1" class="h-full w-full object-cover" alt="Person holding ID and phone for verification" loading="lazy">
+                </div>
+                <h3 class="mt-5 text-xl font-semibold text-brand-ink">Verify &amp; import safely</h3>
+                <p class="mt-3 text-sm leading-6 text-slate-600">Identity checked once. Contacts processed safely to prevent spammer dumps.</p>
+              </article>
+              <article data-reveal style="--reveal-delay: 2" class="story-card p-5 sm:p-6">
+                <div class="h-48 w-full overflow-hidden rounded-[1.35rem] bg-slate-100">
+                  <img src="https://images.pexels.com/photos/8251157/pexels-photo-8251157.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=1200&amp;dpr=1" class="h-full w-full object-cover" alt="Team collaborating with tech" loading="lazy">
+                </div>
+                <h3 class="mt-5 text-xl font-semibold text-brand-ink">AI organizes</h3>
+                <p class="mt-3 text-sm leading-6 text-slate-600">Automatic groups: family, friends, colleagues, businesses.</p>
+              </article>
+              <article data-reveal style="--reveal-delay: 3" class="story-card p-5 sm:p-6">
+                <div class="h-48 w-full overflow-hidden rounded-[1.35rem] bg-slate-100">
+                  <img src="https://images.pexels.com/photos/461049/pexels-photo-461049.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=1200&amp;dpr=1" class="h-full w-full object-cover" alt="Group of friends linking arms in a circle" loading="lazy">
+                </div>
+                <h3 class="mt-5 text-xl font-semibold text-brand-ink">You tag trust</h3>
+                <p class="mt-3 text-sm leading-6 text-slate-600">Level 1: trusted circle. Level 2: friends-of-friends. Everything else stays out.</p>
+              </article>
+              <article data-reveal style="--reveal-delay: 4" class="story-card p-5 sm:p-6">
+                <div class="h-48 w-full overflow-hidden rounded-[1.35rem] bg-slate-100">
+                  <img src="https://images.pexels.com/photos/267394/pexels-photo-267394.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=1200&amp;dpr=1" class="h-full w-full object-cover" alt="Group collaborating around a laptop" loading="lazy">
+                </div>
+                <h3 class="mt-5 text-xl font-semibold text-brand-ink">Smart request cards</h3>
+                <p class="mt-3 text-sm leading-6 text-slate-600">Help, rides, items, reviews, offers, emergencies are structured from the start.</p>
+              </article>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="trust" class="club-section scroll-mt-28 py-3 sm:py-4">
+      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div class="dark-panel px-6 py-8 sm:px-8 sm:py-10 lg:px-10 lg:py-12">
+          <div class="space-y-6">
+            <div class="max-w-3xl space-y-5">
+              <div data-reveal class="inline-flex items-center gap-2 rounded-full bg-brand-coral/25 px-4 py-2 text-sm font-semibold text-brand-ink">
+                <i class="fas fa-shield-halved text-brand-teal"></i>
+                <span>Verified identities · No strangers</span>
+              </div>
+              <p data-reveal style="--reveal-delay: 1" class="text-base font-semibold uppercase tracking-[0.24em] text-brand-teal">REAL PEOPLE. REAL CIRCLES.</p>
+              <h2 data-reveal style="--reveal-delay: 2" class="max-w-xl text-4xl font-semibold leading-tight tracking-[-0.06em] text-brand-ink sm:text-5xl lg:text-6xl">Your personal trust mesh</h2>
+              <p data-reveal style="--reveal-delay: 3" class="max-w-2xl text-base leading-8 text-slate-600 sm:text-lg">
+                Your mesh is made of faces you know: family runs, school pickups, neighborhood swaps, and trusted shops.
+              </p>
+              <div data-reveal style="--reveal-delay: 4" class="flex flex-wrap gap-3 text-sm">
+                <span class="rounded-full bg-slate-100 px-4 py-2 font-semibold text-brand-ink">Level 1 · Trusted circle</span>
+                <span class="rounded-full bg-slate-100 px-4 py-2 font-semibold text-brand-ink">Level 2 · Friends-of-friends</span>
+                <span class="rounded-full bg-slate-100 px-4 py-2 font-semibold text-brand-ink">Businesses in-circle</span>
+              </div>
+            </div>
+
+            <div class="grid gap-4 lg:grid-cols-3">
+              <article data-reveal style="--reveal-delay: 1" class="story-card p-5 sm:p-6">
+                <div class="h-48 w-full overflow-hidden rounded-[1.4rem] bg-slate-100">
+                  <img src="https://images.unsplash.com/photo-1523580846011-d3a5bc25702b?auto=format&amp;fit=crop&amp;w=900&amp;q=80" class="h-full w-full object-cover" alt="Family walking together" loading="lazy">
+                </div>
+                <h3 class="mt-5 text-xl font-semibold text-brand-ink">Level 1 · Trusted circle</h3>
+                <p class="mt-3 text-sm leading-6 text-slate-600">Family, neighbors, close colleagues, trusted local businesses. Emergency alerts go here first.</p>
+                <div class="mt-4 flex flex-wrap gap-2">
+                  <span class="rounded-full bg-slate-100 px-3 py-1.5 text-xs font-semibold text-brand-ink">Family</span>
+                  <span class="rounded-full bg-slate-100 px-3 py-1.5 text-xs font-semibold text-brand-ink">Neighbors</span>
+                  <span class="rounded-full bg-slate-100 px-3 py-1.5 text-xs font-semibold text-brand-ink">Trusted shops</span>
+                </div>
+                <div class="mt-5">
+                  <div class="h-2 rounded-full bg-slate-100">
+                    <div class="h-2 w-[90%] rounded-full bg-gradient-to-r from-brand-teal to-brand-mint"></div>
+                  </div>
+                  <p class="mt-2 text-xs text-slate-500">Trust Score boost: +15 on completed interactions.</p>
+                </div>
+              </article>
+
+              <article data-reveal style="--reveal-delay: 2" class="story-card p-5 sm:p-6">
+                <div class="h-48 w-full overflow-hidden rounded-[1.4rem] bg-slate-100">
+                  <img src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&amp;fit=crop&amp;w=900&amp;q=80" class="h-full w-full object-cover" alt="Friends laughing at a cafe" loading="lazy">
+                </div>
+                <h3 class="mt-5 text-xl font-semibold text-brand-ink">Level 2 · Friends-of-friends</h3>
+                <p class="mt-3 text-sm leading-6 text-slate-600">Introductions via people you trust. Mutual connections always shown.</p>
+                <div class="mt-4 flex flex-wrap gap-2">
+                  <span class="rounded-full bg-slate-100 px-3 py-1.5 text-xs font-semibold text-brand-ink">Friends-of-friends</span>
+                  <span class="rounded-full bg-slate-100 px-3 py-1.5 text-xs font-semibold text-brand-ink">School network</span>
+                  <span class="rounded-full bg-slate-100 px-3 py-1.5 text-xs font-semibold text-brand-ink">Team referrals</span>
+                </div>
+                <div class="mt-5">
+                  <div class="h-2 rounded-full bg-slate-100">
+                    <div class="h-2 w-[70%] rounded-full bg-gradient-to-r from-brand-teal to-brand-mint"></div>
+                  </div>
+                  <p class="mt-2 text-xs text-slate-500">Trust Score boost: +8 on completed interactions.</p>
+                </div>
+              </article>
+
+              <article data-reveal style="--reveal-delay: 3" class="story-card p-5 sm:p-6">
+                <div class="h-48 w-full overflow-hidden rounded-[1.4rem] bg-slate-100">
+                  <img src="https://images.unsplash.com/photo-1556740749-887f6717d7e4?auto=format&amp;fit=crop&amp;w=900&amp;q=80" class="h-full w-full object-cover" alt="Small business owner smiling" loading="lazy">
+                </div>
+                <h3 class="mt-5 text-xl font-semibold text-brand-ink">Businesses in your circle</h3>
+                <p class="mt-3 text-sm leading-6 text-slate-600">Offers from Level 1/2 businesses live in their own tab and stay out of the main feed.</p>
+                <div class="mt-4 space-y-2 text-sm">
+                  <div class="rounded-2xl border border-slate-200 bg-slate-50 p-3"><strong>Urban Bikes · L1</strong><br>20% off tune-ups for circle.</div>
+                  <div class="rounded-2xl border border-slate-200 bg-slate-50 p-3"><strong>Harvest Kitchen · L2</strong><br>Free delivery via Priya.</div>
+                </div>
+                <p class="mt-3 text-xs text-slate-500">No paid boosts. Only people already connected.</p>
+              </article>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="requests" class="club-section scroll-mt-28 py-3 sm:py-4">
+      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div class="soft-panel rounded-[2.4rem] p-6 sm:p-8 lg:p-10">
+          <div class="space-y-6">
+            <div class="max-w-3xl space-y-5">
+              <p data-reveal class="text-sm font-semibold uppercase tracking-[0.24em] text-brand-teal">Requests</p>
+              <h2 data-reveal style="--reveal-delay: 1" class="max-w-md text-4xl font-semibold leading-tight tracking-[-0.05em] text-brand-ink sm:text-5xl">
+                What you can post
+              </h2>
+              <p data-reveal style="--reveal-delay: 2" class="max-w-md text-lg leading-8 text-slate-600">
+                Home feed is Level 1 + Level 2 only. Pre-built cards keep intent clear; AI matches by relevance and proximity.
+              </p>
+              <div data-reveal style="--reveal-delay: 3" class="flex flex-wrap gap-3 text-sm font-semibold text-brand-ink">
+                <span class="rounded-full bg-slate-100 px-4 py-2">Help</span>
+                <span class="rounded-full bg-slate-100 px-4 py-2">Rides</span>
+                <span class="rounded-full bg-slate-100 px-4 py-2">Items</span>
+                <span class="rounded-full bg-slate-100 px-4 py-2">Recommendations</span>
+                <span class="rounded-full bg-slate-100 px-4 py-2">Emergencies</span>
+              </div>
+            </div>
+
+            <div class="grid gap-4 lg:grid-cols-3">
+              <article data-reveal style="--reveal-delay: 1" class="story-card p-5 sm:p-6">
+                <div class="h-52 w-full overflow-hidden rounded-[1.4rem] bg-slate-100">
+                  <img src="https://images.pexels.com/photos/3699259/pexels-photo-3699259.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=1200&amp;dpr=1" class="h-full w-full object-cover" alt="Friends carpooling together" loading="lazy">
+                </div>
+                <div class="mt-5 flex items-center gap-3">
+                  <div class="flex h-11 w-11 items-center justify-center rounded-full bg-brand-teal/10 text-brand-teal"><i class="fas fa-car-side"></i></div>
+                  <h3 class="text-2xl font-semibold text-brand-ink">Help &amp; rides</h3>
+                </div>
+                <p class="mt-3 text-sm leading-6 text-slate-600">Airport pickup, quick favors, school runs. Level 1 first, Level 2 optional.</p>
+                <div class="mt-4 grid gap-2 text-sm">
+                  <div class="rounded-2xl border border-slate-200 bg-slate-50 p-3"><strong>Ride share</strong><br>Need a ride to SFO at 6:30pm.</div>
+                  <div class="rounded-2xl border border-slate-200 bg-slate-50 p-3"><strong>Help</strong><br>Quick dog walk at 3pm.</div>
+                </div>
+              </article>
+
+              <article data-reveal style="--reveal-delay: 2" class="story-card p-5 sm:p-6">
+                <div class="h-52 w-full overflow-hidden rounded-[1.4rem]">
+                  <img src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&amp;fit=crop&amp;w=1200&amp;q=80" class="h-full w-full object-cover" alt="Shared workspace items" loading="lazy">
+                </div>
+                <div class="mt-5 flex items-center gap-3">
+                  <div class="flex h-11 w-11 items-center justify-center rounded-full bg-brand-mint/10 text-brand-ink"><i class="fas fa-hand-holding-heart"></i></div>
+                  <h3 class="text-2xl font-semibold text-brand-ink">Items &amp; recommendations</h3>
+                </div>
+                <p class="mt-3 text-sm leading-6 text-slate-600">Borrow/lend gear, share reviews, swap skills. Always tagged with trust level.</p>
+                <div class="mt-4 grid gap-2 text-sm">
+                  <div class="rounded-2xl border border-slate-200 bg-slate-50 p-3"><strong>Item loan</strong><br>Projector for Thursday?</div>
+                  <div class="rounded-2xl border border-slate-200 bg-slate-50 p-3"><strong>Review</strong><br>Trusted plumber near downtown?</div>
+                </div>
+              </article>
+
+              <article data-reveal style="--reveal-delay: 3" class="story-card p-5 sm:p-6">
+                <div class="h-52 w-full overflow-hidden rounded-[1.4rem]">
+                  <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&amp;fit=crop&amp;w=1200&amp;q=80" class="h-full w-full object-cover" alt="Vibrant local market storefront" loading="lazy">
+                </div>
+                <div class="mt-5 flex items-center gap-3">
+                  <div class="flex h-11 w-11 items-center justify-center rounded-full bg-brand-mint/15 text-brand-mint"><i class="fas fa-bullhorn"></i></div>
+                  <h3 class="text-2xl font-semibold text-brand-ink">Offers &amp; emergencies</h3>
+                </div>
+                <p class="mt-3 text-sm leading-6 text-slate-600">Circle businesses post in a separate tab. Emergencies ping Level 1 with location.</p>
+                <div class="mt-4 grid gap-2 text-sm">
+                  <div class="rounded-2xl border border-slate-200 bg-slate-50 p-3"><strong>Local offer</strong><br>Urban Bikes: 20% off tune-ups.</div>
+                  <div class="rounded-2xl border border-slate-200 bg-slate-50 p-3"><strong>Emergency</strong><br>Nearest high-trust contacts alerted.</div>
+                </div>
+              </article>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="offers" class="club-section scroll-mt-28 py-3 sm:py-4">
+      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div class="soft-panel overflow-hidden rounded-[2.6rem] px-6 py-8 sm:px-8 sm:py-10 lg:px-10 lg:py-12">
+          <div class="grid gap-8 lg:grid-cols-[0.84fr,1.16fr] lg:items-center">
+            <div class="space-y-5">
+              <h2 data-reveal class="text-4xl font-semibold leading-tight tracking-[-0.05em] text-brand-ink sm:text-5xl">Circle offers stay separate</h2>
+              <p data-reveal style="--reveal-delay: 1" class="max-w-lg text-lg leading-8 text-slate-700">Businesses you already know can share perks in a dedicated tab—never boosting into your main feed.</p>
+              <ul data-reveal style="--reveal-delay: 2" class="space-y-3 text-sm leading-6 text-slate-700">
+                <li class="flex items-start gap-3 rounded-2xl bg-white/70 px-4 py-3">
+                  <i class="fas fa-toggle-on pt-1 text-brand-teal"></i>
+                  <span>Mute or follow any business with one tap.</span>
+                </li>
+                <li class="flex items-start gap-3 rounded-2xl bg-white/70 px-4 py-3">
+                  <i class="fas fa-location-dot pt-1 text-brand-teal"></i>
+                  <span>Location-aware offers—no irrelevant ads.</span>
+                </li>
+                <li class="flex items-start gap-3 rounded-2xl bg-white/70 px-4 py-3">
+                  <i class="fas fa-shield pt-1 text-brand-teal"></i>
+                  <span>Offers only from Level 1/2 verified circles.</span>
+                </li>
               </ul>
             </div>
-            <div class="grid sm:grid-cols-2 gap-4">
-              <div class="p-4 rounded-2xl bg-white shadow-sm border border-slate-200">
-                <div class="flex items-center gap-3 mb-2">
-                  <div class="h-10 w-10 rounded-full bg-brand-teal/10 text-brand-teal flex items-center justify-center"><i class="fas fa-store"></i></div>
+
+            <div class="grid gap-4 sm:grid-cols-2">
+              <article data-reveal style="--reveal-delay: 1" class="offer-card p-4 sm:p-5">
+                <div class="flex items-center gap-3">
+                  <div class="flex h-11 w-11 items-center justify-center rounded-full bg-brand-teal/10 text-brand-teal"><i class="fas fa-store"></i></div>
                   <div>
                     <p class="font-semibold text-brand-ink">Harvest Kitchen · L2</p>
                     <p class="text-xs text-slate-500">Verified by Priya</p>
                   </div>
                 </div>
-                <p class="text-sm text-slate-700">Free delivery for your mesh this weekend only.</p>
-              </div>
-              <div class="p-4 rounded-2xl bg-white shadow-sm border border-slate-200">
-                <div class="flex items-center gap-3 mb-2">
-                  <div class="h-10 w-10 rounded-full bg-brand-coral/10 text-brand-coral flex items-center justify-center"><i class="fas fa-bicycle"></i></div>
+                <p class="mt-4 text-sm leading-6 text-slate-700">Free delivery for your mesh this weekend only.</p>
+              </article>
+              <article data-reveal style="--reveal-delay: 2" class="offer-card p-4 sm:p-5">
+                <div class="flex items-center gap-3">
+                  <div class="flex h-11 w-11 items-center justify-center rounded-full bg-brand-coral/10 text-brand-coral"><i class="fas fa-bicycle"></i></div>
                   <div>
                     <p class="font-semibold text-brand-ink">Urban Bikes · L1</p>
                     <p class="text-xs text-slate-500">Verified by 2 neighbors</p>
                   </div>
                 </div>
-                <p class="text-sm text-slate-700">20% off tune-ups and free safety check.</p>
-              </div>
-              <div class="p-4 rounded-2xl bg-white shadow-sm border border-slate-200">
-                <div class="flex items-center gap-3 mb-2">
-                  <div class="h-10 w-10 rounded-full bg-brand-amber/10 text-brand-amber flex items-center justify-center"><i class="fas fa-plug-circle-check"></i></div>
+                <p class="mt-4 text-sm leading-6 text-slate-700">20% off tune-ups and free safety check.</p>
+              </article>
+              <article data-reveal style="--reveal-delay: 3" class="offer-card p-4 sm:p-5">
+                <div class="flex items-center gap-3">
+                  <div class="flex h-11 w-11 items-center justify-center rounded-full bg-brand-amber/10 text-brand-amber"><i class="fas fa-plug-circle-check"></i></div>
                   <div>
                     <p class="font-semibold text-brand-ink">FixRight Electric · L1</p>
                     <p class="text-xs text-slate-500">Tagged high trust</p>
                   </div>
                 </div>
-                <p class="text-sm text-slate-700">Same-day fixes with proof of insurance in-app.</p>
-              </div>
-              <div class="p-4 rounded-2xl bg-white shadow-sm border border-slate-200">
-                <div class="flex items-center gap-3 mb-2">
-                  <div class="h-10 w-10 rounded-full bg-brand-red/10 text-brand-red flex items-center justify-center"><i class="fas fa-screwdriver-wrench"></i></div>
+                <p class="mt-4 text-sm leading-6 text-slate-700">Same-day fixes with proof of insurance in-app.</p>
+              </article>
+              <article data-reveal style="--reveal-delay: 4" class="offer-card p-4 sm:p-5">
+                <div class="flex items-center gap-3">
+                  <div class="flex h-11 w-11 items-center justify-center rounded-full bg-brand-red/10 text-brand-red"><i class="fas fa-screwdriver-wrench"></i></div>
                   <div>
                     <p class="font-semibold text-brand-ink">Maker Garage · L2</p>
                     <p class="text-xs text-slate-500">Via Aria</p>
                   </div>
                 </div>
-                <p class="text-sm text-slate-700">Tool library with weekend access for your circle.</p>
+                <p class="mt-4 text-sm leading-6 text-slate-700">Tool library with weekend access for your circle.</p>
+              </article>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="cta" class="club-section scroll-mt-28 py-3 sm:py-4">
+      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div class="grid gap-6 lg:grid-cols-[1.08fr,0.92fr]">
+          <div class="dark-panel px-6 py-8 sm:px-8 sm:py-10 lg:px-10 lg:py-12">
+            <div class="relative z-10 max-w-2xl">
+              <h3 data-reveal class="text-4xl font-semibold leading-tight tracking-[-0.05em] text-brand-ink sm:text-5xl">Ready to keep your feed free of strangers?</h3>
+              <p data-reveal style="--reveal-delay: 1" class="mt-4 max-w-xl text-lg leading-8 text-slate-600">Launching soon. Keep your circles close—no public profiles.</p>
+              <div data-reveal style="--reveal-delay: 2" class="mt-6 inline-flex flex-wrap items-center gap-3 rounded-full bg-slate-100 px-4 py-3 text-sm font-semibold text-brand-ink">
+                <i class="fab fa-google-play text-lg text-brand-teal"></i><span>See us soon on Play Store</span>
+                <span class="text-slate-300">•</span>
+                <i class="fab fa-apple text-lg text-brand-teal"></i><span>See us soon on App Store</span>
               </div>
             </div>
           </div>
-        </div>
-      </div>
-    </section>
 
-    <section id="cta" class="py-12 scroll-mt-24">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="bg-gradient-to-r from-brand-teal via-brand-mint to-brand-coral text-white rounded-3xl p-10 shadow-xl grid md:grid-cols-3 gap-6 items-center">
-          <div class="md:col-span-2">
-            <h3 class="text-3xl font-semibold">Ready to keep your feed free of strangers?</h3>
-            <p class="text-white/90 mt-2">Launching soon. Keep your circles close—no public profiles.</p>
-            <div class="mt-4 inline-flex items-center gap-3 text-sm font-semibold text-white/90">
-              <i class="fab fa-google-play text-lg"></i><span>See us soon on Play Store</span>
-              <span class="text-white/60">·</span>
-              <i class="fab fa-apple text-lg"></i><span>See us soon on App Store</span>
+          <div class="soft-panel flex items-center justify-between gap-6 rounded-[2.4rem] p-6 sm:p-8">
+            <div data-reveal class="space-y-3">
+              <p class="text-sm font-semibold uppercase tracking-[0.24em] text-brand-teal">Learn more</p>
+              <p class="max-w-sm text-lg leading-8 text-slate-700">Privacy-first, spam-free, people you actually know.</p>
             </div>
-          </div>
-          <div class="flex md:justify-end">
-            <a href="#faq" class="inline-flex items-center justify-center px-6 py-3 rounded-xl bg-white text-brand-ink font-semibold shadow-lg hover:shadow-xl transition">Learn more</a>
+            <a data-reveal style="--reveal-delay: 1" href="#faq" class="inline-flex h-14 min-w-[10rem] items-center justify-center rounded-full bg-brand-teal px-6 text-base font-semibold text-white shadow-lg shadow-brand-teal/25 transition hover:-translate-y-0.5 hover:shadow-xl hover:shadow-brand-teal/30">Learn more</a>
           </div>
         </div>
       </div>
     </section>
 
-    <section id="faq" class="bg-slate-50 py-12 scroll-mt-24">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="text-center">
-          <h2 class="text-3xl font-semibold text-brand-ink">Quick answers</h2>
-          <p class="mt-3 text-lg text-slate-600 max-w-2xl mx-auto">Privacy-first, spam-free, people you actually know.</p>
-        </div>
-        <div class="mt-8 grid gap-4 md:grid-cols-2">
-          <div class="p-5 bg-white border border-slate-200 rounded-2xl shadow-sm">
-            <h4 class="font-semibold text-brand-ink">How do you read my contacts?</h4>
-            <p class="text-slate-600 mt-2 text-sm">With permission, once. Data is used to detect real relationships—never sold, never public.</p>
+    <section id="faq" class="club-section scroll-mt-28 py-3 sm:py-4">
+      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div class="soft-panel rounded-[2.4rem] p-6 sm:p-8 lg:p-10">
+          <div class="text-center">
+            <p data-reveal class="text-sm font-semibold uppercase tracking-[0.24em] text-brand-teal">FAQ</p>
+            <h2 data-reveal style="--reveal-delay: 1" class="mt-3 text-4xl font-semibold tracking-[-0.05em] text-brand-ink sm:text-5xl">Quick answers</h2>
+            <p data-reveal style="--reveal-delay: 2" class="mx-auto mt-4 max-w-2xl text-lg leading-8 text-slate-600">Privacy-first, spam-free, people you actually know.</p>
           </div>
-          <div class="p-5 bg-white border border-slate-200 rounded-2xl shadow-sm">
-            <h4 class="font-semibold text-brand-ink">What stops spam?</h4>
-            <p class="text-slate-600 mt-2 text-sm">No one outside Level 1 or Level 2 can reach you. Businesses live in their own tab.</p>
-          </div>
-          <div class="p-5 bg-white border border-slate-200 rounded-2xl shadow-sm">
-            <h4 class="font-semibold text-brand-ink">Is anything public?</h4>
-            <p class="text-slate-600 mt-2 text-sm">No. Only Level 1 and Level 2 can see or post to you. Nothing is public or searchable.</p>
-          </div>
-          <div class="p-5 bg-white border border-slate-200 rounded-2xl shadow-sm">
-            <h4 class="font-semibold text-brand-ink">What about emergencies?</h4>
-            <p class="text-slate-600 mt-2 text-sm">One tap alerts Level 1 contacts nearest to you. Location is shared only with them.</p>
+          <div class="mt-8 grid gap-4 md:grid-cols-2">
+            <article data-reveal style="--reveal-delay: 1" class="faq-card p-5 sm:p-6">
+              <h4 class="text-lg font-semibold text-brand-ink">How do you read my contacts?</h4>
+              <p class="mt-3 text-sm leading-6 text-slate-600">With permission, once. Data is used to detect real relationships—never sold, never public.</p>
+            </article>
+            <article data-reveal style="--reveal-delay: 2" class="faq-card p-5 sm:p-6">
+              <h4 class="text-lg font-semibold text-brand-ink">What stops spam?</h4>
+              <p class="mt-3 text-sm leading-6 text-slate-600">No one outside Level 1 or Level 2 can reach you. Businesses live in their own tab.</p>
+            </article>
+            <article data-reveal style="--reveal-delay: 3" class="faq-card p-5 sm:p-6">
+              <h4 class="text-lg font-semibold text-brand-ink">Is anything public?</h4>
+              <p class="mt-3 text-sm leading-6 text-slate-600">No. Only Level 1 and Level 2 can see or post to you. Nothing is public or searchable.</p>
+            </article>
+            <article data-reveal style="--reveal-delay: 4" class="faq-card p-5 sm:p-6">
+              <h4 class="text-lg font-semibold text-brand-ink">What about emergencies?</h4>
+              <p class="mt-3 text-sm leading-6 text-slate-600">One tap alerts Level 1 contacts nearest to you. Location is shared only with them.</p>
+            </article>
           </div>
         </div>
       </div>
     </section>
   </main>
 
-  <footer class="bg-brand-ink text-white">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-10">
-      <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6 border-b border-white/10 pb-6">
-        <div class="space-y-2">
-          <div class="text-2xl font-bold tracking-[-0.045em] lowercase text-brand-teal">gonyr</div>
-          <p class="text-white/70 text-sm">A Gigasys Technologies Inc. app. trusted-circle first, private by default.</p>
-        </div>
-        <div class="flex flex-wrap items-center gap-3 text-sm font-semibold">
-          <div class="inline-flex items-center gap-2 px-3 py-2 rounded-lg bg-white text-brand-ink shadow">
-            <span>Get started soon on</span>
-            <i class="fab fa-google-play text-brand-teal"></i>
-            <i class="fab fa-apple text-brand-teal"></i>
+  <footer class="footer-panel text-white">
+    <div class="mx-auto max-w-7xl px-4 pb-6 pt-3 sm:px-6 lg:px-8">
+      <div class="rounded-[2rem] border border-white/10 bg-white/5 px-5 py-4 sm:px-6">
+        <div class="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
+          <div class="flex items-center gap-3">
+            <div class="rounded-xl bg-white px-2 py-1.5">
+              <img src="assets/nyr-icon.png" alt="Nyr" class="h-7 w-[4.5rem] object-cover object-center sm:h-8 sm:w-20">
+            </div>
+            <div>
+              <div class="text-lg font-semibold text-brand-gold">Nyr</div>
+              <p class="text-xs text-white/65">Trusted-circle first. Private by default.</p>
+            </div>
+          </div>
+          <div class="flex flex-wrap gap-x-4 gap-y-2 text-sm text-white/75">
+            <a href="pages/gigasys-technologies-inc.html" class="transition hover:text-white">Company</a>
+            <a href="pages/support.html" class="transition hover:text-white">Support</a>
+            <a href="pages/circle-offers.html" class="transition hover:text-white">Circle Offers</a>
+            <a href="pages/privacy-center.html" class="transition hover:text-white">Privacy</a>
+            <a href="pages/cookie-policy.html" class="transition hover:text-white">Cookies</a>
+            <a href="pages/community-guidelines.html" class="transition hover:text-white">Guidelines</a>
+          </div>
+          <div class="text-xs text-white/55">
+            &copy; 2025 Gigasys Technologies Inc.
           </div>
         </div>
-      </div>
-
-      <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-8 text-sm">
-        <div class="space-y-3">
-          <h4 class="text-base font-semibold text-white">Company</h4>
-          <ul class="space-y-2 text-white/80">
-            <li><a href="pages/gigasys-technologies-inc.html" class="hover:text-white">About Gigasys Technologies Inc.</a></li>
-            <li><a href="pages/careers.html" class="hover:text-white">Careers</a></li>
-            <li><a href="pages/news.html" class="hover:text-white">News</a></li>
-          </ul>
-        </div>
-        <div class="space-y-3">
-          <h4 class="text-base font-semibold text-white">Community</h4>
-          <ul class="space-y-2 text-white/80">
-            <li><a href="pages/support.html" class="hover:text-white">Support</a></li>
-            <li><a href="pages/community-guidelines.html" class="hover:text-white">Community Guidelines</a></li>
-            <li><a href="pages/safety-center.html" class="hover:text-white">Safety Center</a></li>
-          </ul>
-        </div>
-        <div class="space-y-3">
-          <h4 class="text-base font-semibold text-white">Circle business</h4>
-          <ul class="space-y-2 text-white/80">
-            <li><a href="pages/circle-offers.html" class="hover:text-white">Circle Offers</a></li>
-            <li><a href="pages/offer-policies.html" class="hover:text-white">Offer Policies</a></li>
-            <li><a href="pages/brand-guidelines.html" class="hover:text-white">Brand Guidelines</a></li>
-            <li><a href="pages/circle-promotions.html" class="hover:text-white">Circle Promotions</a></li>
-          </ul>
-        </div>
-        <div class="space-y-3">
-          <h4 class="text-base font-semibold text-white">Legal</h4>
-          <ul class="space-y-2 text-white/80">
-            <li><a href="pages/privacy-center.html" class="hover:text-white">Privacy Center</a></li>
-            <li><a href="pages/your-privacy-choices.html" class="hover:text-white">Your Privacy Choices</a></li>
-            <li><a href="pages/cookie-policy.html" class="hover:text-white">Cookie Policy</a></li>
-            <li><a href="pages/report-infringement.html" class="hover:text-white">Report Infringement</a></li>
-            <li><a href="pages/creative-tools-terms.html" class="hover:text-white">Creative Tools Terms</a></li>
-            <li><a href="pages/location-geofilter-terms.html" class="hover:text-white">Location & Geofilter Terms</a></li>
-          </ul>
-        </div>
-      </div>
-
-      <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 text-xs text-white/60">
-        <span>&copy; 2025 Gigasys Technologies Inc. All rights reserved.</span>
-        <span>gonyr by Gigasys Technologies Inc. private circles; nothing public or searchable.</span>
       </div>
     </div>
   </footer>
@@ -468,11 +748,59 @@
   <script>
     const toggleButton = document.getElementById('nav-toggle');
     const mobileNav = document.getElementById('mobile-nav');
+    const siteHeader = document.getElementById('site-header');
+    const revealItems = document.querySelectorAll('[data-reveal]');
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+    const setHeaderState = () => {
+      siteHeader?.classList.toggle('is-scrolled', window.scrollY > 18);
+    };
+
+    let ticking = false;
+
+    const updateScene = () => {
+      ticking = false;
+      setHeaderState();
+    };
+
+    const requestSceneUpdate = () => {
+      if (ticking) return;
+      ticking = true;
+      window.requestAnimationFrame(updateScene);
+    };
 
     toggleButton?.addEventListener('click', () => {
-      mobileNav.classList.toggle('hidden');
-      toggleButton.setAttribute('aria-expanded', mobileNav.classList.contains('hidden') ? 'false' : 'true');
+      mobileNav?.classList.toggle('hidden');
+      toggleButton.setAttribute('aria-expanded', mobileNav?.classList.contains('hidden') ? 'false' : 'true');
     });
+
+    mobileNav?.querySelectorAll('a').forEach((link) => {
+      link.addEventListener('click', () => {
+        mobileNav.classList.add('hidden');
+        toggleButton?.setAttribute('aria-expanded', 'false');
+      });
+    });
+
+    if (prefersReducedMotion.matches) {
+      revealItems.forEach((item) => item.classList.add('revealed'));
+    } else {
+      const revealObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          entry.target.classList.add('revealed');
+          observer.unobserve(entry.target);
+        });
+      }, {
+        threshold: 0.18,
+        rootMargin: '0px 0px -40px 0px',
+      });
+
+      revealItems.forEach((item) => revealObserver.observe(item));
+    }
+
+    setHeaderState();
+    window.addEventListener('scroll', requestSceneUpdate, { passive: true });
+    window.addEventListener('resize', requestSceneUpdate);
   </script>
 </body>
 </html>
