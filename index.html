@@ -7,229 +7,1337 @@
   <link rel="icon" type="image/png" href="assets/nyr-icon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
   <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          colors: {
-            brand: {
-              teal: '#5A6FF7',
-              mint: '#8EA1FF',
-              coral: '#FFD44D',
-              amber: '#F5BF34',
-              ink: '#26224C',
-              gold: '#FFF4BF',
-              red: '#FFE38A',
-            }
-          },
-          fontFamily: {
-            sans: ['"Manrope"', 'system-ui', 'sans-serif'],
-          }
-        }
-      }
-    }
-  </script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
   <style>
     :root {
       color-scheme: light;
       --paper: #ffffff;
-      --paper-strong: #ffffff;
-      --ink: #26224C;
-      --glass: rgba(255, 255, 255, 0.96);
-      --glass-strong: rgba(255, 255, 255, 0.98);
-      --line: rgba(226, 232, 240, 0.95);
-      --shadow: 0 14px 40px rgba(34, 27, 58, 0.06);
-      --shadow-strong: 0 18px 48px rgba(34, 27, 58, 0.08);
+      --paper-soft: #f8f8ff;
+      --ink: #0f0f0f;
+      --muted: #555555;
+      --line: rgba(15, 15, 15, 0.08);
+      --accent: #556cf5;
+      --accent-strong: #4f46e5;
+      --accent-soft: #eef0ff;
+      --accent-soft-2: #f6f7ff;
+      --sun: #ffd44d;
+      --shadow: 0 24px 70px rgba(49, 64, 194, 0.12);
+      --shadow-soft: 0 18px 40px rgba(15, 15, 15, 0.06);
+      --radius-xl: 2rem;
+      --radius-lg: 1.5rem;
       --ease: cubic-bezier(0.22, 1, 0.36, 1);
     }
 
     html {
-      scroll-behavior: smooth;
       background: var(--paper);
       scroll-padding-top: 7rem;
-      scroll-snap-type: y mandatory;
     }
 
     body {
-      min-height: 100vh;
-      background: #ffffff;
-      scroll-snap-type: y mandatory;
+      margin: 0;
+      overflow-x: hidden;
+      background: var(--paper);
+      color: var(--ink);
+      font-family: "Manrope", system-ui, sans-serif;
+      text-rendering: optimizeLegibility;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a {
+      text-decoration: none;
     }
 
     ::selection {
-      background: rgba(90, 111, 247, 0.18);
+      background: rgba(85, 108, 245, 0.18);
     }
 
-    .nav-shell,
-    .soft-panel,
-    .story-card,
-    .offer-card,
-    .faq-card,
-    .hero-spotlight,
-    .feed-card {
-      border: 1px solid var(--line);
-      box-shadow: var(--shadow);
-      background: #ffffff;
+    .site-header {
+      transition: transform 220ms var(--ease);
     }
 
     .nav-shell {
+      background: rgba(255, 255, 255, 0.86);
+      border: 1px solid transparent;
+      border-radius: 999px;
+      box-shadow: 0 12px 34px rgba(15, 15, 15, 0.04);
+      backdrop-filter: blur(18px);
+      transition: border-color 240ms var(--ease), box-shadow 240ms var(--ease), background 240ms var(--ease);
+    }
+
+    .site-header.is-scrolled .nav-shell {
+      border-color: var(--line);
+      box-shadow: 0 18px 42px rgba(15, 15, 15, 0.08);
       background: rgba(255, 255, 255, 0.96);
-      transition:
-        background 260ms var(--ease),
-        box-shadow 260ms var(--ease),
-        border-color 260ms var(--ease),
-        transform 260ms var(--ease);
     }
 
-    #site-header.is-scrolled .nav-shell {
-      background: rgba(255, 255, 255, 0.98);
-      box-shadow: 0 10px 28px rgba(34, 27, 58, 0.08);
-      border-color: rgba(226, 232, 240, 0.95);
-      transform: translateY(0);
-    }
-
-    .hero-loop {
-      display: none;
-    }
-
-    .hero-loop__track {
-      display: none;
-    }
-
-    .hero-loop--compact .hero-loop__track {
-      display: none;
-    }
-
-    .soft-panel {
-      background: #ffffff;
-    }
-
-    .club-section {
-      scroll-snap-align: start;
-      scroll-snap-stop: always;
-    }
-
-    .hero-page {
-      min-height: calc(100svh - 6.5rem);
+    .hero-section {
+      min-height: auto;
       display: flex;
+      align-items: flex-start;
+      padding: 6.4rem 0 2.5rem;
+      position: relative;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      padding: 0.65rem 1rem;
+      border-radius: 999px;
+      background: var(--accent-soft);
+      color: var(--accent-strong);
+      font-size: 0.85rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+
+    .hero-title {
+      font-size: clamp(3.4rem, 7vw, 6.25rem);
+      line-height: 0.92;
+      letter-spacing: -0.08em;
+      font-weight: 800;
+      margin: 0;
+    }
+
+    .hero-line {
+      display: block;
+      will-change: transform;
+    }
+
+    .section-title {
+      font-size: clamp(2.6rem, 5vw, 4.8rem);
+      line-height: 0.96;
+      letter-spacing: -0.06em;
+      font-weight: 800;
+      margin: 0;
+    }
+
+    .section-copy {
+      font-size: 1.05rem;
+      line-height: 1.9;
+      color: var(--muted);
+    }
+
+    .ghost-button,
+    .primary-button,
+    .store-button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.7rem;
+      border-radius: 999px;
+      font-weight: 700;
+      transition: transform 220ms var(--ease), box-shadow 220ms var(--ease), background 220ms var(--ease), border-color 220ms var(--ease);
+    }
+
+    .primary-button {
+      padding: 0.95rem 1.45rem;
+      background: var(--accent);
+      color: #ffffff;
+      box-shadow: 0 18px 34px rgba(85, 108, 245, 0.25);
+    }
+
+    .ghost-button {
+      padding: 0.95rem 1.45rem;
+      border: 1px solid var(--line);
+      background: #ffffff;
+      color: var(--ink);
+    }
+
+    .store-button {
+      padding: 0.85rem 1.25rem;
+      background: #ffffff;
+      color: var(--ink);
+      border: 1px solid rgba(15, 15, 15, 0.08);
+      box-shadow: var(--shadow-soft);
+    }
+
+    .primary-button:hover,
+    .ghost-button:hover,
+    .store-button:hover,
+    .nav-link:hover {
+      transform: translateY(-2px);
+    }
+
+    .hero-scene {
+      position: relative;
+      min-height: 34.5rem;
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      perspective: 1200px;
+      overflow: visible;
+      padding-top: 0.75rem;
+    }
+
+    .hero-blob,
+    .cta-blob {
+      position: absolute;
+      border-radius: 999px;
+      background: radial-gradient(circle at 30% 30%, rgba(255, 212, 77, 0.54), rgba(85, 108, 245, 0.12) 45%, rgba(85, 108, 245, 0.04) 70%, transparent 78%);
+      filter: blur(2px);
+      pointer-events: none;
+    }
+
+    .hero-blob {
+      width: 29rem;
+      height: 29rem;
+      inset: 47% auto auto 50%;
+      transform: translate(-50%, -50%);
+      opacity: 0.9;
+    }
+
+    .hero-backplate {
+      position: absolute;
+      width: 22rem;
+      height: 29rem;
+      border-radius: 2.4rem;
+      background: linear-gradient(180deg, rgba(238, 240, 255, 0.9), rgba(255, 255, 255, 0.4));
+      border: 1px solid rgba(85, 108, 245, 0.14);
+      box-shadow: 0 26px 60px rgba(85, 108, 245, 0.12);
+      transform: rotate(-9deg) translate3d(-1.6rem, 2.2rem, 0);
+      z-index: 0;
+    }
+
+    .hero-device-card {
+      position: absolute;
+      z-index: 3;
+      border-radius: 1.7rem;
+      border: 1px solid rgba(15, 15, 15, 0.08);
+      background: rgba(255, 255, 255, 0.94);
+      box-shadow: 0 20px 40px rgba(15, 15, 15, 0.08);
+      backdrop-filter: blur(18px);
+    }
+
+    .hero-device-card--watch {
+      top: 4.2rem;
+      left: 0.5rem;
+      width: 11.4rem;
+      padding: 0.95rem;
+    }
+
+    .hero-device-card--overview {
+      left: -0.25rem;
+      bottom: 5rem;
+      width: 13.1rem;
+      padding: 1rem;
+    }
+
+    .watch-face {
+      display: grid;
+      grid-template-columns: 4.3rem 1fr;
+      gap: 0.8rem;
       align-items: center;
     }
 
-    .club-section > div,
-    .hero-page > div {
-      width: 100%;
-    }
-
-    .hero-spotlight {
-      background: #ffffff;
-      border-radius: 2rem;
-      overflow: hidden;
+    .watch-dial {
       position: relative;
-    }
-
-    .showcase-frame {
-      position: relative;
-      border-radius: 2rem;
+      width: 4.3rem;
+      height: 4.3rem;
+      border-radius: 1.4rem;
+      background: linear-gradient(180deg, rgba(238, 240, 255, 1), rgba(255, 255, 255, 0.96));
+      border: 1px solid rgba(85, 108, 245, 0.14);
       overflow: hidden;
-      border: 1px solid rgba(226, 232, 240, 0.95);
-      box-shadow: var(--shadow-strong);
-      background: #ffffff;
     }
 
-    .story-card,
-    .offer-card,
-    .faq-card,
-    .feed-card {
-      background: #ffffff;
-      border-radius: 1.5rem;
-      transition: transform 360ms var(--ease), box-shadow 360ms var(--ease);
+    .watch-dial::before,
+    .watch-dial::after {
+      content: "";
+      position: absolute;
+      border-radius: 999px;
+      inset: 0.7rem;
+      border: 2px solid rgba(85, 108, 245, 0.16);
     }
 
-    .story-card:hover,
-    .offer-card:hover,
-    .faq-card:hover,
-    .feed-card:hover {
-      box-shadow: 0 18px 40px rgba(34, 27, 58, 0.08);
+    .watch-dial::after {
+      inset: 1.25rem;
+      border-color: rgba(255, 212, 77, 0.48);
     }
 
-    .dark-panel {
-      position: relative;
+    .watch-copy strong,
+    .hero-overview strong {
+      display: block;
+      margin-bottom: 0.28rem;
+      font-size: 0.92rem;
+      color: var(--ink);
+    }
+
+    .watch-copy span,
+    .hero-overview span {
+      display: block;
+      font-size: 0.79rem;
+      line-height: 1.55;
+      color: var(--muted);
+    }
+
+    .hero-overview {
+      display: grid;
+      gap: 0.75rem;
+    }
+
+    .hero-overview__bar {
+      height: 0.48rem;
+      border-radius: 999px;
+      background: rgba(15, 15, 15, 0.07);
       overflow: hidden;
-      border-radius: 2rem;
-      border: 1px solid var(--line);
-      background: #ffffff;
+    }
+
+    .hero-overview__bar span {
+      display: block;
+      width: 78%;
+      height: 100%;
+      border-radius: inherit;
+      background: linear-gradient(90deg, var(--accent), var(--sun));
+    }
+
+    .phone-shell {
+      position: relative;
+      border-radius: 2.7rem;
+      border: 1px solid rgba(15, 15, 15, 0.08);
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.96), rgba(248, 248, 255, 0.96));
       box-shadow: var(--shadow);
+      padding: 0.85rem;
+      overflow: hidden;
     }
 
-    .dark-panel::before,
-    .dark-panel::after {
-      display: none;
+    .phone-shell::before {
+      content: "";
+      position: absolute;
+      top: 0.8rem;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 6.2rem;
+      height: 0.42rem;
+      border-radius: 999px;
+      background: rgba(15, 15, 15, 0.08);
+      z-index: 5;
     }
 
-    .dark-panel::before {
-      width: 18rem;
-      height: 18rem;
-      top: -4rem;
-      right: -2rem;
-      background: rgba(124, 58, 237, 0.45);
+    .phone-shell--hero {
+      width: min(24rem, 86vw);
+      margin-top: 1.35rem;
     }
 
-    .dark-panel::after {
-      width: 16rem;
-      height: 16rem;
-      bottom: -5rem;
-      left: -3rem;
-      background: rgba(168, 85, 247, 0.34);
+    .phone-shell--feature {
+      width: min(24rem, 100%);
+      margin-left: auto;
+      margin-right: auto;
     }
 
-    .scroll-pill {
-      animation: none !important;
+    .phone-screen {
+      border-radius: 2rem;
+      background: linear-gradient(180deg, #ffffff, #f7f8ff 46%, #ffffff);
+      padding: 1rem;
+      min-height: 29.5rem;
+      position: relative;
+      overflow: hidden;
     }
 
-    [data-reveal] {
-      --reveal-y: 24px;
-      --reveal-scale: 1;
-      opacity: 0;
-      transform: translate3d(0, var(--reveal-y), 0) scale(var(--reveal-scale));
-      transition:
-        opacity 700ms var(--ease),
-        transform 700ms var(--ease);
-      transition-delay: calc(var(--reveal-delay, 0) * 90ms);
-      will-change: opacity, transform;
+    .phone-screen--compact {
+      min-height: 22rem;
     }
 
-    [data-reveal].revealed {
-      --reveal-y: 0px;
-      --reveal-scale: 1;
+    .screen-topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.75rem;
+      margin-bottom: 1rem;
+      padding-top: 0.3rem;
+    }
+
+    .screen-kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      padding: 0.45rem 0.8rem;
+      border-radius: 999px;
+      background: var(--accent-soft);
+      color: var(--accent-strong);
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .screen-title {
+      margin: 0;
+      font-size: 1.65rem;
+      line-height: 1.08;
+      letter-spacing: -0.05em;
+      font-weight: 800;
+    }
+
+    .screen-subcopy {
+      margin: 0.45rem 0 1.15rem;
+      color: var(--muted);
+      font-size: 0.92rem;
+      line-height: 1.6;
+    }
+
+    .ui-pill-row,
+    .ui-stat-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.55rem;
+    }
+
+    .ui-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.5rem 0.8rem;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.78);
+      border: 1px solid rgba(15, 15, 15, 0.06);
+      color: var(--ink);
+      font-size: 0.78rem;
+      font-weight: 700;
+    }
+
+    .ui-stack {
+      display: grid;
+      gap: 0.75rem;
+      margin-top: 1rem;
+    }
+
+    .ui-card {
+      border-radius: 1.35rem;
+      border: 1px solid rgba(15, 15, 15, 0.08);
+      background: rgba(255, 255, 255, 0.92);
+      padding: 0.95rem 1rem;
+      box-shadow: 0 14px 24px rgba(15, 15, 15, 0.04);
+    }
+
+    .ui-card--offer {
+      border-color: rgba(85, 108, 245, 0.16);
+      background: linear-gradient(180deg, rgba(238, 240, 255, 0.92), rgba(255, 255, 255, 0.98));
+      box-shadow: 0 16px 28px rgba(85, 108, 245, 0.08);
+    }
+
+    .ui-card strong,
+    .mini-card strong {
+      display: block;
+      margin-bottom: 0.2rem;
+      color: var(--ink);
+      font-size: 0.92rem;
+    }
+
+    .ui-card span,
+    .mini-card span {
+      color: var(--muted);
+      font-size: 0.82rem;
+      line-height: 1.55;
+    }
+
+    .ui-progress {
+      margin-top: 0.95rem;
+      height: 0.45rem;
+      border-radius: 999px;
+      background: rgba(15, 15, 15, 0.06);
+      overflow: hidden;
+    }
+
+    .ui-progress > span {
+      display: block;
+      height: 100%;
+      border-radius: inherit;
+      background: linear-gradient(90deg, var(--accent), var(--sun));
+    }
+
+    .floating-widget {
+      position: absolute;
+      border-radius: 1.45rem;
+      border: 1px solid rgba(15, 15, 15, 0.08);
+      background: rgba(255, 255, 255, 0.94);
+      box-shadow: var(--shadow-soft);
+      padding: 0.95rem 1rem;
+      max-width: 13rem;
+      backdrop-filter: blur(16px);
+    }
+
+    .floating-widget strong {
+      display: block;
+      margin-bottom: 0.35rem;
+      color: var(--ink);
+      font-size: 0.92rem;
+    }
+
+    .floating-widget span {
+      display: block;
+      color: var(--muted);
+      font-size: 0.8rem;
+      line-height: 1.55;
+    }
+
+    .floating-widget--a {
+      top: 5.5rem;
+      right: 0.5rem;
+    }
+
+    .floating-widget--b {
+      left: 0.25rem;
+      bottom: 5.5rem;
+    }
+
+    .floating-widget--c {
+      right: 1.5rem;
+      bottom: 1rem;
+    }
+
+    .soft-card {
+      border: 1px solid var(--line);
+      background: linear-gradient(180deg, #ffffff, #fbfbff);
+      box-shadow: var(--shadow-soft);
+      border-radius: var(--radius-xl);
+    }
+
+    .marquee-section {
+      padding: 1rem 0 4rem;
+    }
+
+    .marquee-row {
+      overflow: hidden;
+      padding: 0.65rem 0;
+      mask-image: linear-gradient(90deg, transparent, black 10%, black 90%, transparent);
+      -webkit-mask-image: linear-gradient(90deg, transparent, black 10%, black 90%, transparent);
+    }
+
+    .marquee-track {
+      display: flex;
+      width: max-content;
+      gap: 0.85rem;
+      animation: marquee-left 26s linear infinite;
+    }
+
+    .marquee-row--reverse .marquee-track {
+      animation-name: marquee-right;
+      animation-duration: 30s;
+    }
+
+    .marquee-chip {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.55rem;
+      padding: 0.8rem 1.1rem;
+      border-radius: 999px;
+      background: var(--accent-soft);
+      color: var(--accent-strong);
+      font-size: 0.9rem;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .split-section {
+      padding: 3rem 0 5rem;
+    }
+
+    .story-grid {
+      position: relative;
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1.25rem;
+      margin-top: 2.75rem;
+    }
+
+    .story-grid::before {
+      content: "";
+      position: absolute;
+      top: 2rem;
+      left: 18%;
+      right: 18%;
+      height: 1px;
+      background: linear-gradient(90deg, rgba(85, 108, 245, 0.08), rgba(85, 108, 245, 0.22), rgba(255, 212, 77, 0.34), rgba(85, 108, 245, 0.22), rgba(85, 108, 245, 0.08));
+      z-index: 0;
+    }
+
+    .story-card {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      min-height: 100%;
+      padding: 1.55rem;
+      border-radius: 2rem;
+      border: 1px solid rgba(15, 15, 15, 0.08);
+      background: linear-gradient(180deg, #ffffff, #fbfbff);
+      box-shadow: var(--shadow-soft);
+    }
+
+    .story-card__top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    .story-marker {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 4rem;
+      height: 4rem;
+      border-radius: 1.35rem;
+      background: linear-gradient(180deg, rgba(238, 240, 255, 1), rgba(255, 255, 255, 0.96));
+      border: 1px solid rgba(85, 108, 245, 0.14);
+      color: var(--accent-strong);
+      font-size: 1.2rem;
+      box-shadow: 0 14px 28px rgba(85, 108, 245, 0.08);
+    }
+
+    .story-number {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 3rem;
+      height: 3rem;
+      padding: 0 0.85rem;
+      border-radius: 999px;
+      background: var(--accent-soft);
+      color: var(--accent-strong);
+      font-size: 0.88rem;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+    }
+
+    .story-card h3 {
+      margin: 0;
+      font-size: 1.75rem;
+      line-height: 1.02;
+      letter-spacing: -0.05em;
+      font-weight: 800;
+    }
+
+    .story-card p {
+      margin: 0.95rem 0 0;
+      color: var(--muted);
+      line-height: 1.8;
+    }
+
+    .story-card__chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.55rem;
+      margin-top: 1.15rem;
+    }
+
+    .story-card__note {
+      margin-top: 1.15rem;
+      padding-top: 1rem;
+      border-top: 1px solid rgba(15, 15, 15, 0.08);
+      font-size: 0.84rem;
+      font-weight: 700;
+      color: rgba(15, 15, 15, 0.68);
+    }
+
+    .feature-section {
+      padding: 3rem 0 6rem;
+    }
+
+    .feature-pin {
+      position: relative;
+      margin-top: 2.1rem;
+    }
+
+    .feature-pin__canvas {
+      position: relative;
+      max-width: 80rem;
+      height: calc(100vh - 6.85rem);
+      margin: 0 auto;
+      border-radius: 2.5rem;
+      border: 1px solid rgba(15, 15, 15, 0.08);
+      background: linear-gradient(180deg, #ffffff, #fbfbff);
+      box-shadow: 0 30px 90px rgba(15, 15, 15, 0.08);
+      overflow: hidden;
+    }
+
+    .feature-pin__canvas::before,
+    .feature-pin__canvas::after {
+      content: "";
+      position: absolute;
+      border-radius: 999px;
+      pointer-events: none;
+      filter: blur(8px);
+      opacity: 0.72;
+    }
+
+    .feature-pin__canvas::before {
+      width: 24rem;
+      height: 24rem;
+      top: -7rem;
+      right: -4rem;
+      background: radial-gradient(circle, rgba(255, 212, 77, 0.24), rgba(85, 108, 245, 0.12) 46%, transparent 74%);
+    }
+
+    .feature-pin__canvas::after {
+      width: 28rem;
+      height: 28rem;
+      bottom: -11rem;
+      left: -8rem;
+      background: radial-gradient(circle, rgba(85, 108, 245, 0.16), rgba(85, 108, 245, 0.05) 54%, transparent 76%);
+    }
+
+    .feature-panel {
+      display: grid;
+      grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+      gap: 1.5rem;
+      height: 100%;
+      padding: 1.85rem;
+    }
+
+    .feature-copy-stage,
+    .feature-screen-stage {
+      position: relative;
+      min-height: 100%;
+    }
+
+    .feature-screen-stage::before {
+      content: "";
+      position: absolute;
+      inset: 1.4rem 0 1.4rem 1.85rem;
+      border-radius: 2.2rem;
+      background: linear-gradient(180deg, rgba(238, 240, 255, 0.72), rgba(255, 255, 255, 0.24));
+      border: 1px solid rgba(85, 108, 245, 0.1);
+      z-index: 0;
+    }
+
+    .feature-step,
+    .screen-state {
+      position: absolute;
+      inset: 0;
       opacity: 1;
+      will-change: transform, opacity;
     }
 
-    .glass-grid {
-      background-image: none;
+    .feature-step:not([data-step="0"]),
+    .screen-state:not([data-screen="0"]) {
+      opacity: 0;
+      pointer-events: none;
     }
 
-    .fade-edge {
-      mask-image: linear-gradient(180deg, transparent, black 10%, black 90%, transparent);
-      -webkit-mask-image: linear-gradient(180deg, transparent, black 10%, black 90%, transparent);
+    .feature-step {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      inset: 0 0 8.6rem 0;
+      padding-top: 2.75rem;
+      padding-right: 0.5rem;
+    }
+
+    .feature-step h3 {
+      margin: 0;
+      font-size: clamp(2.5rem, 3vw, 4rem);
+      line-height: 0.98;
+      letter-spacing: -0.06em;
+      font-weight: 800;
+    }
+
+    .feature-step p {
+      margin: 1rem 0 1.5rem;
+      max-width: 30rem;
+      color: var(--muted);
+      font-size: 1rem;
+      line-height: 1.8;
+    }
+
+    .feature-stepper {
+      position: absolute;
+      left: 0;
+      bottom: 0.25rem;
+      display: grid;
+      grid-template-columns: 1rem 1fr;
+      column-gap: 1rem;
+      row-gap: 0.9rem;
+      width: min(26rem, calc(100% - 0.5rem));
+    }
+
+    .step-rail {
+      grid-column: 1;
+      grid-row: 1 / span 4;
+      position: relative;
+      width: 2px;
+      height: 100%;
+      margin-left: 0.38rem;
+      border-radius: 999px;
+      background: rgba(15, 15, 15, 0.08);
+      overflow: hidden;
+    }
+
+    .step-rail__fill {
+      position: absolute;
+      inset: 0 auto auto 0;
+      width: 100%;
+      height: 0%;
+      border-radius: inherit;
+      background: linear-gradient(180deg, var(--accent), var(--sun));
+    }
+
+    .step-item {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      color: rgba(15, 15, 15, 0.55);
+      font-size: 0.92rem;
+      font-weight: 700;
+      grid-column: 2;
+      transition: color 220ms var(--ease), transform 220ms var(--ease);
+    }
+
+    .step-dot {
+      width: 0.85rem;
+      height: 0.85rem;
+      border-radius: 999px;
+      background: rgba(15, 15, 15, 0.12);
+      border: 1px solid rgba(15, 15, 15, 0.08);
+      transition: background 220ms var(--ease), transform 220ms var(--ease), box-shadow 220ms var(--ease);
+    }
+
+    .step-dot.is-active {
+      background: var(--accent);
+      box-shadow: 0 0 0 0.35rem rgba(85, 108, 245, 0.16);
+      transform: scale(1.06);
+    }
+
+    .step-item.is-current {
+      color: var(--ink);
+      transform: translateX(4px);
+    }
+
+    .screen-state {
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      padding: 0.35rem 0 0.35rem 0.35rem;
+      z-index: 1;
+    }
+
+    .screen-grid {
+      display: grid;
+      gap: 0.9rem;
+      width: 100%;
+      align-content: start;
+    }
+
+    .mini-stat {
+      border-radius: 1.2rem;
+      padding: 0.9rem 1rem;
+      background: rgba(255, 255, 255, 0.84);
+      border: 1px solid rgba(15, 15, 15, 0.08);
+      box-shadow: 0 10px 24px rgba(15, 15, 15, 0.04);
+      font-size: 0.8rem;
+      max-width: 14rem;
+      margin-left: auto;
+      color: var(--muted);
+    }
+
+    .mini-stat strong {
+      display: block;
+      margin-bottom: 0.22rem;
+      color: var(--ink);
+      font-size: 0.9rem;
+    }
+
+    .mobile-feature-list {
+      display: grid;
+      gap: 1rem;
+      margin-top: 2rem;
+    }
+
+    .mobile-feature-card {
+      border-radius: var(--radius-xl);
+      border: 1px solid rgba(15, 15, 15, 0.08);
+      background: linear-gradient(180deg, #ffffff, #fbfbff);
+      box-shadow: var(--shadow-soft);
+      padding: 1.5rem;
+    }
+
+    .mobile-feature-card h3 {
+      margin: 0.8rem 0 0.4rem;
+      font-size: 1.7rem;
+      line-height: 1.05;
+      letter-spacing: -0.05em;
+      font-weight: 800;
+    }
+
+    .use-case-section,
+    .carousel-section,
+    .faq-section,
+    .cta-section {
+      padding: 6rem 0;
+    }
+
+    .use-case-grid {
+      display: grid;
+      gap: 1.2rem;
+      margin-top: 2.25rem;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .use-card {
+      position: relative;
+      min-height: 24rem;
+      overflow: hidden;
+      border-radius: 2rem;
+      border: 1px solid rgba(15, 15, 15, 0.08);
+      box-shadow: var(--shadow-soft);
+      background: #ffffff;
+      transition: transform 280ms var(--ease), box-shadow 280ms var(--ease);
+    }
+
+    .use-card img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 800ms var(--ease), filter 280ms var(--ease);
+    }
+
+    .use-card::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(15, 15, 15, 0.06) 12%, rgba(15, 15, 15, 0.62) 88%);
+    }
+
+    .use-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 26px 56px rgba(15, 15, 15, 0.16);
+    }
+
+    .use-card:hover img {
+      transform: scale(1.06);
+      filter: saturate(1.02);
+    }
+
+    .use-card__content {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      min-height: 100%;
+      padding: 1.35rem;
+      color: #ffffff;
+    }
+
+    .use-card__icon {
+      width: 3rem;
+      height: 3rem;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.16);
+      backdrop-filter: blur(12px);
+      font-size: 1rem;
+    }
+
+    .use-card__text h3 {
+      margin: 0 0 0.45rem;
+      font-size: 2rem;
+      line-height: 1;
+      letter-spacing: -0.05em;
+      font-weight: 800;
+    }
+
+    .use-card__text p {
+      margin: 0;
+      max-width: 20rem;
+      color: rgba(255, 255, 255, 0.86);
+      line-height: 1.7;
+      opacity: 0;
+      transform: translateY(12px);
+      transition: opacity 260ms var(--ease), transform 260ms var(--ease);
+    }
+
+    .use-card:hover .use-card__text p {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .mid-cta-card {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1.5rem;
+      margin-top: 2rem;
+      padding: 1.55rem 1.7rem;
+      border-radius: 2rem;
+      border: 1px solid rgba(15, 15, 15, 0.08);
+      background: linear-gradient(180deg, #ffffff, #f8f8ff);
+      box-shadow: var(--shadow-soft);
+    }
+
+    .mid-cta-card p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.8;
+    }
+
+    .carousel-shell {
+      margin-top: 2.5rem;
+      display: grid;
+      gap: 1rem;
+    }
+
+    .thumb-marquee {
+      overflow: hidden;
+      mask-image: linear-gradient(90deg, transparent, black 10%, black 90%, transparent);
+      -webkit-mask-image: linear-gradient(90deg, transparent, black 10%, black 90%, transparent);
+    }
+
+    .thumb-track {
+      display: flex;
+      width: max-content;
+      gap: 1rem;
+      animation: marquee-left 24s linear infinite;
+    }
+
+    .thumb-marquee--reverse .thumb-track {
+      animation-name: marquee-right;
+      animation-duration: 28s;
+    }
+
+    .phone-thumb {
+      width: 9.2rem;
+      min-width: 9.2rem;
+      border-radius: 2rem;
+      border: 1px solid rgba(15, 15, 15, 0.08);
+      background: linear-gradient(180deg, #ffffff, #fafaff);
+      box-shadow: var(--shadow-soft);
+      padding: 0.6rem;
+    }
+
+    .thumb-screen {
+      min-height: 18.25rem;
+      border-radius: 1.5rem;
+      border: 1px solid rgba(15, 15, 15, 0.06);
+      background: linear-gradient(180deg, #ffffff, #f7f8ff);
+      padding: 0.8rem;
+      display: grid;
+      align-content: start;
+      gap: 0.55rem;
+    }
+
+    .thumb-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.5rem;
+      margin-bottom: 0.1rem;
+    }
+
+    .thumb-title {
+      font-size: 0.78rem;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+    }
+
+    .mini-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.25rem;
+      padding: 0.3rem 0.5rem;
+      border-radius: 999px;
+      background: var(--accent-soft);
+      color: var(--accent-strong);
+      font-size: 0.62rem;
+      font-weight: 700;
+    }
+
+    .mini-card {
+      border-radius: 1rem;
+      border: 1px solid rgba(15, 15, 15, 0.06);
+      background: rgba(255, 255, 255, 0.9);
+      padding: 0.6rem 0.7rem;
+    }
+
+    .mini-card--offer {
+      border-color: rgba(85, 108, 245, 0.16);
+      background: linear-gradient(180deg, rgba(238, 240, 255, 0.95), rgba(255, 255, 255, 0.98));
+    }
+
+    .mini-skeleton {
+      display: block;
+      height: 0.36rem;
+      border-radius: 999px;
+      background: rgba(15, 15, 15, 0.08);
+    }
+
+    .mini-pill--offer {
+      background: rgba(85, 108, 245, 0.12);
+      color: var(--accent-strong);
+    }
+
+    .inline-offer-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      margin-bottom: 0.45rem;
+      padding: 0.34rem 0.62rem;
+      border-radius: 999px;
+      background: rgba(85, 108, 245, 0.1);
+      color: var(--accent-strong);
+      font-size: 0.68rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .mini-skeleton + .mini-skeleton {
+      margin-top: 0.35rem;
+    }
+
+    .faq-grid {
+      display: grid;
+      gap: 1rem;
+      margin-top: 2.25rem;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .faq-card {
+      border-radius: 1.7rem;
+      border: 1px solid rgba(15, 15, 15, 0.08);
+      background: linear-gradient(180deg, #ffffff, #fbfbff);
+      box-shadow: var(--shadow-soft);
+      padding: 1.45rem;
+    }
+
+    .faq-card h3 {
+      margin: 0;
+      font-size: 1.15rem;
+      letter-spacing: -0.03em;
+      font-weight: 800;
+    }
+
+    .faq-card p {
+      margin: 0.7rem 0 0;
+      color: var(--muted);
+      line-height: 1.8;
+    }
+
+    .cta-shell {
+      position: relative;
+      overflow: hidden;
+      border-radius: 2.6rem;
+      border: 1px solid rgba(15, 15, 15, 0.08);
+      background: linear-gradient(180deg, #ffffff, #f8f8ff);
+      box-shadow: 0 24px 60px rgba(15, 15, 15, 0.08);
+      padding: 2.5rem;
+    }
+
+    .cta-blob {
+      width: 34rem;
+      height: 34rem;
+      top: 50%;
+      right: -8rem;
+      transform: translateY(-50%);
+      opacity: 0.7;
+      animation: breathe 10s ease-in-out infinite;
+    }
+
+    .cta-widget {
+      position: absolute;
+      border-radius: 1.35rem;
+      border: 1px solid rgba(15, 15, 15, 0.08);
+      background: rgba(255, 255, 255, 0.94);
+      box-shadow: var(--shadow-soft);
+      padding: 0.9rem 1rem;
+      max-width: 11.5rem;
+      opacity: 0;
+      backdrop-filter: blur(14px);
+      pointer-events: none;
+    }
+
+    .cta-widget strong {
+      display: block;
+      margin-bottom: 0.22rem;
+      font-size: 0.86rem;
+    }
+
+    .cta-widget span {
+      color: var(--muted);
+      font-size: 0.78rem;
+      line-height: 1.55;
+    }
+
+    .cta-widget-one {
+      top: 1.5rem;
+      left: 6%;
+    }
+
+    .cta-widget-two {
+      top: 18%;
+      right: 2%;
+    }
+
+    .cta-widget-three {
+      bottom: 2rem;
+      left: 8%;
     }
 
     .footer-panel {
-      background: linear-gradient(180deg, rgba(34, 27, 58, 1), rgba(27, 20, 45, 1));
+      border-top: 1px solid rgba(15, 15, 15, 0.08);
+      padding: 1.4rem 0 2rem;
+    }
+
+    .footer-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem 1.25rem;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .footer-links a {
+      color: inherit;
+      transition: color 220ms var(--ease);
+    }
+
+    .footer-links a:hover {
+      color: var(--ink);
+    }
+
+    @keyframes marquee-left {
+      from {
+        transform: translateX(0);
+      }
+      to {
+        transform: translateX(-50%);
+      }
+    }
+
+    @keyframes marquee-right {
+      from {
+        transform: translateX(-50%);
+      }
+      to {
+        transform: translateX(0);
+      }
+    }
+
+    @keyframes breathe {
+      0%,
+      100% {
+        transform: translateY(-50%) scale(1);
+      }
+      50% {
+        transform: translateY(-50%) scale(1.08);
+      }
+    }
+
+    @media (max-width: 1023px) {
+      .hero-section {
+        min-height: auto;
+        padding-top: 6.75rem;
+      }
+
+      .hero-scene {
+        min-height: 31rem;
+        margin-top: 0.5rem;
+        padding-top: 1rem;
+      }
+
+      .floating-widget,
+      .hero-device-card {
+        max-width: 11rem;
+      }
+
+      .story-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .story-grid::before {
+        display: none;
+      }
+
+      .use-case-grid,
+      .faq-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .mid-cta-card {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .cta-shell {
+        padding: 2rem 1.3rem;
+      }
+
+      .cta-widget {
+        position: static;
+        opacity: 1;
+        max-width: none;
+      }
+
+      .cta-widget-stack {
+        display: grid;
+        gap: 0.85rem;
+        margin-top: 1rem;
+      }
+
+      .cta-blob {
+        right: -12rem;
+        top: 14rem;
+      }
     }
 
     @media (max-width: 767px) {
-      .floating-stack {
-        position: static;
-        margin-top: 1rem;
-        display: grid;
-        gap: 1rem;
+      .nav-shell {
+        border-radius: 2rem;
       }
 
-      .hero-page {
-        min-height: auto;
+      .hero-title {
+        font-size: clamp(2.8rem, 13vw, 4.5rem);
+      }
+
+      .section-title {
+        font-size: clamp(2.2rem, 11vw, 3.3rem);
+      }
+
+      .phone-shell--hero {
+        width: min(21rem, 92vw);
+      }
+
+      .hero-device-card--watch {
+        top: 1rem;
+        left: 0;
+      }
+
+      .hero-device-card--overview {
+        left: auto;
+        right: 0;
+        top: 36%;
+      }
+
+      .hero-device-card--overview {
+        display: none;
+      }
+
+      .phone-screen {
+        min-height: 28rem;
+      }
+
+      .floating-widget--a {
+        top: 1.2rem;
+        right: 0.25rem;
+      }
+
+      .floating-widget--b {
+        left: 0;
+        bottom: 8%;
+      }
+
+      .floating-widget--c {
+        right: 0;
+        bottom: 0;
       }
     }
 
@@ -245,138 +1353,847 @@
         animation-iteration-count: 1 !important;
         transition-duration: 0.01ms !important;
       }
-
-      [data-reveal] {
-        opacity: 1;
-        transform: none;
-      }
     }
   </style>
 </head>
-<body class="text-brand-ink antialiased selection:bg-brand-teal/20">
-  <header id="site-header" class="fixed inset-x-0 top-0 z-50 px-4 pt-4 sm:px-6 lg:px-8">
-    <div class="mx-auto max-w-7xl">
-      <div class="nav-shell rounded-full px-4 sm:px-5">
-        <div class="flex min-h-[4.25rem] items-center justify-between gap-4">
+<body class="selection:bg-indigo-100">
+  <header id="site-header" class="site-header fixed inset-x-0 top-0 z-50 px-4 pt-4 sm:px-6 lg:px-8">
+    <div class="mx-auto max-w-[88rem]">
+      <div class="nav-shell px-4 sm:px-5">
+        <div class="relative flex min-h-[4.4rem] items-center">
           <a href="#top" class="flex items-center">
             <img src="assets/nyr-icon.png" alt="Nyr" class="h-9 w-24 object-cover object-center sm:h-10 sm:w-28">
           </a>
-          <nav class="hidden md:flex items-center space-x-6">
-            <a href="#how" class="text-sm font-medium text-slate-600 transition hover:text-brand-teal">How it works</a>
-            <a href="#trust" class="text-sm font-medium text-slate-600 transition hover:text-brand-teal">Trust levels</a>
-            <a href="#requests" class="text-sm font-medium text-slate-600 transition hover:text-brand-teal">Requests</a>
-            <a href="#offers" class="text-sm font-medium text-slate-600 transition hover:text-brand-teal">Circle offers</a>
-            <a href="#faq" class="text-sm font-medium text-slate-600 transition hover:text-brand-teal">FAQ</a>
+          <nav class="absolute left-1/2 hidden -translate-x-1/2 items-center gap-6 xl:gap-8 lg:flex">
+            <a href="#story" class="nav-link text-sm font-semibold text-slate-600 transition hover:text-indigo-600">Story</a>
+            <a href="#features" class="nav-link text-sm font-semibold text-slate-600 transition hover:text-indigo-600">Features</a>
+            <a href="#use-cases" class="nav-link text-sm font-semibold text-slate-600 transition hover:text-indigo-600">Use cases</a>
+            <a href="#faq" class="nav-link text-sm font-semibold text-slate-600 transition hover:text-indigo-600">FAQ</a>
           </nav>
-          <div class="hidden md:flex items-center gap-3 text-sm font-semibold text-brand-ink">
-            <div class="inline-flex items-center gap-2 rounded-full bg-white/70 px-3 py-2">
-              <i class="fab fa-google-play text-brand-teal"></i><span>Play Store soon</span>
-            </div>
-            <div class="inline-flex items-center gap-2 rounded-full bg-white/70 px-3 py-2">
-              <i class="fab fa-apple text-brand-teal"></i><span>App Store soon</span>
-            </div>
+          <div class="ml-auto hidden items-center gap-3 lg:flex">
+            <a href="#cta" class="ghost-button text-sm">Get updates</a>
+            <a href="#cta" class="primary-button text-sm">Download soon</a>
           </div>
-          <button id="nav-toggle" aria-controls="mobile-nav" aria-expanded="false" aria-label="Toggle navigation" class="md:hidden inline-flex h-11 w-11 items-center justify-center rounded-full bg-white/70 text-slate-700">
-            <i class="fas fa-bars text-lg"></i>
+          <button id="nav-toggle" type="button" aria-controls="mobile-nav" aria-expanded="false" aria-label="Toggle navigation" class="ml-auto inline-flex h-11 w-11 items-center justify-center rounded-full border border-slate-200 bg-white text-slate-700 lg:hidden">
+            <i class="fas fa-bars"></i>
           </button>
         </div>
-        <div id="mobile-nav" class="hidden border-t border-white/60 pb-4 pt-3 md:hidden">
-          <div class="flex flex-col space-y-2">
-            <a href="#how" class="rounded-2xl px-3 py-2 text-slate-700 transition hover:bg-white/70">How it works</a>
-            <a href="#trust" class="rounded-2xl px-3 py-2 text-slate-700 transition hover:bg-white/70">Trust levels</a>
-            <a href="#requests" class="rounded-2xl px-3 py-2 text-slate-700 transition hover:bg-white/70">Requests</a>
-            <a href="#offers" class="rounded-2xl px-3 py-2 text-slate-700 transition hover:bg-white/70">Circle offers</a>
-            <a href="#faq" class="rounded-2xl px-3 py-2 text-slate-700 transition hover:bg-white/70">FAQ</a>
-          </div>
-          <div class="mt-3 flex flex-col gap-2 px-3 text-sm font-semibold text-slate-700">
-            <div class="inline-flex items-center gap-2">
-              <i class="fab fa-google-play text-brand-teal"></i><span>Play Store soon</span>
-            </div>
-            <div class="inline-flex items-center gap-2">
-              <i class="fab fa-apple text-brand-teal"></i><span>App Store soon</span>
-            </div>
+        <div id="mobile-nav" class="hidden border-t border-slate-100 pb-4 pt-3 lg:hidden">
+          <div class="grid gap-2">
+            <a href="#story" class="rounded-2xl px-3 py-2 text-sm font-semibold text-slate-700 transition hover:bg-slate-50">Story</a>
+            <a href="#features" class="rounded-2xl px-3 py-2 text-sm font-semibold text-slate-700 transition hover:bg-slate-50">Features</a>
+            <a href="#use-cases" class="rounded-2xl px-3 py-2 text-sm font-semibold text-slate-700 transition hover:bg-slate-50">Use cases</a>
+            <a href="#faq" class="rounded-2xl px-3 py-2 text-sm font-semibold text-slate-700 transition hover:bg-slate-50">FAQ</a>
+            <a href="#cta" class="rounded-2xl bg-indigo-600 px-3 py-2 text-sm font-semibold text-white">Download soon</a>
           </div>
         </div>
       </div>
     </div>
   </header>
 
-  <main id="top" class="space-y-2 overflow-x-hidden pb-3 pt-24">
-    <section class="hero-page club-section relative overflow-hidden py-4 sm:py-6">
-      <div class="mx-auto flex max-w-7xl items-center px-4 py-8 sm:px-6 sm:py-10 lg:px-8 lg:py-12">
-        <div class="grid w-full items-center gap-10 lg:grid-cols-[0.94fr,1.06fr] lg:gap-14">
-          <div class="space-y-7">
-            <div data-reveal class="inline-flex items-center rounded-full border border-brand-teal/15 bg-white/70 px-4 py-2 text-sm font-semibold text-brand-teal">
-              Verified circles • No strangers
+  <main id="top">
+    <section id="hero" class="hero-section">
+      <div class="mx-auto grid max-w-7xl items-start gap-10 px-4 sm:px-6 lg:grid-cols-[1.02fr,0.98fr] lg:px-8 xl:gap-12">
+        <div class="max-w-[38rem]">
+          <span data-hero="eyebrow" class="eyebrow">
+            <span class="inline-block h-2.5 w-2.5 rounded-full bg-[color:var(--sun)]"></span>
+            Verified circles. No strangers.
+          </span>
+          <h1 data-hero="title" class="hero-title mt-6">
+            <span class="hero-line hero-line--a">Real requests from</span>
+            <span class="hero-line hero-line--b">people you actually know.</span>
+          </h1>
+          <p data-hero="copy" class="section-copy mt-6 max-w-xl">
+            Nyr verifies identity first, then organizes your contacts into Level 1 and Level 2. The feed only shows people you know, or people introduced through them, so noise never becomes the default.
+          </p>
+          <div data-hero="actions" class="mt-8 flex flex-wrap items-center gap-3">
+            <a href="#cta" class="store-button">
+              <i class="fab fa-apple text-indigo-600"></i>
+              App Store soon
+            </a>
+            <a href="#cta" class="store-button">
+              <i class="fab fa-google-play text-indigo-600"></i>
+              Play Store soon
+            </a>
+          </div>
+          <div data-hero="meta" class="mt-8 flex flex-wrap gap-3">
+            <span class="ui-pill">Identity check on sign-up</span>
+            <span class="ui-pill">AI contact clustering</span>
+            <span class="ui-pill">Structured request cards</span>
+            <span class="ui-pill">Businesses stay separate</span>
+          </div>
+        </div>
+
+        <div class="hero-scene">
+          <div class="hero-blob" data-depth="blob"></div>
+          <div class="hero-backplate" data-depth="backplate"></div>
+
+          <div class="hero-device-card hero-device-card--watch" data-depth="watch">
+            <div class="watch-face">
+              <div class="watch-dial"></div>
+              <div class="watch-copy">
+                <strong>Private by default</strong>
+                <span>Only your trusted mesh sees what matters.</span>
+              </div>
             </div>
-            <div class="space-y-5">
-              <h1 data-reveal style="--reveal-delay: 1" class="max-w-2xl text-5xl font-semibold leading-[0.95] tracking-[-0.06em] text-brand-ink sm:text-6xl lg:text-7xl">
-                Real requests from people you actually know.
-              </h1>
-              <p data-reveal style="--reveal-delay: 2" class="max-w-xl text-lg leading-8 text-slate-700 sm:text-xl">
-                Verify once, let AI organize your contacts into a personal trust mesh. Level 1 is your trusted circle; Level 2 is friends-of-friends. Your feed only shows them—no spam, no randos.
+          </div>
+
+          <div class="hero-device-card hero-device-card--overview" data-depth="overview">
+            <div class="hero-overview">
+              <strong>Trust mesh active</strong>
+              <span>Identity checked. Contacts clustered. Level 1 and Level 2 are ready.</span>
+              <div class="hero-overview__bar"><span></span></div>
+            </div>
+          </div>
+
+          <div class="floating-widget floating-widget--a" data-depth="widget-a">
+            <strong>Level 1 first</strong>
+            <span>Family, neighbors, close colleagues and trusted local shops.</span>
+          </div>
+
+          <div class="floating-widget floating-widget--b" data-depth="widget-b">
+            <strong>Request cards</strong>
+            <span>Help, rides, items, recommendations and emergencies stay clear.</span>
+          </div>
+
+          <div class="floating-widget floating-widget--c" data-depth="widget-c">
+            <strong>Circle offers</strong>
+            <span>Businesses live in a separate tab. No paid boosts in the main feed.</span>
+          </div>
+
+          <div class="phone-shell phone-shell--hero" data-depth="phone">
+            <div class="phone-screen">
+              <div class="screen-topbar">
+                <span class="screen-kicker">Trusted mesh</span>
+                <div class="ui-pill-row">
+                  <span class="ui-pill">L1</span>
+                  <span class="ui-pill">L2</span>
+                </div>
+              </div>
+              <h2 class="screen-title">Your circle, already sorted.</h2>
+              <p class="screen-subcopy">
+                Home feed is private by default. Only people you know, or people introduced through people you know.
+              </p>
+              <div class="ui-pill-row">
+                <span class="ui-pill">Help</span>
+                <span class="ui-pill">Rides</span>
+                <span class="ui-pill">Items</span>
+                <span class="ui-pill">Offers</span>
+              </div>
+              <div class="ui-stack">
+                <div class="ui-card">
+                  <strong>Ride share · L1</strong>
+                  <span>Need a ride to SFO at 6:30pm. Anna can pick you up.</span>
+                </div>
+                <div class="ui-card">
+                  <strong>Item loan · L2</strong>
+                  <span>Projector for Thursday? Mutual connections shown before you reply.</span>
+                </div>
+                <div class="ui-card ui-card--offer">
+                  <span class="inline-offer-badge">Circle offer</span>
+                  <strong>Local offer · Separate tab</strong>
+                  <span>Urban Bikes: 20% off tune-ups for your circle this weekend.</span>
+                </div>
+              </div>
+              <div class="ui-progress">
+                <span style="width: 82%"></span>
+              </div>
+              <p class="mt-3 text-xs font-semibold uppercase tracking-[0.22em] text-slate-500">
+                Trust score rises with completed interactions
               </p>
             </div>
-            <div data-reveal style="--reveal-delay: 3" class="flex flex-wrap items-center gap-3">
-              <a href="#cta" class="inline-flex items-center justify-center rounded-full bg-brand-teal px-6 py-3.5 text-base font-semibold text-white shadow-lg shadow-brand-teal/25 transition hover:-translate-y-0.5 hover:shadow-xl hover:shadow-brand-teal/30">Start my trust mesh</a>
-              <span class="rounded-full bg-white/55 px-4 py-3 text-sm text-slate-600">No password. No public profile.</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="marquee-section">
+      <div class="marquee-row">
+        <div class="marquee-track">
+          <div class="marquee-chip">Post notices</div>
+          <div class="marquee-chip">Favours</div>
+          <div class="marquee-chip">Local deals</div>
+          <div class="marquee-chip">Trusted circles</div>
+          <div class="marquee-chip">Shared rides</div>
+          <div class="marquee-chip">Lost &amp; found</div>
+          <div class="marquee-chip">Emergency alerts</div>
+          <div class="marquee-chip">Post notices</div>
+          <div class="marquee-chip">Favours</div>
+          <div class="marquee-chip">Local deals</div>
+          <div class="marquee-chip">Trusted circles</div>
+          <div class="marquee-chip">Shared rides</div>
+          <div class="marquee-chip">Lost &amp; found</div>
+          <div class="marquee-chip">Emergency alerts</div>
+        </div>
+      </div>
+      <div class="marquee-row marquee-row--reverse">
+        <div class="marquee-track">
+          <div class="marquee-chip">Friends-of-friends</div>
+          <div class="marquee-chip">Wallet rewards</div>
+          <div class="marquee-chip">Community feed</div>
+          <div class="marquee-chip">Safe &amp; trusted</div>
+          <div class="marquee-chip">Invite friends</div>
+          <div class="marquee-chip">Circle offers</div>
+          <div class="marquee-chip">Quick introductions</div>
+          <div class="marquee-chip">Friends-of-friends</div>
+          <div class="marquee-chip">Wallet rewards</div>
+          <div class="marquee-chip">Community feed</div>
+          <div class="marquee-chip">Safe &amp; trusted</div>
+          <div class="marquee-chip">Invite friends</div>
+          <div class="marquee-chip">Circle offers</div>
+          <div class="marquee-chip">Quick introductions</div>
+        </div>
+      </div>
+    </section>
+
+    <section id="story" class="split-section">
+      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div class="max-w-3xl">
+          <p class="eyebrow">How Nyr works</p>
+          <h2 class="section-title mt-5">Three things people need to understand in 20 seconds.</h2>
+          <p class="section-copy mt-5">
+            Nyr is simple in plain English: real people first, trust levels next, clear post types after that.
+          </p>
+        </div>
+        <div class="story-grid">
+          <article class="story-card" data-reveal>
+            <div class="story-card__top">
+              <span class="story-marker"><i class="fa-regular fa-circle-check"></i></span>
+              <span class="story-number">01</span>
             </div>
-            <div data-reveal style="--reveal-delay: 4" class="flex flex-wrap gap-3 text-sm font-semibold text-brand-ink">
-              <span class="rounded-full bg-white/70 px-4 py-2">Identity check on sign-up</span>
-              <span class="rounded-full bg-white/70 px-4 py-2">AI contact clustering</span>
-              <span class="rounded-full bg-white/70 px-4 py-2">Smart request cards</span>
-              <span class="rounded-full bg-white/70 px-4 py-2">Businesses in separate tab</span>
+            <h3>Verify real people</h3>
+            <p>
+              Everyone starts with identity verification. That keeps fake profiles, cold-start spam and anonymous posting out of the feed.
+            </p>
+            <div class="story-card__chips">
+              <span class="ui-pill">ID check</span>
+              <span class="ui-pill">No public profile</span>
+              <span class="ui-pill">Spam blocked</span>
             </div>
-            <div data-reveal style="--reveal-delay: 5" class="flex items-center gap-5 pt-2">
-              <a href="#how" class="scroll-pill inline-flex h-14 w-14 items-center justify-center rounded-full border border-white/80 bg-white/70 text-brand-teal shadow-lg">
-                <i class="fas fa-arrow-down"></i>
-              </a>
-              <div>
-                <p class="text-sm font-semibold uppercase tracking-[0.22em] text-slate-500">How it works</p>
-                <p class="text-sm text-slate-600">Identity check on sign-up. AI contact clustering.</p>
+            <p class="story-card__note">Result: the network begins with real identities, not random accounts.</p>
+          </article>
+
+          <article class="story-card" data-reveal>
+            <div class="story-card__top">
+              <span class="story-marker"><i class="fa-solid fa-diagram-project"></i></span>
+              <span class="story-number">02</span>
+            </div>
+            <h3>Trust levels stay meaningful</h3>
+            <p>
+              Contacts are organized into Level 1 and Level 2. You confirm who you truly know, so every introduction still carries context.
+            </p>
+            <div class="story-card__chips">
+              <span class="ui-pill">Level 1</span>
+              <span class="ui-pill">Level 2</span>
+              <span class="ui-pill">Mutual context</span>
+            </div>
+            <p class="story-card__note">Result: people do not appear as strangers just because they are nearby.</p>
+          </article>
+
+          <article class="story-card" data-reveal>
+            <div class="story-card__top">
+              <span class="story-marker"><i class="fa-regular fa-note-sticky"></i></span>
+              <span class="story-number">03</span>
+            </div>
+            <h3>Posts are easy to read</h3>
+            <p>
+              Help, rides, item loans, recommendations, emergencies and circle offers each use a clear card, so intent is obvious at a glance.
+            </p>
+            <div class="story-card__chips">
+              <span class="ui-pill">Help</span>
+              <span class="ui-pill">Rides</span>
+              <span class="ui-pill">Offers tab</span>
+            </div>
+            <p class="story-card__note">Result: the feed feels useful fast instead of messy or ambiguous.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="features" class="feature-section">
+      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div data-reveal class="max-w-3xl">
+          <p class="eyebrow">Trust walkthrough</p>
+          <h2 class="section-title mt-5">From verification to offers, the app stays easy to read.</h2>
+          <p class="section-copy mt-5">
+            Each step has one job: verify the person, organize trust levels, keep requests clear, and keep business offers out of the main request feed.
+          </p>
+        </div>
+      </div>
+
+      <div class="feature-pin hidden lg:block">
+        <div class="feature-pin__canvas feature-pin-canvas">
+          <div class="feature-panel">
+            <div class="feature-copy-stage">
+              <article class="feature-step" data-step="0">
+                <span class="eyebrow">01 / Verify once</span>
+                <h3 class="mt-6">Identity checked once. Feed protected from day one.</h3>
+                <p>
+                  Sign-up starts with identity verification. Contacts are processed safely so spammer dumps and fake circles never get the same reach as people you truly know.
+                </p>
+                <div class="ui-pill-row">
+                  <span class="ui-pill">Identity check</span>
+                  <span class="ui-pill">Contact import</span>
+                  <span class="ui-pill">Private by default</span>
+                </div>
+              </article>
+
+              <article class="feature-step" data-step="1">
+                <span class="eyebrow">02 / Trust mesh</span>
+                <h3 class="mt-6">Level 1 and Level 2 become your personal trust mesh.</h3>
+                <p>
+                  Family, neighbors, close colleagues and trusted shops sit in Level 1. Friends-of-friends stay visible through mutual context in Level 2, never as random strangers.
+                </p>
+                <div class="ui-pill-row">
+                  <span class="ui-pill">Trusted circle</span>
+                  <span class="ui-pill">Friends-of-friends</span>
+                  <span class="ui-pill">Mutual context shown</span>
+                </div>
+              </article>
+
+              <article class="feature-step" data-step="2">
+                <span class="eyebrow">03 / Clear requests</span>
+                <h3 class="mt-6">Post help, rides and item requests without guesswork.</h3>
+                <p>
+                  Request cards keep intent obvious. You can ask for help, a ride, a recommendation or an item loan and let relevance plus proximity do the sorting for you.
+                </p>
+                <div class="ui-pill-row">
+                  <span class="ui-pill">Help</span>
+                  <span class="ui-pill">Rides</span>
+                  <span class="ui-pill">Items</span>
+                  <span class="ui-pill">Recommendations</span>
+                </div>
+              </article>
+
+              <article class="feature-step" data-step="3">
+                <span class="eyebrow">04 / Separate offers</span>
+                <h3 class="mt-6">Circle offers stay visible, but out of the main feed.</h3>
+                <p>
+                  Businesses inside your trust mesh can still share value, but they live in their own tab. Emergencies, meanwhile, still alert Level 1 contacts nearest to you.
+                </p>
+                <div class="ui-pill-row">
+                  <span class="ui-pill">Circle offers</span>
+                  <span class="ui-pill">No paid boosts</span>
+                  <span class="ui-pill">Emergency routing</span>
+                </div>
+              </article>
+
+              <div class="feature-stepper">
+                <div class="step-rail"><span class="step-rail__fill"></span></div>
+                <div class="step-item is-current">
+                  <span class="step-dot is-active"></span>
+                  Verify once
+                </div>
+                <div class="step-item">
+                  <span class="step-dot"></span>
+                  Build your trust mesh
+                </div>
+                <div class="step-item">
+                  <span class="step-dot"></span>
+                  Post requests clearly
+                </div>
+                <div class="step-item">
+                  <span class="step-dot"></span>
+                  Keep offers separate
+                </div>
               </div>
             </div>
-          </div>
 
-          <div data-reveal style="--reveal-delay: 2" class="relative mx-auto w-full max-w-2xl lg:max-w-none">
-            <div class="hero-spotlight px-4 pb-4 pt-4 sm:px-6 sm:pb-6 sm:pt-6">
-              <div class="showcase-frame h-[380px] sm:h-[460px] lg:h-[520px]">
-                <img class="h-full w-full object-cover" src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&amp;fit=crop&amp;w=900&amp;q=80" alt="Friends laughing together at a cafe" loading="eager">
-                <div class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-brand-ink/30 via-brand-ink/5 to-transparent p-6 sm:p-8">
-                  <div class="inline-flex items-center gap-2 rounded-full bg-white/80 px-4 py-2 text-sm font-semibold text-brand-ink">
-                    <i class="fas fa-shield-halved text-brand-teal"></i>
-                    <span>Verified circles • No strangers</span>
+            <div class="feature-screen-stage">
+              <div class="screen-state" data-screen="0">
+                <div class="phone-shell phone-shell--feature">
+                  <div class="phone-screen">
+                    <div class="screen-topbar">
+                      <span class="screen-kicker">Verify</span>
+                      <span class="ui-pill">No public profile</span>
+                    </div>
+                    <h3 class="screen-title">Confirm identity once.</h3>
+                    <p class="screen-subcopy">Your first action is trust, not posting.</p>
+                    <div class="ui-stack">
+                      <div class="ui-card">
+                        <strong>ID matched</strong>
+                        <span>Document and face check completed.</span>
+                      </div>
+                      <div class="ui-card">
+                        <strong>Contacts imported safely</strong>
+                        <span>AI looks for patterns, not public exposure.</span>
+                      </div>
+                      <div class="ui-card">
+                        <strong>Spam guard on</strong>
+                        <span>Cold accounts never get Level 1 or Level 2 reach.</span>
+                      </div>
+                    </div>
+                    <div class="ui-progress">
+                      <span style="width: 92%"></span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="screen-state" data-screen="1">
+                <div class="screen-grid">
+                  <div class="mini-stat">
+                    <strong>Level 1 · Trusted circle</strong>
+                    Family, neighbors, close colleagues and trusted local businesses.
+                  </div>
+                  <div class="phone-shell phone-shell--feature">
+                    <div class="phone-screen">
+                      <div class="screen-topbar">
+                        <span class="screen-kicker">Mesh</span>
+                        <div class="ui-pill-row">
+                          <span class="ui-pill">L1</span>
+                          <span class="ui-pill">L2</span>
+                        </div>
+                      </div>
+                      <h3 class="screen-title">Your personal trust mesh.</h3>
+                      <p class="screen-subcopy">Mutual connections stay visible so every introduction has context.</p>
+                      <div class="ui-card">
+                        <strong>Level 1</strong>
+                        <span>Family, neighbors, trusted shops, emergency-first contacts.</span>
+                      </div>
+                      <div class="ui-card">
+                        <strong>Level 2</strong>
+                        <span>Friends-of-friends, school network, team referrals.</span>
+                      </div>
+                      <div class="ui-progress">
+                        <span style="width: 74%"></span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="screen-state" data-screen="2">
+                <div class="phone-shell phone-shell--feature">
+                  <div class="phone-screen">
+                    <div class="screen-topbar">
+                      <span class="screen-kicker">Requests</span>
+                      <span class="ui-pill">Intent stays clear</span>
+                    </div>
+                    <h3 class="screen-title">Structured cards from the start.</h3>
+                    <p class="screen-subcopy">Every request type already knows what it is asking for.</p>
+                    <div class="ui-pill-row">
+                      <span class="ui-pill">Help</span>
+                      <span class="ui-pill">Rides</span>
+                      <span class="ui-pill">Items</span>
+                      <span class="ui-pill">Reviews</span>
+                    </div>
+                    <div class="ui-stack">
+                      <div class="ui-card">
+                        <strong>Help</strong>
+                        <span>Quick dog walk at 3pm.</span>
+                      </div>
+                      <div class="ui-card">
+                        <strong>Ride share</strong>
+                        <span>Need a ride to SFO at 6:30pm.</span>
+                      </div>
+                      <div class="ui-card">
+                        <strong>Review</strong>
+                        <span>Trusted plumber near downtown?</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="screen-state" data-screen="3">
+                <div class="screen-grid">
+                  <div class="phone-shell phone-shell--feature">
+                    <div class="phone-screen">
+                      <div class="screen-topbar">
+                        <span class="screen-kicker">Offers</span>
+                        <span class="ui-pill">Own tab</span>
+                      </div>
+                      <h3 class="screen-title">Businesses stay separate.</h3>
+                      <p class="screen-subcopy">Useful, visible and never pushed into your private request feed.</p>
+                      <div class="ui-stack">
+                        <div class="ui-card ui-card--offer">
+                          <span class="inline-offer-badge">Circle offer</span>
+                          <strong>Urban Bikes · L1</strong>
+                          <span>20% off tune-ups for your circle.</span>
+                        </div>
+                        <div class="ui-card ui-card--offer">
+                          <span class="inline-offer-badge">Circle offer</span>
+                          <strong>Harvest Kitchen · L2</strong>
+                          <span>Free delivery via Priya.</span>
+                        </div>
+                        <div class="ui-card">
+                          <strong>Emergency ping</strong>
+                          <span>Nearest high-trust contacts alerted first.</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="mini-stat">
+                    <strong>No paid boosts</strong>
+                    Only people already connected to your mesh can see these offers.
                   </div>
                 </div>
               </div>
             </div>
+          </div>
+        </div>
+      </div>
 
-            <div class="floating-stack pointer-events-none absolute inset-0 hidden lg:block">
-              <div class="feed-card pointer-events-auto absolute -left-8 top-10 w-[280px] p-4">
-                <p class="text-sm font-semibold text-brand-ink">Live feed · Your mesh</p>
-                <div class="mt-3 space-y-2 text-sm">
-                  <div class="rounded-2xl border border-slate-200 bg-white/80 p-3"><strong>Ride share · L1</strong><br>Anna can pick you up at 6:30pm.</div>
-                  <div class="rounded-2xl border border-slate-200 bg-white/80 p-3"><strong>Kid swap · L2</strong><br>Maya needs a sitter; verified via Priya.</div>
+      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:hidden lg:px-8">
+        <div class="mobile-feature-list">
+          <article class="mobile-feature-card">
+            <span class="eyebrow">01 / Verify once</span>
+            <h3>Identity checked once.</h3>
+            <p class="section-copy">Contacts are processed safely, spam stays out, and trust starts before posting.</p>
+          </article>
+          <article class="mobile-feature-card">
+            <span class="eyebrow">02 / Trust mesh</span>
+            <h3>Level 1 and Level 2 stay clear.</h3>
+            <p class="section-copy">Family and trusted neighbors first. Friends-of-friends only with mutual context.</p>
+          </article>
+          <article class="mobile-feature-card">
+            <span class="eyebrow">03 / Requests</span>
+            <h3>Ask without guesswork.</h3>
+            <p class="section-copy">Help, rides, item loans and recommendations all use structured cards.</p>
+          </article>
+          <article class="mobile-feature-card">
+            <span class="eyebrow">04 / Offers</span>
+            <h3>Useful, but separate.</h3>
+            <p class="section-copy">Circle offers stay in their own tab while emergencies still reach Level 1 first.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="use-cases" class="use-case-section">
+      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div class="max-w-3xl">
+          <p data-reveal class="eyebrow">What you can post</p>
+          <h2 data-reveal class="section-title mt-5">Use cases that feel immediate, not vague.</h2>
+          <p data-reveal class="section-copy mt-5">
+            The content is still yours. The difference is that each card now behaves like a stronger showcase block instead of a flat white panel.
+          </p>
+        </div>
+
+        <div class="use-case-grid">
+          <article class="use-card" data-reveal>
+            <img src="https://images.pexels.com/photos/3699259/pexels-photo-3699259.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=1600&amp;dpr=1" alt="Friends riding together" loading="lazy">
+            <div class="use-card__content">
+              <span class="use-card__icon"><i class="fas fa-car-side"></i></span>
+              <div class="use-card__text">
+                <h3>Shared ride</h3>
+                <p>Airport pickup, school runs and quick favors reach the right people without opening up to the whole city.</p>
+              </div>
+            </div>
+          </article>
+
+          <article class="use-card" data-reveal>
+            <img src="https://images.pexels.com/photos/6146970/pexels-photo-6146970.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=1600&amp;dpr=1" alt="Neighbors helping each other" loading="lazy">
+            <div class="use-card__content">
+              <span class="use-card__icon"><i class="fas fa-hand-holding-heart"></i></span>
+              <div class="use-card__text">
+                <h3>Ask for help</h3>
+                <p>Dog walks, last-minute pickups and small requests stay local, structured and easy to answer.</p>
+              </div>
+            </div>
+          </article>
+
+          <article class="use-card" data-reveal>
+            <img src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&amp;fit=crop&amp;w=1400&amp;q=80" alt="Workspace and shared items" loading="lazy">
+            <div class="use-card__content">
+              <span class="use-card__icon"><i class="fas fa-box-open"></i></span>
+              <div class="use-card__text">
+                <h3>Borrow &amp; recommend</h3>
+                <p>Projectors, tools, plumbers, babysitters and trusted reviews all carry visible trust context.</p>
+              </div>
+            </div>
+          </article>
+
+          <article class="use-card" data-reveal>
+            <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&amp;fit=crop&amp;w=1400&amp;q=80" alt="Local food and emergency items" loading="lazy">
+            <div class="use-card__content">
+              <span class="use-card__icon"><i class="fas fa-bullhorn"></i></span>
+              <div class="use-card__text">
+                <h3>Offers &amp; alerts</h3>
+                <p>Circle businesses can share value in their own tab while emergencies still alert the nearest Level 1 contacts.</p>
+              </div>
+            </div>
+          </article>
+        </div>
+
+        <div class="mid-cta-card" data-reveal>
+          <div class="max-w-2xl">
+            <p class="eyebrow">Keep going</p>
+            <h3 class="mt-4 text-3xl font-extrabold tracking-[-0.05em] text-slate-950 sm:text-4xl">Want the trust logic before the launch?</h3>
+            <p class="mt-3">See how Level 1, Level 2 and circle offers stay separate, or leave your email and get the first invite when Nyr opens up.</p>
+          </div>
+          <div class="flex flex-wrap gap-3">
+            <a href="#features" class="ghost-button text-sm">Learn trust levels</a>
+            <a href="#cta" class="primary-button text-sm">Get updates</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="carousel-section">
+      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div class="max-w-3xl">
+          <p data-reveal class="eyebrow">Interface flow</p>
+          <h2 data-reveal class="section-title mt-5">A product rhythm you can read at a glance.</h2>
+          <p data-reveal class="section-copy mt-5">
+            No heavy JS here. These two rows stay pure CSS so the motion stays cheap and the page keeps its headroom.
+          </p>
+        </div>
+
+        <div class="carousel-shell">
+          <div class="thumb-marquee">
+            <div class="thumb-track">
+              <div class="phone-thumb">
+                <div class="thumb-screen">
+                  <div class="thumb-top">
+                    <span class="thumb-title">Requests</span>
+                    <span class="mini-pill">Structured</span>
+                  </div>
+                  <div class="mini-card"><strong>Item loan</strong><span>Projector for Thursday.</span></div>
+                  <div class="mini-card"><strong>Recommendation</strong><span>Trusted plumber near downtown?</span></div>
+                  <div class="mini-skeleton" style="width: 74%"></div>
                 </div>
               </div>
-              <div class="feed-card pointer-events-auto absolute bottom-6 left-8 w-[320px] p-4">
-                <div class="flex flex-wrap gap-2 text-xs font-semibold text-brand-ink">
-                  <span class="rounded-full bg-brand-teal/10 px-3 py-1.5 text-brand-teal">Level 1 · Trusted circle</span>
-                  <span class="rounded-full bg-brand-mint/10 px-3 py-1.5 text-brand-ink">Level 2 · Friends-of-friends</span>
-                  <span class="rounded-full bg-brand-mint/15 px-3 py-1.5 text-brand-mint">Businesses in separate tab</span>
+              <div class="phone-thumb">
+                <div class="thumb-screen">
+                  <div class="thumb-top">
+                    <span class="thumb-title">Invite flow</span>
+                    <span class="mini-pill">Warm start</span>
+                  </div>
+                  <div class="mini-card"><strong>Add Priya</strong><span>Suggested via existing mutuals.</span></div>
+                  <div class="mini-card"><strong>School network</strong><span>Suggested cluster ready to confirm.</span></div>
                 </div>
-                <p class="mt-3 text-sm leading-6 text-slate-700">Verify once, let AI organize your contacts into a personal trust mesh.</p>
               </div>
-              <div class="feed-card pointer-events-auto absolute -right-8 top-20 w-[260px] p-4">
-                <p class="text-xs font-semibold uppercase tracking-[0.22em] text-slate-500">private by default</p>
-                <p class="mt-2 text-lg font-semibold leading-6 text-brand-ink">No password. No public profile.</p>
-                <div class="mt-3 rounded-2xl border border-slate-200 bg-slate-50 p-3 text-sm">
-                  <strong>Local offer</strong><br>Urban Bikes: 20% off tune-ups.
+              <div class="phone-thumb">
+                <div class="thumb-screen">
+                  <div class="thumb-top">
+                    <span class="thumb-title">Events</span>
+                    <span class="mini-pill">Nearby</span>
+                  </div>
+                  <div class="mini-card"><strong>Block cleanup</strong><span>Saturday at 10am with neighbors.</span></div>
+                  <div class="mini-card"><strong>School meetup</strong><span>Parents in Level 1 first.</span></div>
                 </div>
-                <div class="mt-3 h-2 rounded-full bg-slate-100">
-                  <div class="h-2 w-[84%] rounded-full bg-gradient-to-r from-brand-teal to-brand-coral"></div>
+              </div>
+              <div class="phone-thumb">
+                <div class="thumb-screen">
+                  <div class="thumb-top">
+                    <span class="thumb-title">Privacy</span>
+                    <span class="mini-pill">Locked</span>
+                  </div>
+                  <div class="mini-card"><strong>Visibility</strong><span>Nothing public or searchable.</span></div>
+                  <div class="mini-card"><strong>Permissions</strong><span>Contacts used once, never sold.</span></div>
                 </div>
-                <p class="mt-2 text-xs text-slate-500">Trust Score boost: +15 on completed interactions.</p>
+              </div>
+              <div class="phone-thumb">
+                <div class="thumb-screen">
+                  <div class="thumb-top">
+                    <span class="thumb-title">Circle offers</span>
+                    <span class="mini-pill mini-pill--offer">Separate tab</span>
+                  </div>
+                  <div class="mini-card mini-card--offer"><strong>Maker Garage</strong><span>Tool library access this weekend.</span></div>
+                  <div class="mini-card mini-card--offer"><strong>Harvest Kitchen</strong><span>Free delivery through your circle.</span></div>
+                </div>
+              </div>
+              <div class="phone-thumb">
+                <div class="thumb-screen">
+                  <div class="thumb-top">
+                    <span class="thumb-title">Safety</span>
+                    <span class="mini-pill">L1 first</span>
+                  </div>
+                  <div class="mini-card"><strong>Emergency alert</strong><span>Nearest trusted contacts are being notified.</span></div>
+                  <div class="mini-card"><strong>Location shared</strong><span>Only with Level 1 for this request.</span></div>
+                </div>
+              </div>
+              <div class="phone-thumb">
+                <div class="thumb-screen">
+                  <div class="thumb-top">
+                    <span class="thumb-title">Home feed</span>
+                    <span class="mini-pill">L1 + L2</span>
+                  </div>
+                  <div class="mini-card"><strong>Help</strong><span>Quick dog walk at 3pm.</span></div>
+                  <div class="mini-card"><strong>Ride share</strong><span>Need a ride to SFO.</span></div>
+                  <div class="mini-skeleton" style="width: 88%"></div>
+                  <div class="mini-skeleton" style="width: 62%"></div>
+                </div>
+              </div>
+              <div class="phone-thumb">
+                <div class="thumb-screen">
+                  <div class="thumb-top">
+                    <span class="thumb-title">Trust levels</span>
+                    <span class="mini-pill">Graph</span>
+                  </div>
+                  <div class="mini-card"><strong>Level 1</strong><span>Neighbors, family, close colleagues.</span></div>
+                  <div class="mini-card"><strong>Level 2</strong><span>Shown with mutual context.</span></div>
+                  <div class="mini-skeleton" style="width: 72%"></div>
+                </div>
+              </div>
+              <div class="phone-thumb">
+                <div class="thumb-screen">
+                  <div class="thumb-top">
+                    <span class="thumb-title">Circle offers</span>
+                    <span class="mini-pill mini-pill--offer">Separate</span>
+                  </div>
+                  <div class="mini-card mini-card--offer"><strong>Urban Bikes</strong><span>20% off tune-ups.</span></div>
+                  <div class="mini-card mini-card--offer"><strong>Harvest Kitchen</strong><span>Free delivery via Priya.</span></div>
+                </div>
+              </div>
+              <div class="phone-thumb">
+                <div class="thumb-screen">
+                  <div class="thumb-top">
+                    <span class="thumb-title">Wallet</span>
+                    <span class="mini-pill">Rewards</span>
+                  </div>
+                  <div class="mini-card"><strong>Trust score</strong><span>+15 from completed interactions.</span></div>
+                  <div class="mini-card"><strong>Circle perks</strong><span>Visible from verified businesses only.</span></div>
+                </div>
+              </div>
+              <div class="phone-thumb">
+                <div class="thumb-screen">
+                  <div class="thumb-top">
+                    <span class="thumb-title">Invite friends</span>
+                    <span class="mini-pill">Onboard</span>
+                  </div>
+                  <div class="mini-card"><strong>Import contacts</strong><span>Suggested clusters are ready for review.</span></div>
+                  <div class="mini-skeleton" style="width: 84%"></div>
+                  <div class="mini-skeleton" style="width: 56%"></div>
+                </div>
+              </div>
+              <div class="phone-thumb">
+                <div class="thumb-screen">
+                  <div class="thumb-top">
+                    <span class="thumb-title">Emergency</span>
+                    <span class="mini-pill">L1 first</span>
+                  </div>
+                  <div class="mini-card"><strong>Alert sent</strong><span>Nearest trusted contacts are being notified.</span></div>
+                  <div class="mini-skeleton" style="width: 78%"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="thumb-marquee thumb-marquee--reverse">
+            <div class="thumb-track">
+              <div class="phone-thumb">
+                <div class="thumb-screen">
+                  <div class="thumb-top">
+                    <span class="thumb-title">Wallet</span>
+                    <span class="mini-pill">Rewards</span>
+                  </div>
+                  <div class="mini-card"><strong>Trust score</strong><span>+15 from completed interactions.</span></div>
+                  <div class="mini-card"><strong>Circle perks</strong><span>Visible from verified businesses only.</span></div>
+                </div>
+              </div>
+              <div class="phone-thumb">
+                <div class="thumb-screen">
+                  <div class="thumb-top">
+                    <span class="thumb-title">Community feed</span>
+                    <span class="mini-pill">Local</span>
+                  </div>
+                  <div class="mini-card"><strong>Notice</strong><span>Street cleaning on Friday morning.</span></div>
+                  <div class="mini-card"><strong>Lost &amp; found</strong><span>Bike helmet near the school gate.</span></div>
+                </div>
+              </div>
+              <div class="phone-thumb">
+                <div class="thumb-screen">
+                  <div class="thumb-top">
+                    <span class="thumb-title">Offers tab</span>
+                    <span class="mini-pill mini-pill--offer">Business</span>
+                  </div>
+                  <div class="mini-card mini-card--offer"><strong>Urban Bikes</strong><span>Verified by two neighbors.</span></div>
+                  <div class="mini-card mini-card--offer"><strong>FixRight Electric</strong><span>Same-day fix, insured.</span></div>
+                </div>
+              </div>
+              <div class="phone-thumb">
+                <div class="thumb-screen">
+                  <div class="thumb-top">
+                    <span class="thumb-title">JoinUs</span>
+                    <span class="mini-pill">Neighbors</span>
+                  </div>
+                  <div class="mini-card"><strong>Garden swap</strong><span>Seeds and cuttings this Sunday.</span></div>
+                  <div class="mini-card"><strong>Block dinner</strong><span>RSVP through your trusted circle.</span></div>
+                </div>
+              </div>
+              <div class="phone-thumb">
+                <div class="thumb-screen">
+                  <div class="thumb-top">
+                    <span class="thumb-title">Settings</span>
+                    <span class="mini-pill">Private</span>
+                  </div>
+                  <div class="mini-card"><strong>Visibility</strong><span>Nothing public or searchable.</span></div>
+                  <div class="mini-card"><strong>Permissions</strong><span>Contacts used once, never sold.</span></div>
+                </div>
+              </div>
+              <div class="phone-thumb">
+                <div class="thumb-screen">
+                  <div class="thumb-top">
+                    <span class="thumb-title">Pools</span>
+                    <span class="mini-pill">Soon</span>
+                  </div>
+                  <div class="mini-card"><strong>School pickup</strong><span>Coordinate with trusted parents.</span></div>
+                  <div class="mini-card"><strong>Neighborhood swap</strong><span>Shared logistics, low friction.</span></div>
+                </div>
+              </div>
+              <div class="phone-thumb">
+                <div class="thumb-screen">
+                  <div class="thumb-top">
+                    <span class="thumb-title">Requests</span>
+                    <span class="mini-pill">Structured</span>
+                  </div>
+                  <div class="mini-card"><strong>Help</strong><span>Dog walk at 3pm.</span></div>
+                  <div class="mini-card"><strong>Item loan</strong><span>Projector for Thursday.</span></div>
+                </div>
+              </div>
+              <div class="phone-thumb">
+                <div class="thumb-screen">
+                  <div class="thumb-top">
+                    <span class="thumb-title">Recommendations</span>
+                    <span class="mini-pill">Trusted</span>
+                  </div>
+                  <div class="mini-card"><strong>Plumber</strong><span>Trusted near downtown?</span></div>
+                  <div class="mini-card"><strong>School network</strong><span>Mutual context shown.</span></div>
+                </div>
+              </div>
+              <div class="phone-thumb">
+                <div class="thumb-screen">
+                  <div class="thumb-top">
+                    <span class="thumb-title">Businesses</span>
+                    <span class="mini-pill mini-pill--offer">L1/L2</span>
+                  </div>
+                  <div class="mini-card mini-card--offer"><strong>Urban Bikes</strong><span>Verified by two neighbors.</span></div>
+                  <div class="mini-card mini-card--offer"><strong>FixRight Electric</strong><span>Same-day fix, insured.</span></div>
+                </div>
+              </div>
+              <div class="phone-thumb">
+                <div class="thumb-screen">
+                  <div class="thumb-top">
+                    <span class="thumb-title">Invite</span>
+                    <span class="mini-pill">Circle</span>
+                  </div>
+                  <div class="mini-card"><strong>Add Priya</strong><span>Suggested via existing mutuals.</span></div>
+                  <div class="mini-skeleton" style="width: 80%"></div>
+                  <div class="mini-skeleton" style="width: 66%"></div>
+                </div>
+              </div>
+              <div class="phone-thumb">
+                <div class="thumb-screen">
+                  <div class="thumb-top">
+                    <span class="thumb-title">Settings</span>
+                    <span class="mini-pill">Private</span>
+                  </div>
+                  <div class="mini-card"><strong>Visibility</strong><span>Nothing public or searchable.</span></div>
+                  <div class="mini-card"><strong>Permissions</strong><span>Contacts used once, never sold.</span></div>
+                </div>
+              </div>
+              <div class="phone-thumb">
+                <div class="thumb-screen">
+                  <div class="thumb-top">
+                    <span class="thumb-title">Pools</span>
+                    <span class="mini-pill">Soon</span>
+                  </div>
+                  <div class="mini-card"><strong>School pickup</strong><span>Coordinate with trusted parents.</span></div>
+                  <div class="mini-card"><strong>Neighborhood swap</strong><span>Shared logistics, low friction.</span></div>
+                </div>
               </div>
             </div>
           </div>
@@ -384,423 +2201,474 @@
       </div>
     </section>
 
-    <section id="how" class="club-section scroll-mt-28 py-3 sm:py-4">
+    <section id="faq" class="faq-section">
       <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div class="soft-panel rounded-[2.4rem] p-6 sm:p-8 lg:p-10">
-          <div class="space-y-6">
-            <div class="max-w-3xl space-y-5">
-              <p data-reveal class="text-sm font-semibold uppercase tracking-[0.24em] text-brand-teal">How it works</p>
-              <h2 data-reveal style="--reveal-delay: 1" class="max-w-md text-4xl font-semibold leading-tight tracking-[-0.05em] text-brand-ink sm:text-5xl">
-                How it works
-              </h2>
-              <p data-reveal style="--reveal-delay: 2" class="max-w-md text-lg leading-8 text-slate-600">
-                Verify identity once. AI organizes contacts. You tag who you truly know. Trust levels keep your feed clean.
-              </p>
-              <div data-reveal style="--reveal-delay: 3" class="flex flex-wrap gap-3 text-sm font-semibold text-brand-ink">
-                <span class="rounded-full bg-slate-100 px-4 py-2">Identity check</span>
-                <span class="rounded-full bg-slate-100 px-4 py-2">Contact import</span>
-                <span class="rounded-full bg-slate-100 px-4 py-2">AI clustering</span>
-                <span class="rounded-full bg-slate-100 px-4 py-2">Trust tagging</span>
-              </div>
-            </div>
-
-            <div class="grid gap-4 lg:grid-cols-4">
-              <article data-reveal style="--reveal-delay: 1" class="story-card p-5 sm:p-6">
-                <div class="h-48 w-full overflow-hidden rounded-[1.35rem] bg-slate-100">
-                  <img src="https://images.pexels.com/photos/6140934/pexels-photo-6140934.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=1200&amp;dpr=1" class="h-full w-full object-cover" alt="Person holding ID and phone for verification" loading="lazy">
-                </div>
-                <h3 class="mt-5 text-xl font-semibold text-brand-ink">Verify &amp; import safely</h3>
-                <p class="mt-3 text-sm leading-6 text-slate-600">Identity checked once. Contacts processed safely to prevent spammer dumps.</p>
-              </article>
-              <article data-reveal style="--reveal-delay: 2" class="story-card p-5 sm:p-6">
-                <div class="h-48 w-full overflow-hidden rounded-[1.35rem] bg-slate-100">
-                  <img src="https://images.pexels.com/photos/8251157/pexels-photo-8251157.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=1200&amp;dpr=1" class="h-full w-full object-cover" alt="Team collaborating with tech" loading="lazy">
-                </div>
-                <h3 class="mt-5 text-xl font-semibold text-brand-ink">AI organizes</h3>
-                <p class="mt-3 text-sm leading-6 text-slate-600">Automatic groups: family, friends, colleagues, businesses.</p>
-              </article>
-              <article data-reveal style="--reveal-delay: 3" class="story-card p-5 sm:p-6">
-                <div class="h-48 w-full overflow-hidden rounded-[1.35rem] bg-slate-100">
-                  <img src="https://images.pexels.com/photos/461049/pexels-photo-461049.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=1200&amp;dpr=1" class="h-full w-full object-cover" alt="Group of friends linking arms in a circle" loading="lazy">
-                </div>
-                <h3 class="mt-5 text-xl font-semibold text-brand-ink">You tag trust</h3>
-                <p class="mt-3 text-sm leading-6 text-slate-600">Level 1: trusted circle. Level 2: friends-of-friends. Everything else stays out.</p>
-              </article>
-              <article data-reveal style="--reveal-delay: 4" class="story-card p-5 sm:p-6">
-                <div class="h-48 w-full overflow-hidden rounded-[1.35rem] bg-slate-100">
-                  <img src="https://images.pexels.com/photos/267394/pexels-photo-267394.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=1200&amp;dpr=1" class="h-full w-full object-cover" alt="Group collaborating around a laptop" loading="lazy">
-                </div>
-                <h3 class="mt-5 text-xl font-semibold text-brand-ink">Smart request cards</h3>
-                <p class="mt-3 text-sm leading-6 text-slate-600">Help, rides, items, reviews, offers, emergencies are structured from the start.</p>
-              </article>
-            </div>
-          </div>
+        <div class="max-w-3xl">
+          <p data-reveal class="eyebrow">Quick answers</p>
+          <h2 data-reveal class="section-title mt-5">What people ask before they join.</h2>
+          <p data-reveal class="section-copy mt-5">
+            The original FAQ stays, but the cards now sit inside the same visual language as the rest of the page.
+          </p>
+        </div>
+        <div class="faq-grid">
+          <article class="faq-card" data-reveal>
+            <h3>How do you read my contacts?</h3>
+            <p>With permission, once. Data is used to detect real relationships, not to publish your graph or sell it.</p>
+          </article>
+          <article class="faq-card" data-reveal>
+            <h3>What stops spam?</h3>
+            <p>No one outside Level 1 or Level 2 can reach you. Businesses stay in their own tab and do not boost into the main feed.</p>
+          </article>
+          <article class="faq-card" data-reveal>
+            <h3>Is anything public?</h3>
+            <p>No. Only Level 1 and Level 2 can see or post to you. Nothing is public or searchable on the open web.</p>
+          </article>
+          <article class="faq-card" data-reveal>
+            <h3>What about emergencies?</h3>
+            <p>One tap alerts Level 1 contacts nearest to you. Location is shared only with them, only for that moment.</p>
+          </article>
         </div>
       </div>
     </section>
 
-    <section id="trust" class="club-section scroll-mt-28 py-3 sm:py-4">
+    <section id="cta" class="cta-section">
       <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div class="dark-panel px-6 py-8 sm:px-8 sm:py-10 lg:px-10 lg:py-12">
-          <div class="space-y-6">
-            <div class="max-w-3xl space-y-5">
-              <div data-reveal class="inline-flex items-center gap-2 rounded-full bg-brand-coral/25 px-4 py-2 text-sm font-semibold text-brand-ink">
-                <i class="fas fa-shield-halved text-brand-teal"></i>
-                <span>Verified identities · No strangers</span>
-              </div>
-              <p data-reveal style="--reveal-delay: 1" class="text-base font-semibold uppercase tracking-[0.24em] text-brand-teal">REAL PEOPLE. REAL CIRCLES.</p>
-              <h2 data-reveal style="--reveal-delay: 2" class="max-w-xl text-4xl font-semibold leading-tight tracking-[-0.06em] text-brand-ink sm:text-5xl lg:text-6xl">Your personal trust mesh</h2>
-              <p data-reveal style="--reveal-delay: 3" class="max-w-2xl text-base leading-8 text-slate-600 sm:text-lg">
-                Your mesh is made of faces you know: family runs, school pickups, neighborhood swaps, and trusted shops.
-              </p>
-              <div data-reveal style="--reveal-delay: 4" class="flex flex-wrap gap-3 text-sm">
-                <span class="rounded-full bg-slate-100 px-4 py-2 font-semibold text-brand-ink">Level 1 · Trusted circle</span>
-                <span class="rounded-full bg-slate-100 px-4 py-2 font-semibold text-brand-ink">Level 2 · Friends-of-friends</span>
-                <span class="rounded-full bg-slate-100 px-4 py-2 font-semibold text-brand-ink">Businesses in-circle</span>
-              </div>
-            </div>
-
-            <div class="grid gap-4 lg:grid-cols-3">
-              <article data-reveal style="--reveal-delay: 1" class="story-card p-5 sm:p-6">
-                <div class="h-48 w-full overflow-hidden rounded-[1.4rem] bg-slate-100">
-                  <img src="https://images.unsplash.com/photo-1523580846011-d3a5bc25702b?auto=format&amp;fit=crop&amp;w=900&amp;q=80" class="h-full w-full object-cover" alt="Family walking together" loading="lazy">
-                </div>
-                <h3 class="mt-5 text-xl font-semibold text-brand-ink">Level 1 · Trusted circle</h3>
-                <p class="mt-3 text-sm leading-6 text-slate-600">Family, neighbors, close colleagues, trusted local businesses. Emergency alerts go here first.</p>
-                <div class="mt-4 flex flex-wrap gap-2">
-                  <span class="rounded-full bg-slate-100 px-3 py-1.5 text-xs font-semibold text-brand-ink">Family</span>
-                  <span class="rounded-full bg-slate-100 px-3 py-1.5 text-xs font-semibold text-brand-ink">Neighbors</span>
-                  <span class="rounded-full bg-slate-100 px-3 py-1.5 text-xs font-semibold text-brand-ink">Trusted shops</span>
-                </div>
-                <div class="mt-5">
-                  <div class="h-2 rounded-full bg-slate-100">
-                    <div class="h-2 w-[90%] rounded-full bg-gradient-to-r from-brand-teal to-brand-mint"></div>
-                  </div>
-                  <p class="mt-2 text-xs text-slate-500">Trust Score boost: +15 on completed interactions.</p>
-                </div>
-              </article>
-
-              <article data-reveal style="--reveal-delay: 2" class="story-card p-5 sm:p-6">
-                <div class="h-48 w-full overflow-hidden rounded-[1.4rem] bg-slate-100">
-                  <img src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&amp;fit=crop&amp;w=900&amp;q=80" class="h-full w-full object-cover" alt="Friends laughing at a cafe" loading="lazy">
-                </div>
-                <h3 class="mt-5 text-xl font-semibold text-brand-ink">Level 2 · Friends-of-friends</h3>
-                <p class="mt-3 text-sm leading-6 text-slate-600">Introductions via people you trust. Mutual connections always shown.</p>
-                <div class="mt-4 flex flex-wrap gap-2">
-                  <span class="rounded-full bg-slate-100 px-3 py-1.5 text-xs font-semibold text-brand-ink">Friends-of-friends</span>
-                  <span class="rounded-full bg-slate-100 px-3 py-1.5 text-xs font-semibold text-brand-ink">School network</span>
-                  <span class="rounded-full bg-slate-100 px-3 py-1.5 text-xs font-semibold text-brand-ink">Team referrals</span>
-                </div>
-                <div class="mt-5">
-                  <div class="h-2 rounded-full bg-slate-100">
-                    <div class="h-2 w-[70%] rounded-full bg-gradient-to-r from-brand-teal to-brand-mint"></div>
-                  </div>
-                  <p class="mt-2 text-xs text-slate-500">Trust Score boost: +8 on completed interactions.</p>
-                </div>
-              </article>
-
-              <article data-reveal style="--reveal-delay: 3" class="story-card p-5 sm:p-6">
-                <div class="h-48 w-full overflow-hidden rounded-[1.4rem] bg-slate-100">
-                  <img src="https://images.unsplash.com/photo-1556740749-887f6717d7e4?auto=format&amp;fit=crop&amp;w=900&amp;q=80" class="h-full w-full object-cover" alt="Small business owner smiling" loading="lazy">
-                </div>
-                <h3 class="mt-5 text-xl font-semibold text-brand-ink">Businesses in your circle</h3>
-                <p class="mt-3 text-sm leading-6 text-slate-600">Offers from Level 1/2 businesses live in their own tab and stay out of the main feed.</p>
-                <div class="mt-4 space-y-2 text-sm">
-                  <div class="rounded-2xl border border-slate-200 bg-slate-50 p-3"><strong>Urban Bikes · L1</strong><br>20% off tune-ups for circle.</div>
-                  <div class="rounded-2xl border border-slate-200 bg-slate-50 p-3"><strong>Harvest Kitchen · L2</strong><br>Free delivery via Priya.</div>
-                </div>
-                <p class="mt-3 text-xs text-slate-500">No paid boosts. Only people already connected.</p>
-              </article>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="requests" class="club-section scroll-mt-28 py-3 sm:py-4">
-      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div class="soft-panel rounded-[2.4rem] p-6 sm:p-8 lg:p-10">
-          <div class="space-y-6">
-            <div class="max-w-3xl space-y-5">
-              <p data-reveal class="text-sm font-semibold uppercase tracking-[0.24em] text-brand-teal">Requests</p>
-              <h2 data-reveal style="--reveal-delay: 1" class="max-w-md text-4xl font-semibold leading-tight tracking-[-0.05em] text-brand-ink sm:text-5xl">
-                What you can post
-              </h2>
-              <p data-reveal style="--reveal-delay: 2" class="max-w-md text-lg leading-8 text-slate-600">
-                Home feed is Level 1 + Level 2 only. Pre-built cards keep intent clear; AI matches by relevance and proximity.
-              </p>
-              <div data-reveal style="--reveal-delay: 3" class="flex flex-wrap gap-3 text-sm font-semibold text-brand-ink">
-                <span class="rounded-full bg-slate-100 px-4 py-2">Help</span>
-                <span class="rounded-full bg-slate-100 px-4 py-2">Rides</span>
-                <span class="rounded-full bg-slate-100 px-4 py-2">Items</span>
-                <span class="rounded-full bg-slate-100 px-4 py-2">Recommendations</span>
-                <span class="rounded-full bg-slate-100 px-4 py-2">Emergencies</span>
-              </div>
-            </div>
-
-            <div class="grid gap-4 lg:grid-cols-3">
-              <article data-reveal style="--reveal-delay: 1" class="story-card p-5 sm:p-6">
-                <div class="h-52 w-full overflow-hidden rounded-[1.4rem] bg-slate-100">
-                  <img src="https://images.pexels.com/photos/3699259/pexels-photo-3699259.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=1200&amp;dpr=1" class="h-full w-full object-cover" alt="Friends carpooling together" loading="lazy">
-                </div>
-                <div class="mt-5 flex items-center gap-3">
-                  <div class="flex h-11 w-11 items-center justify-center rounded-full bg-brand-teal/10 text-brand-teal"><i class="fas fa-car-side"></i></div>
-                  <h3 class="text-2xl font-semibold text-brand-ink">Help &amp; rides</h3>
-                </div>
-                <p class="mt-3 text-sm leading-6 text-slate-600">Airport pickup, quick favors, school runs. Level 1 first, Level 2 optional.</p>
-                <div class="mt-4 grid gap-2 text-sm">
-                  <div class="rounded-2xl border border-slate-200 bg-slate-50 p-3"><strong>Ride share</strong><br>Need a ride to SFO at 6:30pm.</div>
-                  <div class="rounded-2xl border border-slate-200 bg-slate-50 p-3"><strong>Help</strong><br>Quick dog walk at 3pm.</div>
-                </div>
-              </article>
-
-              <article data-reveal style="--reveal-delay: 2" class="story-card p-5 sm:p-6">
-                <div class="h-52 w-full overflow-hidden rounded-[1.4rem]">
-                  <img src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&amp;fit=crop&amp;w=1200&amp;q=80" class="h-full w-full object-cover" alt="Shared workspace items" loading="lazy">
-                </div>
-                <div class="mt-5 flex items-center gap-3">
-                  <div class="flex h-11 w-11 items-center justify-center rounded-full bg-brand-mint/10 text-brand-ink"><i class="fas fa-hand-holding-heart"></i></div>
-                  <h3 class="text-2xl font-semibold text-brand-ink">Items &amp; recommendations</h3>
-                </div>
-                <p class="mt-3 text-sm leading-6 text-slate-600">Borrow/lend gear, share reviews, swap skills. Always tagged with trust level.</p>
-                <div class="mt-4 grid gap-2 text-sm">
-                  <div class="rounded-2xl border border-slate-200 bg-slate-50 p-3"><strong>Item loan</strong><br>Projector for Thursday?</div>
-                  <div class="rounded-2xl border border-slate-200 bg-slate-50 p-3"><strong>Review</strong><br>Trusted plumber near downtown?</div>
-                </div>
-              </article>
-
-              <article data-reveal style="--reveal-delay: 3" class="story-card p-5 sm:p-6">
-                <div class="h-52 w-full overflow-hidden rounded-[1.4rem]">
-                  <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&amp;fit=crop&amp;w=1200&amp;q=80" class="h-full w-full object-cover" alt="Vibrant local market storefront" loading="lazy">
-                </div>
-                <div class="mt-5 flex items-center gap-3">
-                  <div class="flex h-11 w-11 items-center justify-center rounded-full bg-brand-mint/15 text-brand-mint"><i class="fas fa-bullhorn"></i></div>
-                  <h3 class="text-2xl font-semibold text-brand-ink">Offers &amp; emergencies</h3>
-                </div>
-                <p class="mt-3 text-sm leading-6 text-slate-600">Circle businesses post in a separate tab. Emergencies ping Level 1 with location.</p>
-                <div class="mt-4 grid gap-2 text-sm">
-                  <div class="rounded-2xl border border-slate-200 bg-slate-50 p-3"><strong>Local offer</strong><br>Urban Bikes: 20% off tune-ups.</div>
-                  <div class="rounded-2xl border border-slate-200 bg-slate-50 p-3"><strong>Emergency</strong><br>Nearest high-trust contacts alerted.</div>
-                </div>
-              </article>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="offers" class="club-section scroll-mt-28 py-3 sm:py-4">
-      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div class="soft-panel overflow-hidden rounded-[2.6rem] px-6 py-8 sm:px-8 sm:py-10 lg:px-10 lg:py-12">
-          <div class="grid gap-8 lg:grid-cols-[0.84fr,1.16fr] lg:items-center">
-            <div class="space-y-5">
-              <h2 data-reveal class="text-4xl font-semibold leading-tight tracking-[-0.05em] text-brand-ink sm:text-5xl">Circle offers stay separate</h2>
-              <p data-reveal style="--reveal-delay: 1" class="max-w-lg text-lg leading-8 text-slate-700">Businesses you already know can share perks in a dedicated tab—never boosting into your main feed.</p>
-              <ul data-reveal style="--reveal-delay: 2" class="space-y-3 text-sm leading-6 text-slate-700">
-                <li class="flex items-start gap-3 rounded-2xl bg-white/70 px-4 py-3">
-                  <i class="fas fa-toggle-on pt-1 text-brand-teal"></i>
-                  <span>Mute or follow any business with one tap.</span>
-                </li>
-                <li class="flex items-start gap-3 rounded-2xl bg-white/70 px-4 py-3">
-                  <i class="fas fa-location-dot pt-1 text-brand-teal"></i>
-                  <span>Location-aware offers—no irrelevant ads.</span>
-                </li>
-                <li class="flex items-start gap-3 rounded-2xl bg-white/70 px-4 py-3">
-                  <i class="fas fa-shield pt-1 text-brand-teal"></i>
-                  <span>Offers only from Level 1/2 verified circles.</span>
-                </li>
-              </ul>
-            </div>
-
-            <div class="grid gap-4 sm:grid-cols-2">
-              <article data-reveal style="--reveal-delay: 1" class="offer-card p-4 sm:p-5">
-                <div class="flex items-center gap-3">
-                  <div class="flex h-11 w-11 items-center justify-center rounded-full bg-brand-teal/10 text-brand-teal"><i class="fas fa-store"></i></div>
-                  <div>
-                    <p class="font-semibold text-brand-ink">Harvest Kitchen · L2</p>
-                    <p class="text-xs text-slate-500">Verified by Priya</p>
-                  </div>
-                </div>
-                <p class="mt-4 text-sm leading-6 text-slate-700">Free delivery for your mesh this weekend only.</p>
-              </article>
-              <article data-reveal style="--reveal-delay: 2" class="offer-card p-4 sm:p-5">
-                <div class="flex items-center gap-3">
-                  <div class="flex h-11 w-11 items-center justify-center rounded-full bg-brand-coral/10 text-brand-coral"><i class="fas fa-bicycle"></i></div>
-                  <div>
-                    <p class="font-semibold text-brand-ink">Urban Bikes · L1</p>
-                    <p class="text-xs text-slate-500">Verified by 2 neighbors</p>
-                  </div>
-                </div>
-                <p class="mt-4 text-sm leading-6 text-slate-700">20% off tune-ups and free safety check.</p>
-              </article>
-              <article data-reveal style="--reveal-delay: 3" class="offer-card p-4 sm:p-5">
-                <div class="flex items-center gap-3">
-                  <div class="flex h-11 w-11 items-center justify-center rounded-full bg-brand-amber/10 text-brand-amber"><i class="fas fa-plug-circle-check"></i></div>
-                  <div>
-                    <p class="font-semibold text-brand-ink">FixRight Electric · L1</p>
-                    <p class="text-xs text-slate-500">Tagged high trust</p>
-                  </div>
-                </div>
-                <p class="mt-4 text-sm leading-6 text-slate-700">Same-day fixes with proof of insurance in-app.</p>
-              </article>
-              <article data-reveal style="--reveal-delay: 4" class="offer-card p-4 sm:p-5">
-                <div class="flex items-center gap-3">
-                  <div class="flex h-11 w-11 items-center justify-center rounded-full bg-brand-red/10 text-brand-red"><i class="fas fa-screwdriver-wrench"></i></div>
-                  <div>
-                    <p class="font-semibold text-brand-ink">Maker Garage · L2</p>
-                    <p class="text-xs text-slate-500">Via Aria</p>
-                  </div>
-                </div>
-                <p class="mt-4 text-sm leading-6 text-slate-700">Tool library with weekend access for your circle.</p>
-              </article>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="cta" class="club-section scroll-mt-28 py-3 sm:py-4">
-      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div class="grid gap-6 lg:grid-cols-[1.08fr,0.92fr]">
-          <div class="dark-panel px-6 py-8 sm:px-8 sm:py-10 lg:px-10 lg:py-12">
+        <div class="cta-shell">
+          <div class="cta-blob"></div>
+          <div class="grid items-center gap-12 lg:grid-cols-[0.92fr,1.08fr]">
             <div class="relative z-10 max-w-2xl">
-              <h3 data-reveal class="text-4xl font-semibold leading-tight tracking-[-0.05em] text-brand-ink sm:text-5xl">Ready to keep your feed free of strangers?</h3>
-              <p data-reveal style="--reveal-delay: 1" class="mt-4 max-w-xl text-lg leading-8 text-slate-600">Launching soon. Keep your circles close—no public profiles.</p>
-              <div data-reveal style="--reveal-delay: 2" class="mt-6 inline-flex flex-wrap items-center gap-3 rounded-full bg-slate-100 px-4 py-3 text-sm font-semibold text-brand-ink">
-                <i class="fab fa-google-play text-lg text-brand-teal"></i><span>See us soon on Play Store</span>
-                <span class="text-slate-300">•</span>
-                <i class="fab fa-apple text-lg text-brand-teal"></i><span>See us soon on App Store</span>
+              <p data-reveal class="eyebrow">Final CTA</p>
+              <h2 data-reveal class="section-title mt-5">Your neighbourhood, connected.</h2>
+              <p data-reveal class="section-copy mt-5 max-w-xl">
+                Ready to keep your feed free of strangers? Launching soon. The product stays private-first, circle-first and built for people who actually know each other.
+              </p>
+              <div data-reveal class="mt-8 flex flex-wrap gap-3">
+                <a href="#cta" class="store-button">
+                  <i class="fab fa-apple text-indigo-600"></i>
+                  See us soon on App Store
+                </a>
+                <a href="#cta" class="store-button">
+                  <i class="fab fa-google-play text-indigo-600"></i>
+                  See us soon on Play Store
+                </a>
+              </div>
+            </div>
+
+            <div class="relative flex justify-center">
+              <div class="phone-shell phone-shell--feature cta-phone relative z-10">
+                <div class="phone-screen phone-screen--compact">
+                  <div class="screen-topbar">
+                    <span class="screen-kicker">Nyr</span>
+                    <span class="ui-pill">Private-first</span>
+                  </div>
+                  <h3 class="screen-title">Ready when your circle is.</h3>
+                  <p class="screen-subcopy">The main feed stays clean. The right people stay visible. The rest stays out.</p>
+                  <div class="ui-stack">
+                    <div class="ui-card">
+                      <strong>Verified circles</strong>
+                      <span>No strangers in the home feed.</span>
+                    </div>
+                    <div class="ui-card">
+                      <strong>Structured requests</strong>
+                      <span>Help, rides, items and trusted recommendations.</span>
+                    </div>
+                    <div class="ui-card">
+                      <strong>Offers kept separate</strong>
+                      <span>Useful, visible and never intrusive.</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="cta-widget cta-widget-one hidden lg:block">
+                <strong>Level 1 alert</strong>
+                <span>Nearest trusted contacts notified first.</span>
+              </div>
+              <div class="cta-widget cta-widget-two hidden lg:block">
+                <strong>Urban Bikes · L1</strong>
+                <span>20% off tune-ups in circle offers.</span>
+              </div>
+              <div class="cta-widget cta-widget-three hidden lg:block">
+                <strong>Quick intro</strong>
+                <span>Maya is connected through Priya and Aria.</span>
               </div>
             </div>
           </div>
 
-          <div class="soft-panel flex items-center justify-between gap-6 rounded-[2.4rem] p-6 sm:p-8">
-            <div data-reveal class="space-y-3">
-              <p class="text-sm font-semibold uppercase tracking-[0.24em] text-brand-teal">Learn more</p>
-              <p class="max-w-sm text-lg leading-8 text-slate-700">Privacy-first, spam-free, people you actually know.</p>
+          <div class="cta-widget-stack lg:hidden">
+            <div class="cta-widget">
+              <strong>Level 1 alert</strong>
+              <span>Nearest trusted contacts notified first.</span>
             </div>
-            <a data-reveal style="--reveal-delay: 1" href="#faq" class="inline-flex h-14 min-w-[10rem] items-center justify-center rounded-full bg-brand-teal px-6 text-base font-semibold text-white shadow-lg shadow-brand-teal/25 transition hover:-translate-y-0.5 hover:shadow-xl hover:shadow-brand-teal/30">Learn more</a>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="faq" class="club-section scroll-mt-28 py-3 sm:py-4">
-      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div class="soft-panel rounded-[2.4rem] p-6 sm:p-8 lg:p-10">
-          <div class="text-center">
-            <p data-reveal class="text-sm font-semibold uppercase tracking-[0.24em] text-brand-teal">FAQ</p>
-            <h2 data-reveal style="--reveal-delay: 1" class="mt-3 text-4xl font-semibold tracking-[-0.05em] text-brand-ink sm:text-5xl">Quick answers</h2>
-            <p data-reveal style="--reveal-delay: 2" class="mx-auto mt-4 max-w-2xl text-lg leading-8 text-slate-600">Privacy-first, spam-free, people you actually know.</p>
-          </div>
-          <div class="mt-8 grid gap-4 md:grid-cols-2">
-            <article data-reveal style="--reveal-delay: 1" class="faq-card p-5 sm:p-6">
-              <h4 class="text-lg font-semibold text-brand-ink">How do you read my contacts?</h4>
-              <p class="mt-3 text-sm leading-6 text-slate-600">With permission, once. Data is used to detect real relationships—never sold, never public.</p>
-            </article>
-            <article data-reveal style="--reveal-delay: 2" class="faq-card p-5 sm:p-6">
-              <h4 class="text-lg font-semibold text-brand-ink">What stops spam?</h4>
-              <p class="mt-3 text-sm leading-6 text-slate-600">No one outside Level 1 or Level 2 can reach you. Businesses live in their own tab.</p>
-            </article>
-            <article data-reveal style="--reveal-delay: 3" class="faq-card p-5 sm:p-6">
-              <h4 class="text-lg font-semibold text-brand-ink">Is anything public?</h4>
-              <p class="mt-3 text-sm leading-6 text-slate-600">No. Only Level 1 and Level 2 can see or post to you. Nothing is public or searchable.</p>
-            </article>
-            <article data-reveal style="--reveal-delay: 4" class="faq-card p-5 sm:p-6">
-              <h4 class="text-lg font-semibold text-brand-ink">What about emergencies?</h4>
-              <p class="mt-3 text-sm leading-6 text-slate-600">One tap alerts Level 1 contacts nearest to you. Location is shared only with them.</p>
-            </article>
+            <div class="cta-widget">
+              <strong>Urban Bikes · L1</strong>
+              <span>20% off tune-ups in circle offers.</span>
+            </div>
+            <div class="cta-widget">
+              <strong>Quick intro</strong>
+              <span>Maya is connected through Priya and Aria.</span>
+            </div>
           </div>
         </div>
       </div>
     </section>
   </main>
 
-  <footer class="footer-panel text-white">
-    <div class="mx-auto max-w-7xl px-4 pb-6 pt-3 sm:px-6 lg:px-8">
-      <div class="rounded-[2rem] border border-white/10 bg-white/5 px-5 py-4 sm:px-6">
-        <div class="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
-          <div class="flex items-center gap-3">
-            <div class="rounded-xl bg-white px-2 py-1.5">
-              <img src="assets/nyr-icon.png" alt="Nyr" class="h-7 w-[4.5rem] object-cover object-center sm:h-8 sm:w-20">
-            </div>
-            <div>
-              <div class="text-lg font-semibold text-brand-gold">Nyr</div>
-              <p class="text-xs text-white/65">Trusted-circle first. Private by default.</p>
-            </div>
-          </div>
-          <div class="flex flex-wrap gap-x-4 gap-y-2 text-sm text-white/75">
-            <a href="pages/gigasys-technologies-inc.html" class="transition hover:text-white">Company</a>
-            <a href="pages/support.html" class="transition hover:text-white">Support</a>
-            <a href="pages/circle-offers.html" class="transition hover:text-white">Circle Offers</a>
-            <a href="pages/privacy-center.html" class="transition hover:text-white">Privacy</a>
-            <a href="pages/cookie-policy.html" class="transition hover:text-white">Cookies</a>
-            <a href="pages/community-guidelines.html" class="transition hover:text-white">Guidelines</a>
-          </div>
-          <div class="text-xs text-white/55">
-            &copy; 2025 Gigasys Technologies Inc.
-          </div>
+  <footer class="footer-panel">
+    <div class="mx-auto flex max-w-7xl flex-col gap-5 px-4 sm:px-6 lg:flex-row lg:items-center lg:justify-between lg:px-8">
+      <div class="flex items-center gap-3">
+        <div class="rounded-xl border border-slate-200 bg-white px-2 py-1.5 shadow-sm">
+          <img src="assets/nyr-icon.png" alt="Nyr" class="h-7 w-[4.5rem] object-cover object-center sm:h-8 sm:w-20">
+        </div>
+        <div>
+          <div class="text-base font-extrabold tracking-[-0.04em] text-slate-950">Nyr</div>
+          <div class="text-sm text-slate-500">Trusted-circle first. Private by default.</div>
         </div>
       </div>
+      <div class="footer-links">
+        <a href="pages/gigasys-technologies-inc.html">Company</a>
+        <a href="pages/support.html">Support</a>
+        <a href="pages/circle-offers.html">Circle Offers</a>
+        <a href="pages/privacy-center.html">Privacy</a>
+        <a href="delete-account/">Delete account</a>
+        <a href="pages/cookie-policy.html">Cookies</a>
+        <a href="pages/community-guidelines.html">Guidelines</a>
+      </div>
+      <div class="text-sm text-slate-500">&copy; 2025 Gigasys Technologies Inc.</div>
     </div>
   </footer>
 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="https://unpkg.com/@studio-freight/lenis@1.0.42/bundled/lenis.min.js"></script>
   <script>
-    const toggleButton = document.getElementById('nav-toggle');
+    const mobileToggle = document.getElementById('nav-toggle');
     const mobileNav = document.getElementById('mobile-nav');
     const siteHeader = document.getElementById('site-header');
-    const revealItems = document.querySelectorAll('[data-reveal]');
-    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const anchorLinks = Array.from(document.querySelectorAll('a[href^="#"]'));
+    const ctaWidgets = [
+      { selector: '.cta-widget-one', from: { x: -130, y: 64, opacity: 0, rotate: -9 } },
+      { selector: '.cta-widget-two', from: { x: 120, y: -48, opacity: 0, rotate: 8 } },
+      { selector: '.cta-widget-three', from: { x: -90, y: 86, opacity: 0, rotate: -7 } },
+    ];
 
-    const setHeaderState = () => {
-      siteHeader?.classList.toggle('is-scrolled', window.scrollY > 18);
+    let lenis = null;
+
+    const setHeaderState = (amount) => {
+      if (!siteHeader) return;
+      siteHeader.classList.toggle('is-scrolled', amount > 20);
     };
 
-    let ticking = false;
-
-    const updateScene = () => {
-      ticking = false;
-      setHeaderState();
-    };
-
-    const requestSceneUpdate = () => {
-      if (ticking) return;
-      ticking = true;
-      window.requestAnimationFrame(updateScene);
-    };
-
-    toggleButton?.addEventListener('click', () => {
-      mobileNav?.classList.toggle('hidden');
-      toggleButton.setAttribute('aria-expanded', mobileNav?.classList.contains('hidden') ? 'false' : 'true');
+    mobileToggle?.addEventListener('click', () => {
+      const hidden = mobileNav?.classList.toggle('hidden');
+      mobileToggle.setAttribute('aria-expanded', hidden ? 'false' : 'true');
     });
 
-    mobileNav?.querySelectorAll('a').forEach((link) => {
-      link.addEventListener('click', () => {
-        mobileNav.classList.add('hidden');
-        toggleButton?.setAttribute('aria-expanded', 'false');
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    const scrollToTarget = (targetId) => {
+      const target = document.querySelector(targetId);
+      if (!target) return;
+
+      if (lenis) {
+        lenis.scrollTo(target, { offset: -84 });
+      } else {
+        target.scrollIntoView({ behavior: prefersReducedMotion ? 'auto' : 'smooth', block: 'start' });
+      }
+    };
+
+    anchorLinks.forEach((link) => {
+      link.addEventListener('click', (event) => {
+        const href = link.getAttribute('href');
+        if (!href || href === '#') return;
+        event.preventDefault();
+        mobileNav?.classList.add('hidden');
+        mobileToggle?.setAttribute('aria-expanded', 'false');
+        scrollToTarget(href);
       });
     });
 
-    if (prefersReducedMotion.matches) {
-      revealItems.forEach((item) => item.classList.add('revealed'));
+    if (prefersReducedMotion) {
+      setHeaderState(window.scrollY);
+      window.addEventListener('scroll', () => setHeaderState(window.scrollY), { passive: true });
     } else {
-      const revealObserver = new IntersectionObserver((entries, observer) => {
-        entries.forEach((entry) => {
-          if (!entry.isIntersecting) return;
-          entry.target.classList.add('revealed');
-          observer.unobserve(entry.target);
-        });
-      }, {
-        threshold: 0.18,
-        rootMargin: '0px 0px -40px 0px',
+      lenis = new Lenis({
+        duration: 1.05,
+        smoothWheel: true,
+        syncTouch: false,
       });
 
-      revealItems.forEach((item) => revealObserver.observe(item));
-    }
+      gsap.registerPlugin(ScrollTrigger);
 
-    setHeaderState();
-    window.addEventListener('scroll', requestSceneUpdate, { passive: true });
-    window.addEventListener('resize', requestSceneUpdate);
+      lenis.on('scroll', ScrollTrigger.update);
+      lenis.on('scroll', ({ scroll }) => setHeaderState(scroll));
+      gsap.ticker.add((time) => {
+        lenis.raf(time * 1000);
+      });
+      gsap.ticker.lagSmoothing(0);
+
+      const heroTl = gsap.timeline({ defaults: { ease: 'power3.out' } });
+      heroTl
+        .from('[data-hero="eyebrow"]', { y: 26, opacity: 0, duration: 0.55 })
+        .from('[data-hero="title"] .hero-line', { y: 56, opacity: 0, rotateX: 16, transformOrigin: '50% 100%', stagger: 0.08, duration: 0.72 }, '-=0.28')
+        .from('[data-hero="copy"]', { y: 32, opacity: 0, duration: 0.55 }, '-=0.35')
+        .from('[data-hero="actions"]', { y: 24, opacity: 0, duration: 0.5 }, '-=0.28')
+        .from('[data-hero="meta"] .ui-pill', { y: 18, opacity: 0, stagger: 0.06, duration: 0.35 }, '-=0.26')
+        .from('[data-depth="phone"]', { y: 55, opacity: 0, scale: 0.96, rotateX: 10, duration: 0.85 }, '-=0.75')
+        .from('[data-depth="backplate"]', { y: 65, opacity: 0, scale: 0.92, rotate: -18, duration: 0.9 }, '-=0.82')
+        .from('[data-depth="watch"], [data-depth="overview"]', { y: 32, opacity: 0, stagger: 0.08, duration: 0.48 }, '-=0.62')
+        .from('[data-depth^="widget"]', { y: 30, opacity: 0, stagger: 0.08, duration: 0.45 }, '-=0.5')
+        .from('[data-depth="blob"]', { scale: 0.88, opacity: 0, duration: 0.9 }, '-=0.75');
+
+      gsap.to('.hero-line--a', {
+        xPercent: -10,
+        scrollTrigger: {
+          trigger: '#hero',
+          start: 'top top',
+          end: 'bottom top',
+          scrub: 1,
+        },
+      });
+
+      gsap.to('.hero-line--b', {
+        xPercent: 8,
+        scrollTrigger: {
+          trigger: '#hero',
+          start: 'top top',
+          end: 'bottom top',
+          scrub: 1,
+        },
+      });
+
+      gsap.to('.hero-line--c', {
+        xPercent: -6,
+        scrollTrigger: {
+          trigger: '#hero',
+          start: 'top top',
+          end: 'bottom top',
+          scrub: 1,
+        },
+      });
+
+      gsap.to('[data-depth="blob"]', {
+        yPercent: -18,
+        scrollTrigger: {
+          trigger: '#hero',
+          start: 'top top',
+          end: 'bottom top',
+          scrub: 1,
+        },
+      });
+
+      gsap.to('[data-depth="phone"]', {
+        yPercent: -24,
+        rotate: 1.5,
+        scrollTrigger: {
+          trigger: '#hero',
+          start: 'top top',
+          end: 'bottom top',
+          scrub: 1,
+        },
+      });
+
+      gsap.to('[data-depth="widget-a"]', {
+        yPercent: -34,
+        xPercent: 8,
+        scrollTrigger: {
+          trigger: '#hero',
+          start: 'top top',
+          end: 'bottom top',
+          scrub: 1,
+        },
+      });
+
+      gsap.to('[data-depth="widget-b"]', {
+        yPercent: -14,
+        xPercent: -6,
+        scrollTrigger: {
+          trigger: '#hero',
+          start: 'top top',
+          end: 'bottom top',
+          scrub: 1,
+        },
+      });
+
+      gsap.to('[data-depth="widget-c"]', {
+        yPercent: -44,
+        xPercent: 5,
+        scrollTrigger: {
+          trigger: '#hero',
+          start: 'top top',
+          end: 'bottom top',
+          scrub: 1,
+        },
+      });
+
+      gsap.to('[data-depth="watch"]', {
+        yPercent: -30,
+        xPercent: -10,
+        rotate: -6,
+        scrollTrigger: {
+          trigger: '#hero',
+          start: 'top top',
+          end: 'bottom top',
+          scrub: 1,
+        },
+      });
+
+      gsap.to('[data-depth="overview"]', {
+        yPercent: -18,
+        xPercent: 10,
+        rotate: 4,
+        scrollTrigger: {
+          trigger: '#hero',
+          start: 'top top',
+          end: 'bottom top',
+          scrub: 1,
+        },
+      });
+
+      gsap.to('[data-depth="backplate"]', {
+        yPercent: -12,
+        rotate: -16,
+        scrollTrigger: {
+          trigger: '#hero',
+          start: 'top top',
+          end: 'bottom top',
+          scrub: 1,
+        },
+      });
+
+      gsap.utils.toArray('[data-reveal]:not(.use-card)').forEach((element, index) => {
+        gsap.from(element, {
+          y: 28,
+          opacity: 0,
+          duration: 0.8,
+          ease: 'power3.out',
+          delay: index % 4 === 0 ? 0 : 0.02,
+          scrollTrigger: {
+            trigger: element,
+            start: 'top 80%',
+            end: 'bottom 20%',
+            toggleActions: 'play none none reverse',
+          },
+        });
+      });
+
+      gsap.utils.toArray('.use-card').forEach((card, index) => {
+        gsap.from(card, {
+          y: 60,
+          x: index % 2 === 0 ? -52 : 52,
+          rotate: index % 2 === 0 ? -2.5 : 2.5,
+          opacity: 0,
+          duration: 0.9,
+          ease: 'power3.out',
+          scrollTrigger: {
+            trigger: card,
+            start: 'top 84%',
+            end: 'bottom 20%',
+            toggleActions: 'play none none reverse',
+          },
+        });
+      });
+
+      ScrollTrigger.matchMedia({
+        '(min-width: 1024px)': () => {
+          const featureSteps = gsap.utils.toArray('.feature-step');
+          const featureScreens = gsap.utils.toArray('.screen-state');
+          const stepDots = gsap.utils.toArray('.step-dot');
+          const stepItems = gsap.utils.toArray('.step-item');
+          const stepFill = document.querySelector('.step-rail__fill');
+
+          gsap.set(featureSteps, { opacity: 0, y: 40 });
+          gsap.set(featureScreens, { opacity: 0, y: 36, scale: 0.92, rotateY: 8, transformPerspective: 1200 });
+          gsap.set(featureSteps[0], { opacity: 1, y: 0 });
+          gsap.set(featureScreens[0], { opacity: 1, y: 0, scale: 1, rotateY: 0 });
+          stepDots[0]?.classList.add('is-active');
+          stepItems[0]?.classList.add('is-current');
+
+          const pinnedTimeline = gsap.timeline({
+            scrollTrigger: {
+              trigger: '.feature-pin',
+              start: 'top top+=88',
+              end: '+=1700',
+              scrub: 1,
+              pin: '.feature-pin-canvas',
+              anticipatePin: 1,
+              invalidateOnRefresh: true,
+              onUpdate: (self) => {
+                const currentIndex = Math.min(featureSteps.length - 1, Math.round(self.progress * (featureSteps.length - 1)));
+                stepDots.forEach((dot, index) => {
+                  dot.classList.toggle('is-active', index <= currentIndex);
+                });
+                stepItems.forEach((item, index) => {
+                  item.classList.toggle('is-current', index === currentIndex);
+                });
+                if (stepFill) {
+                  stepFill.style.height = `${Math.max(0, self.progress * 100)}%`;
+                }
+              },
+            },
+          });
+
+          pinnedTimeline.to({}, { duration: 1.2 });
+
+          featureSteps.forEach((step, index) => {
+            if (index === 0) return;
+
+            pinnedTimeline
+              .to(featureSteps[index - 1], { opacity: 0, y: -24, duration: 0.55 }, `step-${index}`)
+              .to(featureScreens[index - 1], { opacity: 0, y: -18, scale: 0.94, rotateY: -8, duration: 0.55 }, `step-${index}`)
+              .fromTo(featureSteps[index], { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: 0.55 }, `step-${index}+=0.12`)
+              .fromTo(featureScreens[index], { opacity: 0, y: 36, scale: 0.92, rotateY: 8 }, { opacity: 1, y: 0, scale: 1, rotateY: 0, duration: 0.6 }, `step-${index}+=0.12`)
+              .to({}, { duration: 1.05 });
+          });
+        },
+      });
+
+      gsap.fromTo('.cta-phone', {
+        y: 100,
+        opacity: 0,
+      }, {
+        y: 0,
+        opacity: 1,
+        duration: 0.9,
+        ease: 'power3.out',
+        scrollTrigger: {
+          trigger: '#cta',
+          start: 'top 80%',
+          toggleActions: 'play none none reverse',
+        },
+      });
+
+      ctaWidgets.forEach((item) => {
+        gsap.fromTo(item.selector, item.from, {
+          x: 0,
+          y: 0,
+          rotate: 0,
+          opacity: 1,
+          duration: 0.9,
+          ease: 'power3.out',
+          scrollTrigger: {
+            trigger: '#cta',
+            start: 'top 78%',
+            toggleActions: 'play none none reverse',
+          },
+        });
+      });
+
+      const refreshScroll = () => {
+        window.setTimeout(() => ScrollTrigger.refresh(), 100);
+      };
+
+      if (document.fonts?.ready) {
+        document.fonts.ready.then(refreshScroll);
+      }
+
+      window.addEventListener('load', refreshScroll);
+      refreshScroll();
+      setHeaderState(window.scrollY);
+    }
   </script>
 </body>
 </html>
