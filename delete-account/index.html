@@ -38,18 +38,22 @@
   </style>
 </head>
 <body class="font-sans text-brand-ink antialiased">
-  <header class="sticky top-0 z-40 border-b border-slate-200/80 bg-white/90 backdrop-blur">
-    <div class="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-4 sm:px-6 lg:px-8">
+  <header class="sticky top-0 z-40 px-4 pt-4 sm:px-6 lg:px-8">
+    <div class="mx-auto grid max-w-7xl grid-cols-[auto,1fr,auto] items-center gap-4 rounded-full border border-slate-200/90 bg-white/90 px-5 py-3 shadow-[0_12px_28px_rgba(15,23,42,0.05)] backdrop-blur md:gap-6 lg:px-7">
       <a href="../index.html" class="flex items-center gap-3">
         <span class="rounded-xl border border-slate-200 bg-white px-2 py-1.5 shadow-sm">
           <img src="../assets/nyr-icon.png" alt="Nyr" class="h-9 w-24 object-cover object-center sm:h-10 sm:w-28">
         </span>
-        <span class="hidden text-sm font-semibold text-slate-500 sm:inline">Delete account</span>
       </a>
-      <div class="flex items-center gap-3">
-        <a href="../pages/privacy.html" class="hidden text-sm font-semibold text-slate-600 transition hover:text-brand-indigo sm:inline">Privacy</a>
-        <a href="../pages/support.html" class="hidden text-sm font-semibold text-slate-600 transition hover:text-brand-indigo sm:inline">Support</a>
-        <a href="../index.html" class="inline-flex items-center justify-center rounded-full border border-slate-200 px-4 py-2 text-sm font-semibold text-brand-ink transition hover:-translate-y-0.5 hover:shadow-sm">Back to home</a>
+      <nav class="hidden min-w-0 items-center justify-center gap-2 md:flex lg:gap-3">
+        <a href="../index.html" class="inline-flex items-center justify-center rounded-full px-4 py-2 text-sm font-semibold text-slate-600 transition hover:-translate-y-0.5 hover:bg-brand-soft/70 hover:text-brand-indigo">Home</a>
+        <a href="../pages/nyr-business.html" class="inline-flex items-center justify-center rounded-full px-4 py-2 text-sm font-semibold text-slate-600 transition hover:-translate-y-0.5 hover:bg-brand-soft/70 hover:text-brand-indigo">nyr Business</a>
+        <a href="../pages/privacy.html" class="inline-flex items-center justify-center rounded-full px-4 py-2 text-sm font-semibold text-slate-600 transition hover:-translate-y-0.5 hover:bg-brand-soft/70 hover:text-brand-indigo">Privacy</a>
+        <a href="../pages/support.html" class="inline-flex items-center justify-center rounded-full px-4 py-2 text-sm font-semibold text-slate-600 transition hover:-translate-y-0.5 hover:bg-brand-soft/70 hover:text-brand-indigo">Support</a>
+      </nav>
+      <div class="flex items-center justify-end gap-3">
+        <a href="../pages/terms.html" class="hidden items-center justify-center rounded-full border border-slate-200 bg-white px-4 py-2 text-sm font-semibold text-brand-ink shadow-sm transition hover:-translate-y-0.5 hover:bg-brand-soft/40 sm:inline-flex">Terms</a>
+        <a href="mailto:connect@gigasystech.com?subject=nyr%20waitlist" class="inline-flex items-center justify-center rounded-full bg-brand-indigo px-4 py-2 text-sm font-semibold text-white shadow-[0_16px_34px_rgba(85,108,245,0.22)] transition hover:-translate-y-0.5">Join waitlist</a>
       </div>
     </div>
   </header>

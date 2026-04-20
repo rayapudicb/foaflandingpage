@@ -110,6 +110,7 @@
     }
 
     .nav-links,
+    .nav-actions,
     .button-row,
     .store-row,
     .footer-links {
@@ -126,12 +127,39 @@
       gap: clamp(14px, 1.45vw, 28px);
     }
 
-    .nav-links a,
+    .nav-links a {
+      color: var(--muted);
+      font-size: 0.93rem;
+      font-weight: 600;
+      padding: 10px 14px;
+      border-radius: 999px;
+      transition: color 180ms var(--ease), background-color 180ms var(--ease), transform 180ms var(--ease);
+      white-space: nowrap;
+    }
     .footer-links a {
       color: var(--muted);
       font-size: 0.93rem;
       font-weight: 600;
+      transition: color 180ms var(--ease), transform 180ms var(--ease);
       white-space: nowrap;
+    }
+    .nav-links a:hover,
+    .footer-links a:hover {
+      color: var(--brand-deep);
+      transform: translateY(-1px);
+    }
+    .nav-links a:hover {
+      background: rgba(91, 97, 235, 0.06);
+    }
+    .nav-links a[aria-current="page"] {
+      color: var(--brand-deep);
+      background: var(--brand-soft);
+    }
+
+    .nav-actions {
+      justify-content: flex-end;
+      flex-wrap: nowrap;
+      gap: 14px;
     }
 
     .button,
@@ -160,6 +188,12 @@
       border-color: rgba(230, 232, 236, 0.94);
       color: var(--ink);
       box-shadow: var(--shadow-sm);
+    }
+    .button-secondary[aria-current="page"] {
+      border-color: rgba(91, 97, 235, 0.18);
+      background: var(--brand-soft);
+      color: var(--brand-deep);
+      box-shadow: none;
     }
 
     .button:hover,
@@ -290,6 +324,7 @@
       width: 100%;
       height: 100%;
       object-fit: cover;
+      display: block;
     }
 
     .floating-card {
@@ -559,15 +594,17 @@
       <div class="nav-shell">
         <a class="brand" href="../index.html">
           <img src="../assets/nyr-icon.png" alt="nyr">
-          <span>nyr Business</span>
         </a>
         <nav class="nav-links" aria-label="Primary">
-          <a href="#features">Features</a>
-          <a href="#separation">Separation</a>
-          <a href="#workflow">How it works</a>
-          <a href="#policies">Policies</a>
+          <a href="../index.html">Home</a>
+          <a href="nyr-business.html" aria-current="page">nyr Business</a>
+          <a href="privacy.html">Privacy</a>
+          <a href="support.html">Support</a>
         </nav>
-        <a class="button-secondary" href="../index.html">Back to nyr</a>
+        <div class="nav-actions">
+          <a class="button-secondary" href="terms.html">Terms</a>
+          <a class="button" href="mailto:connect@gigasystech.com?subject=nyr%20waitlist">Join waitlist</a>
+        </div>
       </div>
     </div>
   </header>
@@ -591,7 +628,7 @@
 
         <div class="visual-stage" aria-label="nyr Business visual context">
           <div class="visual-image">
-            <img src="https://images.unsplash.com/photo-1556741533-6e6a62bd8b49?auto=format&amp;fit=crop&amp;w=1400&amp;q=80" alt="A local business owner serving a customer in a real shop" loading="lazy" decoding="async">
+            <img src="https://images.pexels.com/photos/34164498/pexels-photo-34164498.jpeg?cs=srgb&amp;dl=pexels-anthony-dalesandro-1601290757-34164498.jpg&amp;fm=jpg" alt="Friendly local cafe owners behind the counter of their business" loading="lazy" decoding="async">
           </div>
           <div class="floating-card">
             <span class="metric-tag">Verified presence</span>

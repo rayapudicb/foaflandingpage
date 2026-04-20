@@ -196,7 +196,16 @@
       gap: 14px;
     }
 
-    .nav-links a,
+    .nav-links a {
+      color: var(--muted);
+      font-size: 0.94rem;
+      font-weight: 600;
+      padding: 10px 14px;
+      border-radius: 999px;
+      transition: color 180ms var(--ease), transform 180ms var(--ease);
+      white-space: nowrap;
+    }
+
     .footer-links a,
     .support-links a {
       color: var(--muted);
@@ -211,6 +220,10 @@
     .support-links a:hover {
       color: var(--brand-deep);
       transform: translateY(-1px);
+    }
+
+    .nav-links a:hover {
+      background: rgba(91, 97, 235, 0.06);
     }
 
     .button,
@@ -421,26 +434,27 @@
       z-index: 1;
     }
 
+    .visual-card--categories {
+      top: 48px;
+      right: 52px;
+      width: 224px;
+      min-height: 278px;
+      transform: rotate(7deg);
+    }
+
+    .visual-card--requests {
+      left: 14px;
+      bottom: 84px;
+      width: 214px;
+      min-height: 258px;
+      transform: rotate(-8deg);
+    }
+
     .visual-card img {
       width: 100%;
       height: 100%;
       object-fit: cover;
-    }
-
-    .visual-card--neighbors {
-      top: 48px;
-      right: 52px;
-      width: 220px;
-      height: 276px;
-      transform: rotate(7deg);
-    }
-
-    .visual-card--business {
-      left: 14px;
-      bottom: 84px;
-      width: 210px;
-      height: 250px;
-      transform: rotate(-8deg);
+      display: block;
     }
 
     .visual-card .caption {
@@ -452,7 +466,7 @@
       border-radius: 16px;
       background: rgba(255, 255, 255, 0.92);
       backdrop-filter: blur(10px);
-      font-size: 0.85rem;
+      font-size: 0.84rem;
       font-weight: 700;
       color: var(--ink);
     }
@@ -759,6 +773,206 @@
       box-shadow: var(--shadow-sm);
     }
 
+    .showcase-panel {
+      min-height: 280px;
+      padding: 24px;
+    }
+
+    .showcase-panel--utility {
+      background:
+        radial-gradient(circle at top right, rgba(246, 206, 86, 0.18), transparent 28%),
+        linear-gradient(180deg, rgba(91, 97, 235, 0.08), rgba(255, 255, 255, 0.94));
+    }
+
+    .showcase-panel--business {
+      background:
+        radial-gradient(circle at top left, rgba(91, 97, 235, 0.14), transparent 32%),
+        linear-gradient(180deg, rgba(255, 255, 255, 0.96), rgba(247, 248, 250, 0.92));
+    }
+
+    .showcase-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .showcase-kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.9);
+      border: 1px solid rgba(230, 232, 236, 0.92);
+      color: var(--brand-deep);
+      font-size: 0.74rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .showcase-kicker::before {
+      content: "";
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: var(--signal);
+    }
+
+    .showcase-note {
+      color: #677487;
+      font-size: 0.78rem;
+      font-weight: 700;
+      text-align: right;
+    }
+
+    .showcase-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 18px;
+    }
+
+    .showcase-grid--utility {
+      position: relative;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      grid-template-areas:
+        "rides rides help services"
+        "rides rides items services"
+        "rentals jobs jobs events"
+        "travel recommendations recommendations urgent";
+      grid-template-rows: repeat(4, minmax(128px, 168px));
+      gap: 14px;
+      margin-top: 22px;
+    }
+
+    .showcase-photo-tile {
+      position: relative;
+      overflow: hidden;
+      min-height: 0;
+      height: 100%;
+      border-radius: 20px;
+      border: 1px solid rgba(230, 232, 236, 0.92);
+      background: #ffffff;
+      box-shadow: 0 18px 38px rgba(17, 24, 39, 0.08);
+      isolation: isolate;
+    }
+
+    .showcase-photo-tile::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(180deg, rgba(17, 24, 39, 0) 32%, rgba(17, 24, 39, 0.48) 100%);
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    .showcase-photo-tile img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 520ms var(--ease);
+    }
+
+    .showcase-photo-tile:hover img {
+      transform: scale(1.04);
+    }
+
+    .showcase-photo-tile.is-soft::after {
+      background:
+        linear-gradient(180deg, rgba(17, 24, 39, 0.04) 20%, rgba(17, 24, 39, 0.42) 100%);
+    }
+
+    .tile-rides { grid-area: rides; }
+    .tile-help { grid-area: help; }
+    .tile-services { grid-area: services; }
+    .tile-items { grid-area: items; }
+    .tile-rentals { grid-area: rentals; }
+    .tile-jobs { grid-area: jobs; }
+    .tile-events { grid-area: events; }
+    .tile-travel { grid-area: travel; }
+    .tile-recommendations { grid-area: recommendations; }
+    .tile-urgent { grid-area: urgent; }
+
+    .showcase-photo-label {
+      position: absolute;
+      left: 12px;
+      bottom: 12px;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 11px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.92);
+      color: var(--ink);
+      font-size: 0.76rem;
+      font-weight: 800;
+      box-shadow: var(--shadow-sm);
+      z-index: 2;
+    }
+
+    .showcase-photo-label::before {
+      content: "";
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: var(--signal);
+    }
+
+    .users-gallery {
+      position: relative;
+      overflow: hidden;
+      margin-top: 28px;
+      padding: 28px;
+    }
+
+    .users-gallery::before,
+    .users-gallery::after {
+      content: "";
+      position: absolute;
+      border-radius: 999px;
+      pointer-events: none;
+      filter: blur(2px);
+    }
+
+    .users-gallery::before {
+      top: -36px;
+      right: -18px;
+      width: 180px;
+      height: 180px;
+      background: radial-gradient(circle, rgba(91, 97, 235, 0.18), rgba(91, 97, 235, 0));
+    }
+
+    .users-gallery::after {
+      left: -30px;
+      bottom: -40px;
+      width: 220px;
+      height: 220px;
+      background: radial-gradient(circle, rgba(246, 206, 86, 0.16), rgba(246, 206, 86, 0));
+    }
+
+    .showcase-footer {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 18px;
+    }
+
+    .showcase-pill {
+      display: inline-flex;
+      align-items: center;
+      padding: 9px 12px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.9);
+      border: 1px solid rgba(230, 232, 236, 0.92);
+      color: #556072;
+      font-size: 0.8rem;
+      font-weight: 700;
+    }
+
     .aside-panel figure {
       margin: 0;
     }
@@ -767,6 +981,7 @@
       width: 100%;
       height: 280px;
       object-fit: cover;
+      display: block;
     }
 
     .aside-copy {
@@ -816,12 +1031,14 @@
     .scenario-media {
       aspect-ratio: 1.1;
       overflow: hidden;
+      background: #ffffff;
     }
 
     .scenario-media img {
       width: 100%;
       height: 100%;
       object-fit: cover;
+      display: block;
       transition: transform 520ms var(--ease);
     }
 
@@ -977,6 +1194,17 @@
         grid-template-columns: repeat(2, minmax(0, 1fr));
       }
 
+      .showcase-grid--utility {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        grid-template-areas:
+          "rides rides help"
+          "services services items"
+          "rentals jobs jobs"
+          "events travel urgent"
+          "recommendations recommendations recommendations";
+        grid-template-rows: repeat(5, minmax(128px, 160px));
+      }
+
       .cards-grid.cards-3,
       .step-grid {
         grid-template-columns: 1fr;
@@ -1018,6 +1246,17 @@
         text-align: center;
       }
 
+      .showcase-grid--utility {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        grid-template-areas:
+          "rides help"
+          "services items"
+          "rentals jobs"
+          "events travel"
+          "recommendations urgent";
+        grid-template-rows: repeat(5, minmax(148px, 180px));
+      }
+
       .eyebrow,
       .section-kicker,
       .step-kicker,
@@ -1040,18 +1279,16 @@
         transform: translateX(-50%) rotate(-3deg);
       }
 
-      .visual-card--neighbors {
+      .visual-card--categories {
         top: 24px;
         right: 14px;
         width: 178px;
-        height: 230px;
       }
 
-      .visual-card--business {
+      .visual-card--requests {
         left: 10px;
         bottom: 96px;
         width: 160px;
-        height: 200px;
       }
 
       .business-console {
@@ -1114,23 +1351,42 @@
         padding-inline: 12px;
       }
 
-      .visual-card--neighbors {
+      .visual-card--categories {
         width: 132px;
-        height: 170px;
       }
 
-      .visual-card--business {
+      .visual-card--requests {
         width: 132px;
-        height: 164px;
         bottom: 112px;
       }
 
-      .visual-card .caption {
-        left: 10px;
-        right: 10px;
-        bottom: 10px;
-        padding: 9px 10px;
+      .showcase-pill,
+      .showcase-photo-label {
         font-size: 0.72rem;
+      }
+
+      .showcase-panel {
+        padding: 20px;
+      }
+
+      .showcase-grid--utility {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        grid-template-areas:
+          "rides help"
+          "services items"
+          "rentals jobs"
+          "events travel"
+          "recommendations urgent";
+        grid-template-rows: repeat(5, minmax(124px, 148px));
+        gap: 10px;
+      }
+
+      .showcase-photo-tile {
+        min-height: 138px;
+      }
+
+      .users-gallery {
+        padding: 20px;
       }
 
       .business-console {
@@ -1192,7 +1448,6 @@
           <nav class="nav-links" aria-label="Primary">
             <a href="#users">For users</a>
             <a href="#business">For businesses</a>
-            <a href="pages/nyr-business.html">nyr Business</a>
             <a href="#trust">How trust works</a>
             <a href="#scenarios">Scenarios</a>
           </nav>
@@ -1225,14 +1480,14 @@
           <div class="hero-visual reveal">
             <div class="hero-glow" aria-hidden="true"></div>
 
-            <article class="visual-card visual-card--neighbors float-slow" aria-hidden="true">
-              <img src="https://images.unsplash.com/photo-1772471754740-6e1e6dfd17e5?auto=format&amp;fit=crop&amp;w=1200&amp;q=80" alt="" loading="lazy" decoding="async">
-              <div class="caption">Trusted circles start with real nearby context</div>
+            <article class="visual-card visual-card--categories float-slow" aria-hidden="true">
+              <img src="https://images.pexels.com/photos/5098028/pexels-photo-5098028.jpeg?cs=srgb&amp;dl=pexels-pierre-blache-651604-5098028.jpg&amp;fm=jpg" alt="" loading="lazy" decoding="async">
+              <div class="caption">Ride and travel requests start with real local timing context.</div>
             </article>
 
-            <article class="visual-card visual-card--business float-soft" aria-hidden="true">
-              <img src="https://images.unsplash.com/photo-1556741533-6e6a62bd8b49?auto=format&amp;fit=crop&amp;w=1200&amp;q=80" alt="" loading="lazy" decoding="async">
-              <div class="caption">Business presence stays verified and separate</div>
+            <article class="visual-card visual-card--requests float-soft" aria-hidden="true">
+              <img src="https://images.pexels.com/photos/7859953/pexels-photo-7859953.jpeg?cs=srgb&amp;dl=pexels-heiko-ruth-53441229-7859953.jpg&amp;fm=jpg" alt="" loading="lazy" decoding="async">
+              <div class="caption">Services and urgent home help stay structured instead of buried.</div>
             </article>
 
             <article class="phone-shell" aria-label="nyr consumer app mockup">
@@ -1327,23 +1582,61 @@
 
       <section class="section-block" id="users">
         <div class="container">
-          <div class="users-layout">
-            <div class="section-shell reveal">
-              <div class="section-header">
-                <span class="section-kicker">For users</span>
-                <h2 class="section-title">What people can do in nyr</h2>
-              </div>
+          <div class="section-shell reveal">
+            <div class="section-header">
+              <span class="section-kicker">For users</span>
+              <h2 class="section-title">What people can do in nyr</h2>
+              <p class="section-intro">Ask clearly across rides, help, services, items, rentals, jobs, events, travel, recommendations and urgent needs, all inside trusted circles that are easier to scan and safer to act on.</p>
             </div>
 
-            <aside class="aside-panel reveal" aria-label="young professionals and campus context">
-              <figure>
-                <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&amp;fit=crop&amp;w=1400&amp;q=80" alt="Young professionals in a coworking setting" loading="lazy" decoding="async">
-              </figure>
-              <div class="aside-copy">
-                <strong>Structured requests feel more useful than chat fragments.</strong>
-                <p class="section-intro">From apartment help to office referrals and campus coordination, the flow stays clear, private and easy to scan.</p>
+            <div class="showcase-panel showcase-panel--utility users-gallery" aria-label="nyr user categories">
+              <div class="showcase-top">
+                <span class="showcase-kicker">Category flow</span>
+                <span class="showcase-note">10 structured local categories</span>
               </div>
-            </aside>
+              <div class="showcase-grid showcase-grid--utility">
+                <div class="showcase-photo-tile tile-rides">
+                  <img src="https://images.pexels.com/photos/5098028/pexels-photo-5098028.jpeg?cs=srgb&amp;dl=pexels-pierre-blache-651604-5098028.jpg&amp;fm=jpg" alt="Busy city street representing ride requests and local commute" loading="lazy" decoding="async">
+                  <span class="showcase-photo-label">Rides</span>
+                </div>
+                <div class="showcase-photo-tile tile-help is-soft">
+                  <img src="https://images.pexels.com/photos/6647116/pexels-photo-6647116.jpeg?cs=srgb&amp;dl=pexels-rdne-6647116.jpg&amp;fm=jpg" alt="People carrying community aid boxes representing help and support" loading="lazy" decoding="async">
+                  <span class="showcase-photo-label">Help</span>
+                </div>
+                <div class="showcase-photo-tile tile-services">
+                  <img src="https://images.pexels.com/photos/7859953/pexels-photo-7859953.jpeg?cs=srgb&amp;dl=pexels-heiko-ruth-53441229-7859953.jpg&amp;fm=jpg" alt="Technician repairing a home utility system for service requests" loading="lazy" decoding="async">
+                  <span class="showcase-photo-label">Services</span>
+                </div>
+                <div class="showcase-photo-tile tile-items is-soft">
+                  <img src="https://images.pexels.com/photos/12857307/pexels-photo-12857307.jpeg?cs=srgb&amp;dl=pexels-omerderinyar-12857307.jpg&amp;fm=jpg" alt="Market stall with goods representing item discovery and exchange" loading="lazy" decoding="async">
+                  <span class="showcase-photo-label">Items</span>
+                </div>
+                <div class="showcase-photo-tile tile-rentals is-soft">
+                  <img src="https://images.pexels.com/photos/31015267/pexels-photo-31015267.jpeg?cs=srgb&amp;dl=pexels-jakubzerdzicki-31015267.jpg&amp;fm=jpg" alt="Keys representing apartment or room rental" loading="lazy" decoding="async">
+                  <span class="showcase-photo-label">Rentals</span>
+                </div>
+                <div class="showcase-photo-tile tile-jobs">
+                  <img src="https://images.pexels.com/photos/8117405/pexels-photo-8117405.jpeg?cs=srgb&amp;dl=pexels-ivan-s-8117405.jpg&amp;fm=jpg" alt="People collaborating in an office representing local jobs and hiring" loading="lazy" decoding="async">
+                  <span class="showcase-photo-label">Jobs</span>
+                </div>
+                <div class="showcase-photo-tile tile-events is-soft">
+                  <img src="https://images.pexels.com/photos/17373844/pexels-photo-17373844.jpeg?cs=srgb&amp;dl=pexels-milodeckert-17373844.jpg&amp;fm=jpg" alt="Outdoor crowd at an event representing local events" loading="lazy" decoding="async">
+                  <span class="showcase-photo-label">Events</span>
+                </div>
+                <div class="showcase-photo-tile tile-travel is-soft">
+                  <img src="https://images.pexels.com/photos/15910430/pexels-photo-15910430.jpeg?cs=srgb&amp;dl=pexels-jan-van-der-wolf-11680885-15910430.jpg&amp;fm=jpg" alt="Suitcase on an escalator representing travel and transit" loading="lazy" decoding="async">
+                  <span class="showcase-photo-label">Travel</span>
+                </div>
+                <div class="showcase-photo-tile tile-recommendations">
+                  <img src="https://images.pexels.com/photos/7616700/pexels-photo-7616700.jpeg?cs=srgb&amp;dl=pexels-padmathilaka-wanigasekara-49566452-7616700.jpg&amp;fm=jpg" alt="College students discussing together representing recommendations and trusted circles" loading="lazy" decoding="async">
+                  <span class="showcase-photo-label">Recommendations</span>
+                </div>
+                <div class="showcase-photo-tile tile-urgent">
+                  <img src="https://images.pexels.com/photos/5146534/pexels-photo-5146534.jpeg?cs=srgb&amp;dl=pexels-roger-brown-3435524-5146534.jpg&amp;fm=jpg" alt="First aid supplies representing urgent needs" loading="lazy" decoding="async">
+                  <span class="showcase-photo-label">Urgent needs</span>
+                </div>
+              </div>
+            </div>
           </div>
 
           <div class="cards-grid cards-4">
@@ -1382,9 +1675,9 @@
               </div>
             </div>
 
-            <aside class="aside-panel reveal" aria-label="local business owner context">
+            <aside class="aside-panel reveal" aria-label="business utility layer overview">
               <figure>
-                <img src="https://images.unsplash.com/photo-1556741533-6e6a62bd8b49?auto=format&amp;fit=crop&amp;w=1400&amp;q=80" alt="A local business owner helping a customer in a real shop" loading="lazy" decoding="async">
+                <img src="https://images.pexels.com/photos/34164498/pexels-photo-34164498.jpeg?cs=srgb&amp;dl=pexels-anthony-dalesandro-1601290757-34164498.jpg&amp;fm=jpg" alt="Friendly local cafe owners behind the counter" loading="lazy" decoding="async">
               </figure>
               <div class="aside-copy">
                 <strong>Local business tools stay useful when they feel accountable and relevant.</strong>
@@ -1462,7 +1755,7 @@
             <div class="scenarios-grid">
               <article class="scenario-card reveal">
                 <div class="scenario-media">
-                  <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&amp;fit=crop&amp;w=1200&amp;q=80" alt="Young professionals talking in a coworking setting" loading="lazy" decoding="async">
+                  <img src="https://images.pexels.com/photos/5098028/pexels-photo-5098028.jpeg?cs=srgb&amp;dl=pexels-pierre-blache-651604-5098028.jpg&amp;fm=jpg" alt="Busy city street representing ride and commute requests" loading="lazy" decoding="async">
                 </div>
                 <div class="scenario-body">
                   <span class="card-kicker">After work</span>
@@ -1473,7 +1766,7 @@
 
               <article class="scenario-card reveal">
                 <div class="scenario-media">
-                  <img src="https://images.unsplash.com/photo-1772471754740-6e1e6dfd17e5?auto=format&amp;fit=crop&amp;w=1200&amp;q=80" alt="Neighbors talking outside an apartment building" loading="lazy" decoding="async">
+                  <img src="https://images.pexels.com/photos/7859953/pexels-photo-7859953.jpeg?cs=srgb&amp;dl=pexels-heiko-ruth-53441229-7859953.jpg&amp;fm=jpg" alt="Technician repairing a home system for service request context" loading="lazy" decoding="async">
                 </div>
                 <div class="scenario-body">
                   <span class="card-kicker">Home</span>
@@ -1484,7 +1777,7 @@
 
               <article class="scenario-card reveal">
                 <div class="scenario-media">
-                  <img src="https://images.unsplash.com/photo-1619512673224-91cfb2688284?auto=format&amp;fit=crop&amp;w=1200&amp;q=80" alt="College students sitting together on campus" loading="lazy" decoding="async">
+                  <img src="https://images.pexels.com/photos/8117405/pexels-photo-8117405.jpeg?cs=srgb&amp;dl=pexels-ivan-s-8117405.jpg&amp;fm=jpg" alt="People collaborating in an office representing nearby hiring" loading="lazy" decoding="async">
                 </div>
                 <div class="scenario-body">
                   <span class="card-kicker">Hiring</span>
@@ -1495,7 +1788,7 @@
 
               <article class="scenario-card reveal">
                 <div class="scenario-media">
-                  <img src="https://images.unsplash.com/photo-1556741533-6e6a62bd8b49?auto=format&amp;fit=crop&amp;w=1200&amp;q=80" alt="A local business owner serving a customer in a real shop" loading="lazy" decoding="async">
+                  <img src="https://images.pexels.com/photos/34164498/pexels-photo-34164498.jpeg?cs=srgb&amp;dl=pexels-anthony-dalesandro-1601290757-34164498.jpg&amp;fm=jpg" alt="Local cafe owners representing a verified local business offer" loading="lazy" decoding="async">
                 </div>
                 <div class="scenario-body">
                   <span class="card-kicker">Weekend offer</span>
