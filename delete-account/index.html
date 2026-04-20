@@ -42,12 +42,12 @@
     <div class="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-4 sm:px-6 lg:px-8">
       <a href="../index.html" class="flex items-center gap-3">
         <span class="rounded-xl border border-slate-200 bg-white px-2 py-1.5 shadow-sm">
-          <img src="../assets/nyr-icon.png" alt="Nyr" class="h-7 w-[4.5rem] object-cover object-center sm:h-8 sm:w-20">
+          <img src="../assets/nyr-icon.png" alt="Nyr" class="h-9 w-24 object-cover object-center sm:h-10 sm:w-28">
         </span>
         <span class="hidden text-sm font-semibold text-slate-500 sm:inline">Delete account</span>
       </a>
       <div class="flex items-center gap-3">
-        <a href="../pages/privacy-center.html" class="hidden text-sm font-semibold text-slate-600 transition hover:text-brand-indigo sm:inline">Privacy</a>
+        <a href="../pages/privacy.html" class="hidden text-sm font-semibold text-slate-600 transition hover:text-brand-indigo sm:inline">Privacy</a>
         <a href="../pages/support.html" class="hidden text-sm font-semibold text-slate-600 transition hover:text-brand-indigo sm:inline">Support</a>
         <a href="../index.html" class="inline-flex items-center justify-center rounded-full border border-slate-200 px-4 py-2 text-sm font-semibold text-brand-ink transition hover:-translate-y-0.5 hover:shadow-sm">Back to home</a>
       </div>
@@ -71,7 +71,7 @@
             <div class="space-y-4">
               <h1 class="max-w-3xl text-4xl font-extrabold tracking-[-0.06em] text-brand-ink sm:text-5xl lg:text-6xl">Delete your Nyr account.</h1>
               <p class="max-w-2xl text-lg leading-8 text-brand-muted">
-                This page explains how to delete your Nyr account, what data is removed, and what may be retained for legal, fraud-prevention, or safety reasons.
+                This page explains how to delete your Nyr account, what happens to your requests, chats, trusted circles and any linked business access, and what may be retained for legal, fraud-prevention or safety reasons.
               </p>
             </div>
             <div class="flex flex-wrap gap-3">
@@ -98,6 +98,10 @@
                 <div class="rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3">
                   <strong class="block text-sm text-brand-ink">Your circle data is disconnected</strong>
                   <span class="mt-1 block text-sm leading-6 text-brand-muted">Your trusted-circle graph and personal settings are removed from active use.</span>
+                </div>
+                <div class="rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3">
+                  <strong class="block text-sm text-brand-ink">Linked business access is disabled</strong>
+                  <span class="mt-1 block text-sm leading-6 text-brand-muted">If the deleted account manages nyr Business access, related admin access, leads, chats or campaigns may be disabled or require reassignment.</span>
                 </div>
                 <div class="rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3">
                   <strong class="block text-sm text-brand-ink">Some records may be retained</strong>
@@ -130,14 +134,14 @@
                 <span class="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-brand-soft text-sm font-extrabold text-brand-indigoDark">2</span>
                 <div>
                   <strong class="block text-sm text-brand-ink">Go to account settings.</strong>
-                  <span class="mt-1 block text-sm leading-6 text-brand-muted">Open your profile or settings area and select the account deletion option.</span>
+                  <span class="mt-1 block text-sm leading-6 text-brand-muted">Open your profile or settings area, review account options and select the delete account flow.</span>
                 </div>
               </li>
               <li class="flex gap-4 rounded-2xl border border-slate-200 bg-slate-50 p-4">
                 <span class="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-brand-soft text-sm font-extrabold text-brand-indigoDark">3</span>
                 <div>
                   <strong class="block text-sm text-brand-ink">Review the deletion notice and confirm.</strong>
-                  <span class="mt-1 block text-sm leading-6 text-brand-muted">Once confirmed, your account enters the deletion process.</span>
+                  <span class="mt-1 block text-sm leading-6 text-brand-muted">Read what happens to requests, chats, circles and any linked business access, then confirm the deletion request.</span>
                 </div>
               </li>
             </ol>
@@ -171,11 +175,17 @@
                   Requests are handled within applicable legal and operational timelines. Some retention may apply where required.
                 </p>
               </div>
+              <div class="rounded-2xl border border-slate-200 bg-slate-50 p-4">
+                <strong class="block text-sm text-brand-ink">If you manage nyr Business</strong>
+                <p class="mt-2 text-sm leading-6 text-brand-muted">
+                  If your account is tied to a verified business presence, contact support before deletion so active business access, chats or campaigns can be reviewed or reassigned where needed.
+                </p>
+              </div>
             </div>
 
             <div class="mt-6 flex flex-wrap gap-3">
               <a href="../pages/support.html" class="inline-flex items-center justify-center rounded-full bg-brand-indigo px-5 py-3 text-sm font-bold text-white transition hover:-translate-y-0.5">Open support</a>
-              <a href="../pages/privacy-center.html" class="inline-flex items-center justify-center rounded-full border border-slate-200 bg-white px-5 py-3 text-sm font-bold text-brand-ink transition hover:-translate-y-0.5 hover:shadow-sm">Privacy center</a>
+              <a href="../pages/privacy.html" class="inline-flex items-center justify-center rounded-full border border-slate-200 bg-white px-5 py-3 text-sm font-bold text-brand-ink transition hover:-translate-y-0.5 hover:shadow-sm">Privacy</a>
             </div>
           </section>
         </div>
@@ -188,6 +198,8 @@
               <li class="flex items-start gap-3"><i class="fa-solid fa-circle-check mt-1 text-brand-indigo"></i><span>Your profile information and app access.</span></li>
               <li class="flex items-start gap-3"><i class="fa-solid fa-circle-check mt-1 text-brand-indigo"></i><span>Your personal settings and active preferences.</span></li>
               <li class="flex items-start gap-3"><i class="fa-solid fa-circle-check mt-1 text-brand-indigo"></i><span>Your trusted-circle associations tied to the deleted account.</span></li>
+              <li class="flex items-start gap-3"><i class="fa-solid fa-circle-check mt-1 text-brand-indigo"></i><span>Your account-linked requests, replies, saved context and direct chat access that no longer need to remain active.</span></li>
+              <li class="flex items-start gap-3"><i class="fa-solid fa-circle-check mt-1 text-brand-indigo"></i><span>Linked business access and related admin controls tied only to the deleted account, unless retention or reassignment is required.</span></li>
               <li class="flex items-start gap-3"><i class="fa-solid fa-circle-check mt-1 text-brand-indigo"></i><span>Other account-linked data that is no longer required for legal or safety purposes.</span></li>
             </ul>
           </div>
@@ -199,6 +211,7 @@
               <li class="flex items-start gap-3"><i class="fa-solid fa-shield-halved mt-1 text-brand-sun"></i><span>Records required to comply with legal obligations.</span></li>
               <li class="flex items-start gap-3"><i class="fa-solid fa-shield-halved mt-1 text-brand-sun"></i><span>Data reasonably needed for fraud prevention, abuse prevention, or safety investigations.</span></li>
               <li class="flex items-start gap-3"><i class="fa-solid fa-shield-halved mt-1 text-brand-sun"></i><span>Technical logs or limited records needed to enforce platform integrity and resolve disputes.</span></li>
+              <li class="flex items-start gap-3"><i class="fa-solid fa-shield-halved mt-1 text-brand-sun"></i><span>Business-related records that must be preserved temporarily for compliance, billing, security or admin handoff review.</span></li>
             </ul>
             <p class="mt-6 text-sm leading-7 text-white/70">
               Retained data is limited to what is necessary for the relevant purpose and is handled in line with applicable law.
@@ -212,7 +225,7 @@
   <footer class="border-t border-slate-200 bg-white">
     <div class="mx-auto flex max-w-7xl flex-col gap-5 px-4 py-8 text-sm text-slate-500 sm:px-6 lg:flex-row lg:items-center lg:justify-between lg:px-8">
       <div class="flex items-center gap-3">
-        <img src="../assets/nyr-icon.png" alt="Nyr" class="h-7 w-[4.5rem] rounded-lg border border-slate-200 bg-white object-cover object-center px-2 py-1 shadow-sm sm:h-8 sm:w-20">
+        <img src="../assets/nyr-icon.png" alt="Nyr" class="h-9 w-24 rounded-lg border border-slate-200 bg-white object-cover object-center px-2 py-1 shadow-sm sm:h-10 sm:w-28">
         <div>
           <div class="font-extrabold tracking-[-0.04em] text-slate-950">Nyr</div>
           <div>Trusted-circle first. Private by default.</div>

@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Support | nyr</title>
-  <meta name="description" content="Support routes for nyr, including people support, business early access, privacy requests and account deletion.">
+  <title>Privacy | nyr</title>
+  <meta name="description" content="Plain-English privacy overview for nyr.">
   <link rel="icon" type="image/png" href="../assets/nyr-icon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -21,38 +21,27 @@
       --brand-deep: #4a50d6;
       --brand-soft: #eef0ff;
       --signal: #f6ce56;
-      --shadow: 0 24px 60px rgba(91, 97, 235, 0.12);
       --radius-xl: 30px;
       --radius-lg: 22px;
     }
 
     * { box-sizing: border-box; }
-
     body {
       margin: 0;
       background:
-        radial-gradient(circle at top left, rgba(91, 97, 235, 0.12), transparent 30%),
+        radial-gradient(circle at top left, rgba(91, 97, 235, 0.12), transparent 28%),
         linear-gradient(180deg, #ffffff 0%, var(--bg) 100%);
       color: var(--ink);
       font-family: "Manrope", system-ui, sans-serif;
       -webkit-font-smoothing: antialiased;
       text-rendering: optimizeLegibility;
     }
-
     a { color: inherit; text-decoration: none; }
-
     .container {
       width: min(calc(100% - 32px), 1080px);
       margin: 0 auto;
     }
-
-    .site-header {
-      position: sticky;
-      top: 0;
-      z-index: 10;
-      padding-top: 14px;
-    }
-
+    .site-header { padding-top: 14px; }
     .nav-shell,
     .shell,
     .footer-shell {
@@ -61,7 +50,6 @@
       backdrop-filter: blur(14px);
       box-shadow: 0 12px 28px rgba(17, 24, 39, 0.05);
     }
-
     .nav-shell {
       display: flex;
       align-items: center;
@@ -70,27 +58,22 @@
       padding: 12px 16px;
       border-radius: 999px;
     }
-
     .brand {
       display: flex;
       align-items: center;
       gap: 12px;
     }
-
     .brand img {
       width: 112px;
       height: 42px;
       object-fit: cover;
       object-position: center;
     }
-
     .brand span {
       color: var(--muted);
       font-size: 0.9rem;
       font-weight: 700;
     }
-
-    .button,
     .button-secondary {
       display: inline-flex;
       align-items: center;
@@ -98,37 +81,17 @@
       min-height: 46px;
       padding: 0 20px;
       border-radius: 999px;
-      font-size: 0.95rem;
-      font-weight: 700;
-      transition: transform 180ms ease, box-shadow 180ms ease;
-    }
-
-    .button {
-      background: linear-gradient(135deg, var(--brand), var(--brand-deep));
-      color: #ffffff;
-      box-shadow: 0 18px 38px rgba(91, 97, 235, 0.2);
-    }
-
-    .button-secondary {
       background: #ffffff;
       border: 1px solid var(--line);
       color: var(--ink);
+      font-size: 0.95rem;
+      font-weight: 700;
     }
-
-    .button:hover,
-    .button-secondary:hover {
-      transform: translateY(-2px);
-    }
-
-    main {
-      padding: 30px 0 34px;
-    }
-
+    main { padding: 30px 0 34px; }
     .shell {
       padding: 34px;
       border-radius: var(--radius-xl);
     }
-
     .eyebrow {
       display: inline-flex;
       align-items: center;
@@ -142,7 +105,6 @@
       letter-spacing: 0.14em;
       text-transform: uppercase;
     }
-
     .eyebrow::before {
       content: "";
       width: 8px;
@@ -150,37 +112,29 @@
       border-radius: 999px;
       background: var(--signal);
     }
-
-    h1,
-    h2 {
+    h1, h2 {
       margin: 18px 0 0;
       line-height: 0.98;
       letter-spacing: -0.05em;
       font-weight: 800;
     }
-
     h1 { font-size: clamp(2.6rem, 5vw, 4.6rem); }
     h2 { font-size: clamp(1.65rem, 3vw, 2.2rem); }
-
-    p,
-    li {
+    p, li {
       color: var(--muted);
       font-size: 1rem;
       line-height: 1.72;
     }
-
     .intro {
-      max-width: 700px;
+      max-width: 720px;
       margin-top: 18px;
     }
-
     .grid {
       display: grid;
       grid-template-columns: repeat(3, minmax(0, 1fr));
       gap: 18px;
       margin-top: 30px;
     }
-
     .card {
       padding: 24px;
       border: 1px solid rgba(230, 232, 236, 0.95);
@@ -188,11 +142,6 @@
       background: var(--surface);
       box-shadow: 0 14px 34px rgba(17, 24, 39, 0.06);
     }
-
-    .card h2 {
-      margin-top: 14px;
-    }
-
     .icon {
       display: inline-grid;
       place-items: center;
@@ -204,23 +153,32 @@
       font-size: 1rem;
       font-weight: 800;
     }
-
     ul {
       margin: 14px 0 0;
       padding-left: 18px;
     }
-
     .actions {
       display: flex;
       gap: 12px;
       flex-wrap: wrap;
       margin-top: 22px;
     }
-
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 46px;
+      padding: 0 20px;
+      border-radius: 999px;
+      background: linear-gradient(135deg, var(--brand), var(--brand-deep));
+      color: #ffffff;
+      font-size: 0.95rem;
+      font-weight: 700;
+      box-shadow: 0 18px 38px rgba(91, 97, 235, 0.2);
+    }
     .footer {
       padding-bottom: 32px;
     }
-
     .footer-shell {
       display: flex;
       align-items: center;
@@ -229,26 +187,22 @@
       padding: 18px 24px;
       border-radius: 24px;
     }
-
     .footer-links {
       display: flex;
       align-items: center;
       gap: 14px;
       flex-wrap: wrap;
     }
-
     .footer-links a {
       color: var(--muted);
       font-size: 0.92rem;
       font-weight: 700;
     }
-
     .footer-note {
       margin: 0;
       font-size: 0.88rem;
       line-height: 1.5;
     }
-
     @media (max-width: 900px) {
       .grid { grid-template-columns: 1fr; }
       .footer-shell {
@@ -256,7 +210,6 @@
         text-align: center;
       }
     }
-
     @media (max-width: 640px) {
       .container { width: min(calc(100% - 20px), 1080px); }
       .nav-shell {
@@ -265,7 +218,6 @@
         align-items: stretch;
       }
       .brand { justify-content: center; }
-      .actions { flex-direction: column; }
       .button,
       .button-secondary { width: 100%; }
       .shell { padding: 26px; }
@@ -279,7 +231,7 @@
       <div class="nav-shell">
         <a class="brand" href="../index.html">
           <img src="../assets/nyr-icon.png" alt="nyr">
-          <span>Support</span>
+          <span>Privacy</span>
         </a>
         <a class="button-secondary" href="../index.html">Back to home</a>
       </div>
@@ -289,52 +241,48 @@
   <main>
     <div class="container">
       <section class="shell">
-        <span class="eyebrow">Support</span>
-        <h1>Help for people, privacy requests, and business access.</h1>
-        <p class="intro">Use the route that matches your issue so requests stay clear from the start. nyr support is designed for account, safety, privacy and business onboarding requests, not broad public contact forms.</p>
+        <span class="eyebrow">Privacy</span>
+        <h1>Private by default, with clearer local context.</h1>
+        <p class="intro">nyr is designed so personal requests stay inside trusted circles, business content stays separate, and verification adds context without turning the product into a public feed. This page is the plain-English overview.</p>
 
         <div class="grid">
           <article class="card">
             <div class="icon">01</div>
-            <h2>People support</h2>
-            <p>Use this for account access, trust circles, request visibility or in-app issues.</p>
+            <h2>Private by default</h2>
+            <p>Your profile, requests and local activity are built for controlled sharing, not open public discovery.</p>
             <ul>
-              <li>Account or sign-in issues</li>
-              <li>Request and chat support</li>
-              <li>Delete account follow-up</li>
+              <li>Relevant visibility instead of broad exposure</li>
+              <li>Context around who can respond</li>
+              <li>Less noise than public social feeds</li>
             </ul>
-            <div class="actions">
-              <a class="button" href="mailto:connect@gigasystech.com?subject=nyr%20support">Email support</a>
-            </div>
           </article>
 
           <article class="card">
             <div class="icon">02</div>
-            <h2>Business early access</h2>
-            <p>Use this for verified business onboarding, category setup, campaigns and lead workflows.</p>
+            <h2>Verified circles</h2>
+            <p>Identity and work or college verification add trust context when people need it.</p>
             <ul>
-              <li>Business verification</li>
-              <li>Early access request</li>
-              <li>Plans and launch questions</li>
+              <li>Direct circles first</li>
+              <li>Mutual connection context where available</li>
+              <li>Extra trust signals for work and campus circles</li>
             </ul>
-            <div class="actions">
-              <a class="button" href="mailto:connect@gigasystech.com?subject=nyr%20Business%20early%20access">Request access</a>
-            </div>
           </article>
 
           <article class="card">
             <div class="icon">03</div>
-            <h2>Privacy and safety</h2>
-            <p>Use this for privacy questions, trusted-circle concerns, abuse reports or deletion-related issues.</p>
+            <h2>Separate business layer</h2>
+            <p>Business posts, offers and campaigns are intentionally separated from person-to-person requests.</p>
             <ul>
-              <li>Privacy request</li>
-              <li>Safety concern</li>
-              <li>Verification dispute</li>
+              <li>Verified local business presence</li>
+              <li>Cleaner request feed for people</li>
+              <li>Less spammy business discovery</li>
             </ul>
-            <div class="actions">
-              <a class="button" href="mailto:connect@gigasystech.com?subject=nyr%20privacy%20request">Privacy request</a>
-            </div>
           </article>
+        </div>
+
+        <div class="actions">
+          <a class="button" href="mailto:connect@gigasystech.com?subject=nyr%20privacy%20request">Contact privacy support</a>
+          <a class="button-secondary" href="../delete-account/index.html">Delete account</a>
         </div>
       </section>
     </div>
